@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Loader2, CheckCircle, AlertTriangle, HelpCircle, X } from 'lucide-react';
+import { Phone, Mail, MapPin, Loader2, CheckCircle, AlertTriangle, HelpCircle, X } from 'lucide-react';
 import Button from '@/components/Button';
 
 // Updated schema with separate countryCode and phoneNumber
@@ -52,9 +52,13 @@ export default function ContactPage() {
       setFormState('success');
       reset();
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       setFormState('error');
-      setErrorMessage(error.message || 'Bilinmeyen bir hata oluştu.');
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Bilinmeyen bir hata oluştu.');
+      }
     }
   };
 

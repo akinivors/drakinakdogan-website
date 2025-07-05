@@ -8,8 +8,15 @@ import { Stethoscope, FlaskConical } from 'lucide-react';
 const InfoModal = dynamic(() => import('@/components/InfoModal'));
 const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
 
+// Define a specific type for our service items
+interface ServiceItem {
+  title: string;
+  longDescription: string;
+  imageSrc: string;
+}
+
 // Updated data structure with more details for the modal
-const conditionsTreated = [
+const conditionsTreated: ServiceItem[] = [
   { 
     title: 'Endometriozis', 
     longDescription: 'Endometriozis, rahim içini döşeyen dokunun rahim dışında büyümesidir. Bu durum ağrıya ve kısırlığa neden olabilir. Modern laparoskopik cerrahi ve medikal tedavilerle etkili sonuçlar alıyoruz. Tanı ve tedavide 25 yılı aşkın deneyimimle bireysel yaklaşım uyguluyorum.',
@@ -47,7 +54,7 @@ const conditionsTreated = [
   }
 ];
 
-const treatmentMethods = [
+const treatmentMethods: ServiceItem[] = [
   {
     title: 'Embriyo Transferi',
     longDescription: 'IVF sürecinin son aşaması olan embriyo transferi, laboratuvar ortamında geliştirilen embriyoların rahim içine yerleştirilmesi işlemidir. Uygun embriyo seçimi ve transfer tekniği ile yüksek başarı oranları elde edilmektedir.',
@@ -76,7 +83,8 @@ const treatmentMethods = [
 ];
 
 export default function ServicesPage() {
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  // Use the new type for our state
+  const [selectedItem, setSelectedItem] = useState<ServiceItem | null>(null);
 
   return (
     <>
