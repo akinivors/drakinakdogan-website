@@ -26,7 +26,7 @@ export default function ContactPage() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormInputs>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-        countryCode: "+90" // Default to Turkey's country code
+        countryCode: "+90" // Default to Turkey&apos;s country code
     }
   });
 
@@ -222,7 +222,7 @@ export default function ContactPage() {
           <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-lg shadow-2xl w-full max-w-md p-8 relative">
             <button onClick={() => setInfoVisible(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-800"><X size={24} /></button>
             <h3 className="font-serif text-2xl text-primary mb-4">Mesaj Bilgilendirmesi</h3>
-            <p className="font-sans text-text-light">Bu form aracılığıyla gönderdiğiniz mesaj doğrudan Dr. Ayşin Akdoğan'ın ekibine iletilir. Size en kısa sürede belirttiğiniz e-posta adresi ve telefon numarası üzerinden geri dönüş yapılacaktır.</p>
+            <p className="font-sans text-text-light">Bu form aracılığıyla gönderdiğiniz mesaj doğrudan Dr. Ayşin Akdoğan&apos;ın ekibine iletilir. Size en kısa sürede belirttiğiniz e-posta adresi ve telefon numarası üzerinden geri dönüş yapılacaktır.</p>
           </div>
         </div>
       )}

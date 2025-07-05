@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     }
 
     return new Response(JSON.stringify(data), { status: 200 });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Bir hata oluştu.' }), { status: 500 });
   }
 } 

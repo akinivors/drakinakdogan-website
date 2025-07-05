@@ -6,7 +6,7 @@ import { Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: "İlk andan itibaren kendimi güvende hissettim. Dr. Akdoğan'ın profesyonelliği ve samimiyeti sayesinde tüm süreci rahatlıkla atlattım.",
+    quote: "İlk andan itibaren kendimi güvende hissettim. Dr. Akdoğan&apos;ın profesyonelliği ve samimiyeti sayesinde tüm süreci rahatlıkla atlattım.",
     author: "E. Yılmaz",
   },
   {
@@ -67,9 +67,7 @@ export default function TestimonialsSection() {
               <div key={index} className="flex-grow-0 flex-shrink-0 w-full">
                 <div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg relative max-w-3xl mx-auto text-center">
                   <Quote className="absolute top-4 left-4 text-primary/10" size={60} />
-                  <p className="font-sans text-xl text-text-light italic relative z-10 leading-relaxed">
-                    "{testimonial.quote}"
-                  </p>
+                  <p className="font-sans text-xl text-text-light italic relative z-10 leading-relaxed" dangerouslySetInnerHTML={{ __html: `"${testimonial.quote}"` }} />
                   <p className="font-serif font-bold text-text-main text-right mt-6">
                     - {testimonial.author}
                   </p>

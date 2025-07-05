@@ -48,6 +48,7 @@ const ovulationSchema = z.object(commonSchema);
 type OvulationInputs = z.infer<typeof ovulationSchema>;
 
 // --- Reusable Date Picker Component ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function DatePickerField({ control, name }: { control: any, name: string }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -72,7 +73,7 @@ function DatePickerField({ control, name }: { control: any, name: string }) {
 export default function PatientCalculators() {
   const [dueDateResult, setDueDateResult] = useState('');
   const [fertileWindowResult, setFertileWindowResult] = useState('');
-  const [activeInfo, setActiveInfo] = useState<any>(null);
+  const [activeInfo, setActiveInfo] = useState<{ title: string; body: string; } | null>(null);
 
   const { control: dueDateControl, handleSubmit: handleDueDateSubmit, formState: { errors: dueDateErrors } } = useForm<DueDateInputs>({
     resolver: zodResolver(dueDateSchema), defaultValues: { cycleLength: 28 }

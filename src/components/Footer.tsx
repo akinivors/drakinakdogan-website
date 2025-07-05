@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4" suppressHydrationWarning>
             <Logo />
             <p className="font-sans text-white/70">
-              İzmir'de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.
+              İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.
             </p>
             {/* Social media icons can be added here later */}
           </div>

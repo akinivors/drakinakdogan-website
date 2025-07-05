@@ -1,8 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { Award, BookOpen, School, Users, FileText, Globe } from 'lucide-react';
+import { Award, BookOpen, Users, FileText, Globe } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 // --- DYNAMIC IMPORTS ---
 const Image = dynamic(() => import('next/image'));
@@ -26,7 +27,7 @@ export default function AboutPage() {
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="font-serif text-5xl font-bold text-primary">
-            Dr. Ayşin Akdoğan'ı Yakından Tanıyın
+            Dr. Ayşin Akdoğan&apos;ı Yakından Tanıyın
           </h1>
           <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
             Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.
@@ -198,60 +199,34 @@ export default function AboutPage() {
             </motion.div>
             
             <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center" variants={itemVariants}>
-              <BookOpen className="mx-auto mb-4 text-primary" size={40} />
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Kitap Bölümleri</h3>
-              <p className="font-sans text-text-light">Yardımcı Üreme Teknikleri, İnfertilite ve Ovulasyon İnduksiyonu konularında</p>
+              <Globe className="mx-auto mb-4 text-primary" size={40} />
+              <h3 className="font-serif text-xl font-bold text-text-main mb-2">5+ Kitap Bölümü</h3>
+              <p className="font-sans text-text-light">Kadın sağlığı ve infertilite konularında akademik eserler</p>
             </motion.div>
             
             <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center" variants={itemVariants}>
-              <Globe className="mx-auto mb-4 text-primary" size={40} />
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Uluslararası Çalışmalar</h3>
-              <p className="font-sans text-text-light">Faz 3 ve Faz 4 randomize kontrollü klinik araştırmalar</p>
+              <BookOpen className="mx-auto mb-4 text-primary" size={40} />
+              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Klinik Araştırmalar</h3>
+              <p className="font-sans text-text-light">Yeni tedavi yöntemleri ve hasta bakım protokolleri geliştirme</p>
             </motion.div>
           </AnimatedSection>
-
-          <div className="mt-12 bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg">
-            <h3 className="font-serif text-2xl font-bold text-text-main mb-4">Seçilmiş Yayınlar</h3>
-            <div className="space-y-3 font-sans text-text-light">
-              <p className="text-sm leading-relaxed">
-                • <strong>Fertility & Sterility (2004):</strong> "Morphometric Changes In The Endometrium And Serum Leptin Levels During The Implantation Period"
-              </p>
-              <p className="text-sm leading-relaxed">
-                • <strong>European Journal of Obstetrics & Gynecology (2010):</strong> "Effect Of Ovarian Stimulation on Integrins Expression in Rat Endometrium"
-              </p>
-              <p className="text-sm leading-relaxed">
-                • <strong>Turkish Journal of Medical Sciences (2011):</strong> "Comparison Of Intravenous General Anesthesia And Paracervical Block for IVF"
-              </p>
-              <p className="text-sm leading-relaxed">
-                • <strong>Kitap Çevirileri:</strong> Yen & Yaffe Üreme Endokrinolojisi, Te Linde's Operative Gynecology
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Section 5: Call to Action */}
-      <AnimatedSection>
-        <section className="w-full bg-gradient-to-b from-white to-primary-lightest">
-          <div className="container mx-auto px-6 py-16 text-center">
-            <h2 className="font-serif text-3xl font-bold text-primary mb-4">
-              Sağlık Yolculuğunuza Birlikte Başlayalım
-            </h2>
-            <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
-              25+ yıllık deneyimim ve sürekli güncellenen bilimsel yaklaşımım ile sorularınızı yanıtlamak ve size en uygun tedavi sürecini planlamak için buradayım.
-            </p>
-            <a 
-              href="https://mobil.mph.com.tr/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button variant="primary">
-                Randevu Almak İçin Ulaşın
-              </Button>
-            </a>
-          </div>
-        </section>
-      </AnimatedSection>
+      {/* Section 5: Contact CTA */}
+      <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="font-serif text-3xl font-bold text-primary mb-4">
+            Sağlık Yolculuğunuzda Yanınızdayım
+          </h2>
+          <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
+            25 yıllık deneyimim ve modern tıp yaklaşımımla, her hastam için en uygun tedavi planını oluşturuyor ve bu yolculukta yanınızda olmaya devam ediyorum.
+          </p>
+          <Button variant="primary" className="mx-auto">
+            <Link href="/iletisim">Randevu Al</Link>
+          </Button>
+        </div>
+      </section>
     </>
   );
 } 
