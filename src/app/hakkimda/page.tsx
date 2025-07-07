@@ -29,7 +29,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-28 md:mb-36">
             <h1 className="font-serif text-5xl font-bold text-primary">
-              Dr. Ayşin Akdoğan'ı Yakından Tanıyın
+              Dr. Ayşin Akdoğan&apos;ı Yakından Tanıyın
             </h1>
             <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
               Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.
@@ -57,10 +57,10 @@ export default function AboutPage() {
                 </h2>
                 <div className="font-sans text-text-light leading-relaxed space-y-4">
                   <p>
-                    1971 yılının 10 Ekim sabahı Mersin'de başlayan hayat yolculuğum, beni insanlara yardım etme ve en büyük mutluluklarına tanıklık etme arzusuna götürdü. İki çocuk annesi olarak, bir ailenin kurulmasındaki o tarifsiz heyecanı ve her çocuğun bir mucize olduğunu kalbimin en derinlerinde hissediyorum. Bu his, mesleğime olan tutkumun ve hastalarıma olan bağlılığımın temelini oluşturuyor.
+                    1971 yılının 10 Ekim sabahı Mersin&apos;de başlayan hayat yolculuğum, beni insanlara yardım etme ve en büyük mutluluklarına tanıklık etme arzusuna götürdü. İki çocuk annesi olarak, bir ailenin kurulmasındaki o tarifsiz heyecanı ve her çocuğun bir mucize olduğunu kalbimin en derinlerinde hissediyorum. Bu his, mesleğime olan tutkumun ve hastalarıma olan bağlılığımın temelini oluşturuyor.
                   </p>
                   <p>
-                    Hacettepe Üniversitesi'nde başlayan tıp eğitimim ve Ege Üniversitesi'nde tamamladığım uzmanlığım, bana bilimin ışığında yürüme fırsatı verdi. Ancak biliyorum ki, tıp sadece bilimden ibaret değildir; aynı zamanda şefkat, anlayış ve güvendir. 25 yılı aşan kariyerim boyunca, her hastamı kendi ailemden biri gibi gördüm; onların endişelerini paylaştım ve sevinçlerine ortak oldum. Amacım, sadece en güncel tedavi yöntemlerini uygulamak değil, aynı zamanda bu hassas yolculukta size kendinizi güvende ve anlaşılmış hissettirmektir.
+                    Hacettepe Üniversitesi&apos;nde başlayan tıp eğitimim ve Ege Üniversitesi&apos;nde tamamladığım uzmanlığım, bana bilimin ışığında yürüme fırsatı verdi. Ancak biliyorum ki, tıp sadece bilimden ibaret değildir; aynı zamanda şefkat, anlayış ve güvendir. 25 yılı aşan kariyerim boyunca, her hastamı kendi ailemden biri gibi gördüm; onların endişelerini paylaştım ve sevinçlerine ortak oldum. Amacım, sadece en güncel tedavi yöntemlerini uygulamak değil, aynı zamanda bu hassas yolculukta size kendinizi güvende ve anlaşılmış hissettirmektir.
                   </p>
                 </div>
               </AnimatedSection>
