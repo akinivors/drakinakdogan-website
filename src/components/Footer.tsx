@@ -29,8 +29,8 @@ export default function Footer() {
           
           {/* Column 1: Logo and Summary */}
           <div className="flex flex-col gap-4" suppressHydrationWarning>
-            <Logo />
-            <p className="font-sans text-white/70">
+            <Logo variant="light" />
+            <p className="font-sans text-white">
               İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.
             </p>
             {/* Social media icons can be added here later */}
@@ -42,7 +42,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {navLinks.map(link => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-sans text-white/80 hover:text-white transition-colors">
+                  <Link href={link.href} className="font-sans text-white hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -53,9 +53,9 @@ export default function Footer() {
           {/* Column 3: Contact Info */}
           <div suppressHydrationWarning>
             <h3 className="font-serif text-lg font-bold mb-4">İletişim</h3>
-            <div className="font-sans text-white/80 space-y-2">
-              <p>1234 Örnek Sokak, No: 5, Daire: 6</p>
-              <p>Konak, İzmir, Türkiye</p>
+            <div className="font-sans text-white space-y-2">
+              <p>Yeni Girne Bulvarı, 1825. Sk. No:12,</p>
+              <p>35575 Karşıyaka/İzmir</p>
               <p>Telefon: +90 (555) 123 45 67</p>
               <p>E-posta: info@drakinakdogan.com</p>
             </div>
@@ -64,18 +64,13 @@ export default function Footer() {
           {/* Column 4: Call to Action */}
           <div suppressHydrationWarning>
             <h3 className="font-serif text-lg font-bold mb-4">Hızlı İletişim</h3>
-            <p className="font-sans text-white/70 mb-4">
+            <p className="font-sans text-white mb-4">
               Anında randevu alın veya sorularınız için bize mesaj gönderin.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href="https://mobil.mph.com.tr/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex-1"
-              >
-                <Button variant="primary" className="w-full">Hızlı Randevu Al</Button>
-              </a>
+              <Link href="/iletisim#form" className="flex-1">
+                <Button variant="primary" className="w-full">İletişime Geçin</Button>
+              </Link>
               <Link href="/iletisim" className="flex-1">
                 <Button variant="secondary" className="w-full">Mesaj Gönder</Button>
               </Link>
@@ -85,7 +80,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright bar */}
-        <div className="mt-12 pt-8 border-t border-white/20 text-center text-white/60 font-sans" suppressHydrationWarning>
+        <div className="mt-12 pt-8 border-t border-white/20 text-center text-white font-sans" suppressHydrationWarning>
           <p>&copy; {currentYear || '2024'} Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır.</p>
         </div>
       </div>

@@ -68,9 +68,9 @@ export default function Header() {
           </div>
 
           <div className="hidden md:block">
-            <a href="https://mobil.mph.com.tr/" target="_blank" rel="noopener noreferrer">
-              <Button variant="primary">Randevu Al</Button>
-            </a>
+            <Link href="/iletisim#form">
+              <Button variant="primary">İletişime Geçin</Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -104,14 +104,12 @@ export default function Header() {
             ))}
             <Link href="/hizmetler" onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-3xl text-white hover:text-accent transition-colors">Hizmetler</Link>
             <div className="mt-8">
-              <a 
-                href="https://mobil.mph.com.tr/" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <Link 
+                href="/iletisim#form" 
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Button variant="secondary">Randevu Al</Button>
-              </a>
+                <Button variant="secondary">İletişime Geçin</Button>
+              </Link>
             </div>
           </nav>
         </div>

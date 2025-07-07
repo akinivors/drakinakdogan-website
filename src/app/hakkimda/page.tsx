@@ -4,11 +4,12 @@ import dynamic from 'next/dynamic';
 import { Award, BookOpen, Users, FileText, Globe } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // --- DYNAMIC IMPORTS ---
-const Image = dynamic(() => import('next/image'));
 const Button = dynamic(() => import('@/components/Button'));
 const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
+const HeroCarousel = dynamic(() => import('@/components/HeroCarousel'));
 
 // Animation variants for staggered items
 const itemVariants: Variants = {
@@ -23,32 +24,59 @@ const itemVariants: Variants = {
 export default function AboutPage() {
   return (
     <>
-      {/* Section 1: Page Header / Introduction */}
+      {/* Section 1: Page Header with Personal Bio */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="font-serif text-5xl font-bold text-primary">
-            Dr. Ayşin Akdoğan&apos;ı Yakından Tanıyın
-          </h1>
-          <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
-            Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.
-          </p>
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-28 md:mb-36">
+            <h1 className="font-serif text-5xl font-bold text-primary">
+              Dr. Ayşin Akdoğan'ı Yakından Tanıyın
+            </h1>
+            <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
+              Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.
+            </p>
+          </div>
+
+          {/* Personal Bio Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+            <div className="md:col-span-1">
+              <div className="w-full h-[400px] rounded-lg shadow-xl overflow-hidden relative">
+                <Image
+                  src="/dr-aysin-akdogan.png"
+                  alt="Dr. Ayşin Akdoğan"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+            </div>
+
+            <div className="md:col-span-2 flex flex-col gap-6">
+              <AnimatedSection>
+                <h2 className="font-serif text-3xl font-bold text-text-main mb-6">
+                  Bir Hekimden Daha Fazlası: Bir Rehber, Bir Dost
+                </h2>
+                <div className="font-sans text-text-light leading-relaxed space-y-4">
+                  <p>
+                    1971 yılının 10 Ekim sabahı Mersin'de başlayan hayat yolculuğum, beni insanlara yardım etme ve en büyük mutluluklarına tanıklık etme arzusuna götürdü. İki çocuk annesi olarak, bir ailenin kurulmasındaki o tarifsiz heyecanı ve her çocuğun bir mucize olduğunu kalbimin en derinlerinde hissediyorum. Bu his, mesleğime olan tutkumun ve hastalarıma olan bağlılığımın temelini oluşturuyor.
+                  </p>
+                  <p>
+                    Hacettepe Üniversitesi'nde başlayan tıp eğitimim ve Ege Üniversitesi'nde tamamladığım uzmanlığım, bana bilimin ışığında yürüme fırsatı verdi. Ancak biliyorum ki, tıp sadece bilimden ibaret değildir; aynı zamanda şefkat, anlayış ve güvendir. 25 yılı aşan kariyerim boyunca, her hastamı kendi ailemden biri gibi gördüm; onların endişelerini paylaştım ve sevinçlerine ortak oldum. Amacım, sadece en güncel tedavi yöntemlerini uygulamak değil, aynı zamanda bu hassas yolculukta size kendinizi güvende ve anlaşılmış hissettirmektir.
+                  </p>
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Section 2: Career Timeline */}
-      <section className="w-full bg-white py-20">
+      <section className="w-full bg-white pt-24 md:pt-32 pb-20">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
             {/* Photo Column */}
             <div className="lg:col-span-1">
               <div className="w-full h-[500px] rounded-lg shadow-xl overflow-hidden relative sticky top-24">
-                <Image
-                  src="/dr-aysin-akdogan-standingnextodesk.jpg"
-                  alt="Op. Dr. Ayşin Akdoğan - Profesyonel Portre"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
+                <HeroCarousel />
               </div>
             </div>
 
@@ -98,7 +126,7 @@ export default function AboutPage() {
 
               {/* Professional Memberships */}
               <div className="mt-16">
-                <h3 className="font-serif text-2xl font-bold text-text-main mb-6">
+                <h3 className="font-serif text-2xl font-bold text-text-main mb-8">
                   Mesleki Üyelikler
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -121,7 +149,7 @@ export default function AboutPage() {
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-4xl font-bold text-primary mb-4">
+            <h2 className="font-serif text-4xl font-bold text-primary mb-8">
               Uzmanlık Alanları ve Tedavi Yöntemleri
             </h2>
             <p className="font-sans text-lg text-text-light max-w-3xl mx-auto">
@@ -132,7 +160,7 @@ export default function AboutPage() {
           <AnimatedSection tag="div" className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Specialization Areas */}
             <motion.div className="bg-white p-8 rounded-lg shadow-md" variants={itemVariants}>
-              <h3 className="font-serif text-2xl font-bold text-text-main mb-6 flex items-center gap-3">
+              <h3 className="font-serif text-2xl font-bold text-text-main mb-8 flex items-center gap-3">
                 <Award className="text-accent" size={28} />
                 Uzmanlık Alanları
               </h3>
@@ -156,7 +184,7 @@ export default function AboutPage() {
 
             {/* Treatment Methods */}
             <motion.div className="bg-white p-8 rounded-lg shadow-md" variants={itemVariants}>
-              <h3 className="font-serif text-2xl font-bold text-text-main mb-6 flex items-center gap-3">
+              <h3 className="font-serif text-2xl font-bold text-text-main mb-8 flex items-center gap-3">
                 <BookOpen className="text-accent" size={28} />
                 Tedavi Yöntemleri
               </h3>
@@ -183,7 +211,7 @@ export default function AboutPage() {
       <section className="w-full bg-white py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-4xl font-bold text-primary mb-4">
+            <h2 className="font-serif text-4xl font-bold text-primary mb-8">
               Araştırma ve Akademik Katkılar
             </h2>
             <p className="font-sans text-lg text-text-light max-w-3xl mx-auto">
@@ -216,15 +244,15 @@ export default function AboutPage() {
       {/* Section 5: Contact CTA */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl font-bold text-primary mb-4">
+          <h2 className="font-serif text-3xl font-bold text-primary mb-8">
             Sağlık Yolculuğunuzda Yanınızdayım
           </h2>
           <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
             25 yıllık deneyimim ve modern tıp yaklaşımımla, her hastam için en uygun tedavi planını oluşturuyor ve bu yolculukta yanınızda olmaya devam ediyorum.
           </p>
-          <Button variant="primary" className="mx-auto">
-            <Link href="/iletisim">Randevu Al</Link>
-          </Button>
+          <Link href="/iletisim#form">
+            <Button variant="primary">İletişime Geçin</Button>
+          </Link>
         </div>
       </section>
     </>

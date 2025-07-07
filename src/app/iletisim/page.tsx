@@ -79,7 +79,7 @@ export default function ContactPage() {
             <div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg">
                 <h2 className="font-serif text-2xl font-bold text-text-main mb-6">İletişim Bilgileri</h2>
                 <div className="space-y-4">
-                    <div className="flex items-start gap-4"><MapPin size={24} className="text-primary flex-shrink-0 mt-1" /><span className="font-sans text-text-light">1234 Örnek Sokak, No: 5, Daire: 6, Konak, İzmir</span></div>
+                    <div className="flex items-start gap-4"><MapPin size={24} className="text-primary flex-shrink-0 mt-1" /><span className="font-sans text-text-light">Yeni Girne Bulvarı, 1825. Sk. No:12, 35575 Karşıyaka/İzmir</span></div>
                     <div className="flex items-center gap-4"><Phone size={20} className="text-primary" /><span className="font-sans text-text-light">+90 (555) 123 45 67</span></div>
                     <div className="flex items-center gap-4"><Mail size={20} className="text-primary" /><span className="font-sans text-text-light">info@drakinakdogan.com</span></div>
                 </div>
@@ -94,7 +94,7 @@ export default function ContactPage() {
                 </div>
             </div>
             
-            <div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg">
+            <div id="form" className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg">
               <h2 className="font-serif text-2xl font-bold text-text-main mb-6">Bize Mesaj Gönderin</h2>
               {formState === 'success' ? (
                 <div className="text-center p-4 bg-green-100 text-green-800 rounded-lg flex flex-col items-center justify-center h-full">

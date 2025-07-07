@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic';
 import AnimatedSection from '@/components/AnimatedSection';
+import ResourceHub from '@/components/ResourceHub';
 
 // --- DYNAMIC IMPORTS ---
 // Instead of direct imports, we now use next/dynamic to lazy-load each section.
 const Hero = dynamic(() => import('@/components/Hero'));
-const AboutSection = dynamic(() => import('@/components/AboutSection'));
 const ServicesSection = dynamic(() => import('@/components/ServicesSection'));
 const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
 
@@ -15,8 +15,9 @@ export default function Home() {
     <>
       <Hero /> {/* No longer wrapped - visible immediately */}
       
-      <AboutSection /> {/* Also no longer wrapped - visible immediately */}
-      
+      <AnimatedSection>
+        <ResourceHub /> {/* The new section */}
+      </AnimatedSection>
       <AnimatedSection>
         <ServicesSection />
       </AnimatedSection>
