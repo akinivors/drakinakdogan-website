@@ -1,15 +1,59 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 import { Award, BookOpen, Users, FileText, Globe } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+
+// --- Import the new modal component ---
+import PublicationModal from '@/components/PublicationModal';
 
 // --- DYNAMIC IMPORTS ---
 const Button = dynamic(() => import('@/components/Button'));
 const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
+const AboutSection = dynamic(() => import('@/components/AboutSection'));
 const HeroCarousel = dynamic(() => import('@/components/HeroCarousel'));
+
+// --- Type definitions ---
+interface PublicationData {
+  title: string;
+  items: string[];
+}
+
+// --- Data for Publications ---
+const publicationsData = {
+  uluslararasi: {
+    title: "Uluslararası Yayınlar",
+    items: [
+      "Morphometric Changes In The Endometrium And Serum Leptin Levels During The Implantation Period Of Teh Embriyo In The Rat In Response To Exogenous Ovarian Stimulation. A. Dursun, F. Sendag, M.C. Terek, H. Yılmaz, K. Öztekin, M. Baka And T. Tanyalcin. Fertil Steril; 2004: 82 Sup 3. 1121-1126",
+      "Effect Of Ovarian Stimulation With Human Menopausal Gonadotropin And Recombinant Follicle Stimulating Hormone On The Expression Of Integrins Alpha(3), Beta(1) In The Rat Endometrium During The Implantation Period. Fatih Sendag , Aysin Akdogan, Kemal Ozbilgin , Gulsen Giray , Kemal Oztekin European Journal Of Obstetrics & Gynecology And Reproductive Biology 150 (2010) 57–60",
+      "A Comparison Of Intravenous General Anesthesia And Paracervical Block For In Vitro Fertilization: Eff Ects On Oocytes Using The Transvaginal Technique. Sevil Bumen, İlkben Gunuşen, Vicdan Firat, Semra Karaman, Ayşin Akdoğan, Ege Nazan Tavmergen Goker. Turk J Med Sci 2011; 41 (5): 801-808",
+      "Reproductive Outcomes After Progestin Therapy In Infertile Women With Endometrial Atypical Hyperplasia. Akman L, Akdogan A, Sahin G, Terek MC, Ozsaran A, Dikmen Y, Tavmergen Goker EN, Tavmergen E. Eur J Obstet Gynecol Reprod Biol. 2013 Dec;171(2):390-1",
+      "Ligneous Cervicovaginitis Associated With Plasminogen Deficiency: A Rare Cause Of Infertility. Aysin Akdogan, Gulnaz Sahin, Levent Akman, Deniz Simsek, Osman Zekioglu, Ege NT Goker, Erol Tavmergen. Uluslararası Hematolojı-Onkolojı Dergısı. Number: 1 Volume: 25 Year: 2015."
+    ]
+  },
+  ulusal: {
+    title: "Ulusal Yayınlar",
+    items: [
+      "Servikal Yetmezlik Tedavisinde Serklajin Yeri Cerclage Operation In The Treatment Of Cervical Incompetencyrafael Levi, Ayşin Akdoğan, Pınar Solmaz Yildiz,Ege Nazan Tavmergen Göker, Şefik Eser Özyürek, Erol Tavmergen, Ege Tıp Dergisi 43 (2) : 87-89 2004",
+      "Ovulasyon İndukisyonunda Gonadotropinler .Ayşin Akdoğan , Erol Tavmergen. Türkiye Klinikleri Jinekoloji Obstretrik Dergisi . 2012.",
+      "Yardımcı Üreme Teknikleri Öncesi Cerrahi .Ayşin Akdoğan , Erol Tavmergen . Türkiye Klinikleri Jinekoloji Obsteterik Dergisi. İnfertil Hastalarda Yardımcı Üreme Teknikleri Özel Sayısı .2013",
+      "Hepatit Ve Viral Enfeksiyonlar İçin Önemli Bir Risk Grubunda Tarama Screening For Hepatitis And Viral Infections In A Significant Risk Group Mustafa Yamazhan, Serhat Uysal, Muhammet Soylar, Gülnaz Şahin, Ayşin Akdoğan, Ege Nazan Tavmergen Göker, Meltem Taşbakan, Rüçhan Yazan Sertöz, Hüsnü Pullukçu, Erol Tavmergen. Mediterr J Infect Microb Antimicrob 2014;3:11",
+      "REVIEW: Antioksidan İlaçların İnfertil Çiftin Geleneksel Tedavisine Katkısı Var Mıdır? . Ayşin AKDOĞAN. Turkiye Klinikleri J Gynecol Obst-Special Topics 2012;5(2):1-5"
+    ]
+  },
+  kitaplar: {
+    title: "Kitap Bölümleri ve Çeviriler",
+    items: [
+      "Yardımcı Üreme Teknikleri (IVF/ICSI Hangisi ?) Ege Göker-Ayşin Akdoğan(2010)",
+      "İnfertilite Ve Yardımla Üreme Teknikleri – Ovulasyon İnduksiyonu (Ayşin Akdoğan,Erol Tavmergen(2012)",
+      "Telesağlık Ve Online Hasta Görüşmesi.2020 Telejinokoloji Ve Online Gebelik Takibi(Ayşin Akdoğan, Gülnaz Şahin, Ferruh Acet)",
+      "Çeviri: Üreme Endokrinolojisi . Yen &Yaffe 5. Basım: Bölüm 8: Over Yaşam Siklusu Erol Tavmergen, Ayşin Akdoğan(213-254)(2006)",
+      "Çeviri Editör Yardımcılığı: Te Linde's Operative Gynecology Dokuzuncu Basım .(2005)"
+    ]
+  }
+};
 
 // Animation variants for staggered items
 const itemVariants: Variants = {
@@ -22,12 +66,14 @@ const itemVariants: Variants = {
 };
 
 export default function AboutPage() {
+  const [modalContent, setModalContent] = useState<PublicationData | null>(null); // State to manage modal
+
   return (
     <>
-      {/* Section 1: Page Header with Personal Bio */}
+      {/* Section 1: Page Header */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-28 md:mb-36">
+          <div className="text-center mb-12">
             <h1 className="font-serif text-5xl font-bold text-primary">
               Dr. Ayşin Akdoğan&apos;ı Yakından Tanıyın
             </h1>
@@ -35,39 +81,11 @@ export default function AboutPage() {
               Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.
             </p>
           </div>
-
-          {/* Personal Bio Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
-            <div className="md:col-span-1">
-              <div className="w-full h-[400px] rounded-lg shadow-xl overflow-hidden relative">
-                <Image
-                  src="/dr-aysin-akdogan.png"
-                  alt="Dr. Ayşin Akdoğan"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            </div>
-
-            <div className="md:col-span-2 flex flex-col gap-6">
-              <AnimatedSection>
-                <h2 className="font-serif text-3xl font-bold text-text-main mb-6">
-                  Bir Hekimden Daha Fazlası: Bir Rehber, Bir Dost
-                </h2>
-                <div className="font-sans text-text-light leading-relaxed space-y-4">
-                  <p>
-                    1971 yılının 10 Ekim sabahı Mersin&apos;de başlayan hayat yolculuğum, beni insanlara yardım etme ve en büyük mutluluklarına tanıklık etme arzusuna götürdü. İki çocuk annesi olarak, bir ailenin kurulmasındaki o tarifsiz heyecanı ve her çocuğun bir mucize olduğunu kalbimin en derinlerinde hissediyorum. Bu his, mesleğime olan tutkumun ve hastalarıma olan bağlılığımın temelini oluşturuyor.
-                  </p>
-                  <p>
-                    Hacettepe Üniversitesi&apos;nde başlayan tıp eğitimim ve Ege Üniversitesi&apos;nde tamamladığım uzmanlığım, bana bilimin ışığında yürüme fırsatı verdi. Ancak biliyorum ki, tıp sadece bilimden ibaret değildir; aynı zamanda şefkat, anlayış ve güvendir. 25 yılı aşan kariyerim boyunca, her hastamı kendi ailemden biri gibi gördüm; onların endişelerini paylaştım ve sevinçlerine ortak oldum. Amacım, sadece en güncel tedavi yöntemlerini uygulamak değil, aynı zamanda bu hassas yolculukta size kendinizi güvende ve anlaşılmış hissettirmektir.
-                  </p>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* --- REUSABLE ABOUT SECTION --- */}
+      <AboutSection />
 
       {/* Section 2: Career Timeline */}
       <section className="w-full bg-white pt-24 md:pt-32 pb-20">
@@ -207,7 +225,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 4: Research & Publications */}
+      {/* Section 4: Research & Publications (NOW INTERACTIVE) */}
       <section className="w-full bg-white py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -220,23 +238,26 @@ export default function AboutPage() {
           </div>
 
           <AnimatedSection tag="div" className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center" variants={itemVariants}>
+            {/* International Publications Card */}
+            <motion.button onClick={() => setModalContent(publicationsData.uluslararasi)} className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center hover:shadow-xl transition-shadow" variants={itemVariants}>
               <FileText className="mx-auto mb-4 text-primary" size={40} />
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">15+ Uluslararası Yayın</h3>
-              <p className="font-sans text-text-light">Fertility & Sterility, European Journal of Obstetrics & Gynecology gibi prestijli dergilerde</p>
-            </motion.div>
+              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Uluslararası Yayınlar</h3>
+              <p className="font-sans text-text-light">Fertility & Sterility ve European Journal of Obstetrics & Gynecology gibi prestijli dergilerde yayınlanmış makaleler.</p>
+            </motion.button>
             
-            <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center" variants={itemVariants}>
+            {/* National Publications Card */}
+            <motion.button onClick={() => setModalContent(publicationsData.ulusal)} className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center hover:shadow-xl transition-shadow" variants={itemVariants}>
               <Globe className="mx-auto mb-4 text-primary" size={40} />
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">5+ Kitap Bölümü</h3>
-              <p className="font-sans text-text-light">Kadın sağlığı ve infertilite konularında akademik eserler</p>
-            </motion.div>
+              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Ulusal Yayınlar</h3>
+              <p className="font-sans text-text-light">Türkiye Klinikleri ve Ege Tıp Dergisi gibi ulusal tıp literatürüne katkıda bulunan araştırmalar.</p>
+            </motion.button>
             
-            <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center" variants={itemVariants}>
+            {/* Books Card */}
+            <motion.button onClick={() => setModalContent(publicationsData.kitaplar)} className="bg-gradient-to-b from-white to-primary-lightest p-6 rounded-lg text-center hover:shadow-xl transition-shadow" variants={itemVariants}>
               <BookOpen className="mx-auto mb-4 text-primary" size={40} />
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Klinik Araştırmalar</h3>
-              <p className="font-sans text-text-light">Yeni tedavi yöntemleri ve hasta bakım protokolleri geliştirme</p>
-            </motion.div>
+              <h3 className="font-serif text-xl font-bold text-text-main mb-2">Kitap Bölümleri & Çeviriler</h3>
+              <p className="font-sans text-text-light">Alanında öncü ders kitaplarına yazılan bölümler ve yapılan önemli çeviriler.</p>
+            </motion.button>
           </AnimatedSection>
         </div>
       </section>
@@ -255,6 +276,9 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
+      
+      {/* --- The Modal will appear here when content is set --- */}
+      <PublicationModal content={modalContent} onClose={() => setModalContent(null)} />
     </>
   );
 } 

@@ -56,8 +56,14 @@ export default function Footer() {
             <div className="font-sans text-white space-y-2">
               <p>Yeni Girne Bulvarı, 1825. Sk. No:12,</p>
               <p>35575 Karşıyaka/İzmir</p>
-              <p>Telefon: +90 (555) 123 45 67</p>
+              <p>Telefon: +90 554 871 05 90</p>
               <p>E-posta: info@drakinakdogan.com</p>
+              <div className="flex items-center gap-3 mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                <a href="https://www.instagram.com/draysinakdogan/" target="_blank" rel="noopener noreferrer" className="font-sans text-white hover:underline">
+                  @draysinakdogan
+                </a>
+              </div>
             </div>
           </div>
           

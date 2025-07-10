@@ -1,42 +1,30 @@
 import Link from 'next/link';
-import AnimatedSection from '@/components/AnimatedSection';
-import { motion, Variants } from 'framer-motion';
 
-// Define the animation for each service card
-const serviceVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
-  },
-};
-
-// Updated data structure with imageUrls instead of icons
+// The new, focused list of services for the homepage
 const services = [
   {
-    title: 'Jinekoloji',
-    description: 'Kadın hastalıkları tanı, tedavi ve rutin kontrol hizmetleri.',
-    imageUrl: '/service-gynecology.jpg',
-    href: '/hizmetler',
-  },
-  {
-    title: 'Gebelik Takibi',
-    description: 'Hamilelik sürecinizin başından sonuna kadar kapsamlı takip.',
-    imageUrl: '/service-pregnancy.jpg',
-    href: '/hizmetler',
-  },
-  {
-    title: 'Tüp Bebek',
+    title: 'Tüp Bebek (IVF)',
     description: 'İleri teknoloji ve kişiye özel yaklaşımlarla IVF tedavisi.',
     imageUrl: '/service-ivf.jpg',
-    href: '/hizmetler',
+    href: '/hizmetler#tup-bebek', // Links to the specific modal
   },
   {
     title: 'İnfertilite',
     description: 'Kısırlık nedenlerini araştırma ve en etkili tedavi yöntemleri.',
     imageUrl: '/service-infertility.jpg',
-    href: '/hizmetler',
+    href: '/hizmetler#infertilite', // Links to the specific modal
+  },
+  {
+    title: 'Endometriozis (Çikolata Kisti)',
+    description: 'Ağrı ve infertiliteye neden olabilen bu kronik durum için modern tanı ve tedavi.',
+    imageUrl: '/pcos-sendromu.jpeg',
+    href: '/hizmetler#endometriozis', // Links to the specific modal
+  },
+  {
+    title: 'Polikistik Over Sendromu (PCOS)',
+    description: 'Yumurtlama sorunlarının en sık nedeninin yönetimi ve tedavisi.',
+    imageUrl: '/pcos-sendromu.jpeg',
+    href: '/hizmetler#polikistik-over-sendromu', // Links to the specific modal
   },
 ];
 
@@ -47,30 +35,25 @@ export default function ServicesSection() {
         <h2 className="font-serif text-4xl font-bold text-primary mb-12">
           Hizmetlerimiz
         </h2>
-        <AnimatedSection
-          tag="div"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <motion.div key={index} variants={serviceVariants}>
-              <Link href={service.href} className="group relative block rounded-lg overflow-hidden shadow-lg h-80">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110"
-                  style={{ backgroundImage: `url(${service.imageUrl})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="relative h-full flex flex-col justify-end p-6 text-white text-left">
-                  <h3 className="font-serif text-2xl font-bold mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="font-sans text-white/90">
-                    {service.description}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
+            <Link href={service.href} key={index} className="group relative block rounded-lg overflow-hidden shadow-lg h-80">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110"
+                style={{ backgroundImage: `url(${service.imageUrl})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="relative h-full flex flex-col justify-end p-6 text-white text-left">
+                <h3 className="font-serif text-2xl font-bold mb-2 flex-grow">
+                  {service.title}
+                </h3>
+                <p className="font-sans text-white/90">
+                  {service.description}
+                </p>
+              </div>
+            </Link>
           ))}
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );

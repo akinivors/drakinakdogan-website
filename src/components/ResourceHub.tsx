@@ -1,30 +1,30 @@
 import Link from 'next/link';
-import { Map, Calculator, HelpCircle, FileText } from 'lucide-react';
+import { HelpCircle, FileText, FlaskConical, Baby } from 'lucide-react';
 
 const resources = [
   {
-    icon: <Map size={32} className="text-primary" />,
-    title: "Tedavi Yolculuğunuz",
-    description: "İnfertilite ve Tüp Bebek süreçlerinde sizi nelerin beklediğini adım adım keşfedin.",
-    href: "/hasta-rehberi#journey-map" // Link to the section ID
+    icon: <FlaskConical size={32} className="text-primary" />,
+    title: "İnfertilite Değerlendirmesi",
+    description: "Kısırlık nedenlerini ve size en uygun tedavi yolunu adım adım keşfedin.",
+    href: "/hasta-rehberi#infertility-journey"
   },
   {
-    icon: <Calculator size={32} className="text-primary" />,
-    title: "Faydalı Hesaplayıcılar",
-    description: "Gebelik haftası ve yumurtlama günü gibi önemli tarihleri kolayca hesaplayın.",
-    href: "/hasta-rehberi#calculators" // Link to the section ID
+    icon: <Baby size={32} className="text-primary" />,
+    title: "Tüp Bebek (IVF) Süreci",
+    description: "Tüp bebek tedavisinin tüm aşamalarını detaylı bir şekilde inceleyin.",
+    href: "/hasta-rehberi#ivf-journey"
   },
   {
     icon: <HelpCircle size={32} className="text-primary" />,
     title: "Sıkça Sorulan Sorular",
     description: "Tedavi süreçleriyle ilgili en merak edilen soruların yanıtlarını bulun.",
-    href: "/hasta-rehberi#faq" // Link to the section ID
+    href: "/hasta-rehberi#faq"
   },
   {
     icon: <FileText size={32} className="text-primary" />,
     title: "Blog & Makaleler",
     description: "Kadın sağlığı ve infertilite üzerine en güncel bilgilere ve yazılarımıza ulaşın.",
-    href: "/blog" // Direct link to the blog page
+    href: "/blog"
   }
 ];
 
@@ -34,7 +34,7 @@ export default function ResourceHub() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {resources.map((resource, index) => (
-            <Link href={resource.href} key={index} className="group bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg shadow-md flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+            <Link href={resource.href} key={index} className="group bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg shadow-md flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full">
               <div className="mb-4">{resource.icon}</div>
               <h3 className="font-serif text-xl font-bold text-text-main mb-2">
                 {resource.title}

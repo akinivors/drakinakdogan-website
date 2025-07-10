@@ -4,16 +4,27 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
-import { X, Menu, Stethoscope, FlaskConical } from 'lucide-react';
+import { X, Menu, Stethoscope, FlaskConical, Home } from 'lucide-react';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- Data for the Mega Menu ---
+// --- Data for the Mega Menu (Updated to match hizmetler page) ---
 const conditionsTreated = [
-  'Endometriozis', 'İnfertilite', 'Polikistik Over Sendromu', 'Miyoma Uteri', 'Zayıf Over Cevabı'
+  { slug: 'infertilite', title: 'İnfertilite (Kısırlık)' },
+  { slug: 'polikistik-over-sendromu', title: 'Polikistik Over Sendromu (PCOS)' },
+  { slug: 'endometriozis', title: 'Endometriozis (Çikolata Kisti)' },
+  { slug: 'azalmis-over-rezervi', title: 'Azalmış Over Rezervi' },
+  { slug: 'tuplerin-tikali-olmasi', title: 'Tüplerin Tıkalı Olması' },
+  { slug: 'rahim-anomalileri', title: 'Rahim Anomalileri' },
+  { slug: 'hipogonadotropik-hipogonadizm', title: 'Hipogonadotropik Hipogonadizm' }
 ];
 const treatmentMethods = [
-  'Tüp Bebek (IVF)', 'Aşılama (IUI)', 'Embriyo Transferi', 'Laparoskopi', 'Histerektomi'
+  { slug: 'tup-bebek', title: 'Tüp Bebek (IVF)' },
+  { slug: 'yapay-zeka-embriyo', title: 'Yapay Zeka ile Embriyo Seçimi' },
+  { slug: 'mikroenjeksiyon', title: 'Mikroenjeksiyon (ICSI)' },
+  { slug: 'embriyoskop-takip', title: 'Embriyoskop ile Takip' },
+  { slug: 'genetik-tani', title: 'Genetik Tanı İşlemleri (PGT)' },
+  { slug: 'yumurta-dondurma', title: 'Yumurta Dondurma' }
 ];
 
 // --- Main Navigation Links ---
@@ -52,6 +63,12 @@ export default function Header() {
 
           {/* --- Desktop Navigation --- */}
           <div className="hidden md:flex items-center gap-8">
+            {/* Home Icon Button */}
+            <Link href="/" className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title="Ana Sayfa">
+              <Home size={20} />
+            </Link>
+            
+            {/* Hakkımda */}
             <Link href="/hakkimda" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Hakkımda</Link>
             
             {/* Services Mega Menu Trigger */}
@@ -60,11 +77,15 @@ export default function Header() {
                 Hizmetler
               </Link>
             </div>
-
-            {/* Other links */}
-            {navLinks.slice(1).map((link) => (
-                 <Link key={link.href} href={link.href} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{link.label}</Link>
-            ))}
+            
+            {/* Hasta Rehberi */}
+            <Link href="/hasta-rehberi" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Hasta Rehberi</Link>
+            
+            {/* Blog */}
+            <Link href="/blog" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Blog</Link>
+            
+            {/* İletişim */}
+            <Link href="/iletisim" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>İletişim</Link>
           </div>
 
           <div className="hidden md:block">
@@ -118,7 +139,7 @@ export default function Header() {
   );
 }
 
-// --- The Mega Menu Component (with corrected styling) ---
+// --- The Mega Menu Component (Updated to match hizmetler page) ---
 function MegaMenu() {
   return (
     <motion.div
@@ -132,16 +153,43 @@ function MegaMenu() {
         <div className="grid grid-cols-3 gap-8 py-8">
           {/* Column 1: Conditions */}
           <div>
-            <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2"><Stethoscope size={20} /> Tedavisi Yapılan Hastalıklar</h3>
-            <ul className="space-y-2">{conditionsTreated.map(item => (<li key={item}><Link href="/hizmetler" className="font-sans text-text-light hover:text-primary transition-colors">{item}</Link></li>))}</ul>
+            <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <Stethoscope size={20} /> Tanı ve Tedavisi Yapılan Hastalıklar
+            </h3>
+            <ul className="space-y-2">
+              {conditionsTreated.map(item => (
+                <li key={item.slug}>
+                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
           {/* Column 2: Treatments */}
           <div>
-            <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2"><FlaskConical size={20} /> Uygulanan Tedavi Yöntemleri</h3>
-            <ul className="space-y-2">{treatmentMethods.map(item => (<li key={item}><Link href="/hizmetler" className="font-sans text-text-light hover:text-primary transition-colors">{item}</Link></li>))}</ul>
+            <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <FlaskConical size={20} /> Uygulanan Tedavi Yöntemleri
+            </h3>
+            <ul className="space-y-2">
+              {treatmentMethods.map(item => (
+                <li key={item.slug}>
+                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
           {/* Column 3: Featured Service */}
-          <div className="bg-secondary p-6 rounded-lg"><h3 className="font-serif text-lg font-bold text-primary mb-2">Öne Çıkan Hizmet</h3><p className="font-sans text-2xl font-bold text-text-main mb-4">Tüp Bebek (IVF)</p><p className="font-sans text-sm text-text-light mb-4">Kişiye özel protokoller ve en güncel teknoloji ile başarıya giden yolda yanınızdayız.</p><Link href="/hizmetler"><Button variant="primary" className="w-full">Detayları İncele</Button></Link></div>
+          <div className="bg-secondary p-6 rounded-lg">
+            <h3 className="font-serif text-lg font-bold text-primary mb-2">Öne Çıkan Hizmet</h3>
+            <p className="font-sans text-2xl font-bold text-text-main mb-4">Tüp Bebek (IVF)</p>
+            <p className="font-sans text-sm text-text-light mb-4">Kişiye özel protokoller ve en güncel teknoloji ile başarıya giden yolda yanınızdayız.</p>
+            <Link href="/hizmetler#tup-bebek">
+              <Button variant="primary" className="w-full">Detayları İncele</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.div>

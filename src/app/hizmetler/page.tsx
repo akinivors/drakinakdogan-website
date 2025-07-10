@@ -1,90 +1,51 @@
-'use client'; // Required for state management (useState)
+'use client'; 
 
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
 import { Stethoscope, FlaskConical } from 'lucide-react';
+import InfoModal from '@/components/InfoModal';
 
-// --- DYNAMIC IMPORTS ---
-const InfoModal = dynamic(() => import('@/components/InfoModal'));
-const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
-
-// Define a specific type for our service items
+// --- Type definitions ---
 interface ServiceItem {
+  slug: string;
   title: string;
   longDescription: string;
   imageSrc: string;
 }
 
-// Updated data structure with more details for the modal
+// --- Final, Medically Accurate Data Arrays with Slugs ---
 const conditionsTreated: ServiceItem[] = [
-  { 
-    title: 'Endometriozis', 
-    longDescription: 'Endometriozis, rahim içini döşeyen dokunun rahim dışında büyümesidir. Bu durum ağrıya ve kısırlığa neden olabilir. Modern laparoskopik cerrahi ve medikal tedavilerle etkili sonuçlar alıyoruz. Tanı ve tedavide 25 yılı aşkın deneyimimle bireysel yaklaşım uyguluyorum.',
-    imageSrc: '/pcos-sendromu.jpeg' // Related visual
-  },
-  { 
-    title: 'Erkek İnfertilitesi', 
-    longDescription: 'Erkek faktörlü infertilite, çiftlerin %40\'ında görülen bir durumdur. Sperm sayısı, hareketlilik ve morfoloji analizleriyle detaylı değerlendirme yapılır. Mikroenjeksiyon (ICSI) tekniği ile başarılı sonuçlar elde edilmektedir.',
-    imageSrc: '/service-infertility.jpg' // Shows a couple in consultation
-  },
-  { 
-    title: 'İnfertilite', 
-    longDescription: 'Bir yıl boyunca korunmasız ilişkiye rağmen gebelik oluşmaması durumudur. Hem kadın hem de erkek faktörlerini detaylıca araştırarak kişiye özel tedavi planları oluşturuyoruz. Modern üreme tekniklerini deneyimle birleştiriyoruz.',
-    imageSrc: '/infertilite.jpg' // Specific infertility graphic
-  },
-  { 
-    title: 'Konjenital Uterin Anomaliler', 
-    longDescription: 'Doğumsal rahim anomalileri, gebelik kayıplarına ve infertiliteye neden olabilir. Histeroskopi ve laparoskopi teknikleriyle cerrahi düzeltme işlemleri gerçekleştiriliyor. Her hasta için uygun tedavi yöntemi belirleniyor.',
-    imageSrc: '/service-gynecology.jpg' // Professional ultrasound visual
-  },
-  { 
-    title: 'Miyoma Uteri', 
-    longDescription: 'Rahim kasından kaynaklanan iyi huylu tümörlerdir. Adet düzensizliği, ağrı ve infertiliteye neden olabilir. Laparoskopik miyomektomi ile minimal invaziv cerrahi yaklaşım uyguluyoruz. Doğurganlık korunarak tedavi edilir.',
-    imageSrc: '/dr-aysin-akdogan-lab1.jpg' // Professional lab setting
-  },
-  { 
-    title: 'Polikistik Over Sendromu', 
-    longDescription: 'PCOS, üreme çağındaki kadınları etkileyen hormonal bir bozukluktur. Adet düzensizliği, kilo artışı ve infertiliteye neden olur. Yaşam tarzı değişiklikleri ve medikal tedavi ile etkin yönetim sağlanır.',
-    imageSrc: '/pcos-sendromu.jpeg' // Specific PCOS graphic
-  },
-  { 
-    title: 'Zayıf Over Cevabı', 
-    longDescription: 'Yumurtalıkların stimülasyon tedavilerine yetersiz cevap vermesi durumudur. Özel protokoller ve bireyselleştirilmiş tedavi yaklaşımları ile over rezervini optimize ediyoruz. Deneyimli yaklaşımla başarı oranlarını artırıyoruz.',
-    imageSrc: '/dr-aysin-akdogan-staringatthecomputer.jpg' // Professional focus/analysis
-  }
+  { slug: 'infertilite', title: 'İnfertilite (Kısırlık)', longDescription: 'Bir yıl (35 yaş üstü kadınlarda 6 ay) boyunca korunmasız ve düzenli cinsel ilişkiye rağmen gebelik oluşmaması durumudur. Çiftlerin yaklaşık %20\'sini etkileyebilir.', imageSrc: '/infertilite.jpg' },
+  { slug: 'polikistik-over-sendromu', title: 'Polikistik Over Sendromu (PCOS)', longDescription: 'Yumurtlama problemlerinin en sık nedenlerinden biridir. Adet düzensizliği, hormonal dengesizlikler ve yumurtalıklarda çok sayıda küçük kist oluşumu ile karakterizedir.', imageSrc: '/pcos-sendromu.jpeg' },
+  { slug: 'endometriozis', title: 'Endometriozis (Çikolata Kisti)', longDescription: 'Rahim içini döşeyen endometrium dokusunun, rahim dışında (yumurtalıklar, tüpler vb.) yerleşmesi durumudur. Kronik ağrı ve infertiliteye neden olabilir.', imageSrc: '/pcos-sendromu.jpeg' },
+  { slug: 'azalmis-over-rezervi', title: 'Azalmış Over Rezervi', longDescription: 'Genellikle ileri yaşa bağlı olarak kadının yumurtalıklarındaki yumurta sayısı ve kalitesinin azalmasıdır. Bu durum, gebelik şansını doğal olarak düşürebilir.', imageSrc: '/service-infertility.jpg' },
+  { slug: 'tuplerin-tikali-olmasi', title: 'Tüplerin Tıkalı Olması', longDescription: 'Geçirilmiş enfeksiyonlar veya cerrahiler sonucu fallop tüplerinin tıkanması, sperm ve yumurtanın buluşmasını engelleyerek infertiliteye neden olur.', imageSrc: '/dr-aysin-akdogan-lab1.jpg' },
+  { slug: 'rahim-anomalileri', title: 'Rahim Anomalileri', longDescription: 'Myom, polip, rahim içi yapışıklıklar veya perde gibi doğuştan gelen ya da sonradan oluşan yapısal bozukluklardır. Embriyonun tutunmasını engelleyebilir.', imageSrc: '/service-gynecology.jpg' },
+  { slug: 'hipogonadotropik-hipogonadizm', title: 'Hipogonadotropik Hipogonadizm', longDescription: 'Beyinden (hipofiz ve hipotalamus) yumurtalıkları uyaran FSH ve LH hormonlarının yetersiz salgılanması sonucu yumurtlama fonksiyonlarının olmaması durumudur.', imageSrc: '/service-infertility.jpg' }
 ];
 
 const treatmentMethods: ServiceItem[] = [
-  {
-    title: 'Embriyo Transferi',
-    longDescription: 'IVF sürecinin son aşaması olan embriyo transferi, laboratuvar ortamında geliştirilen embriyoların rahim içine yerleştirilmesi işlemidir. Uygun embriyo seçimi ve transfer tekniği ile yüksek başarı oranları elde edilmektedir.',
-    imageSrc: '/service-ivf.jpg' // IVF graphic
-  },
-  {
-    title: 'Histerektomi',
-    longDescription: 'Rahim alınması operasyonu olan histerektomi, çeşitli jinekolojik hastalıkların tedavisinde uygulanır. Laparoskopik yöntemlerle minimal invaziv cerrahi teknikler kullanılarak hastanın konforunu maksimize ediyoruz.',
-    imageSrc: '/dr-aysin-akdogan.png' // Professional surgery setting
-  },
-  {
-    title: 'İntrauterin İnseminasyon (Aşılama)',
-    longDescription: 'İntrauterin inseminasyon (IUI), hazırlanan spermlerin doğrudan rahim içine yerleştirildiği bir yardımcı üreme tekniğidir. Özellikle açıklanamayan infertilite ve hafif erkek faktöründe tercih edilir. Doğal sürece en yakın yöntemdir.',
-    imageSrc: '/service-infertility.jpg' // Shows a couple in consultation
-  },
-  {
-    title: 'Laparoskopi',
-    longDescription: 'Minimal invaziv cerrahi tekniği olan laparoskopi ile tanı ve tedavi bir arada yapılır. Endometriozis, miyoma, over kistleri ve tüp tıkanıklıklarının tedavisinde altın standart yöntemdir. Hızlı iyileşme ve minimal iz avantajı sağlar.',
-    imageSrc: '/dr-aysin-akdogan-lab1.jpg' // Professional lab setting
-  },
-  {
-    title: 'Tüp Bebek',
-    longDescription: 'Vücut dışında döllenme işlemi olan IVF, birçok çift için umut olmaktadır. Laboratuvar koşullarında embriyo oluşturulup rahime transfer edilmesi esasına dayanır. Güncel protokoller ve deneyimli yaklaşımla yüksek başarı oranları elde edilmektedir.',
-    imageSrc: '/service-ivf.jpg' // Specific IVF graphic
-  }
+  { slug: 'tup-bebek', title: 'Tüp Bebek (IVF)', longDescription: 'Vücut dışında döllenme işlemi olan IVF, birçok çift için en etkili tedavi yöntemidir. Laboratuvarda embriyo oluşturulup rahime transfer edilmesi esasına dayanır.', imageSrc: '/service-ivf.jpg' },
+  { slug: 'yapay-zeka-embriyo', title: 'Yapay Zeka ile Embriyo Seçimi', longDescription: 'Embriyoskop ile elde edilen binlerce görüntü, yapay zeka algoritmaları ile analiz edilerek tutunma potansiyeli en yüksek olan embriyonun seçilmesini sağlayan en ileri teknolojidir.', imageSrc: '/dr-aysin-akdogan-lab1.jpg' },
+  { slug: 'mikroenjeksiyon', title: 'Mikroenjeksiyon (ICSI)', longDescription: 'Tek bir spermin doğrudan yumurta içine enjekte edildiği bu yöntem, özellikle erkek faktörlü infertilitede döllenme oranlarını büyük ölçüde artırır.', imageSrc: '/infertilite.jpg' },
+  { slug: 'embriyoskop-takip', title: 'Embriyoskop ile Takip', longDescription: 'Embriyoların gelişimini 7/24 kesintisiz olarak izleyen özel inkübatör sistemidir. En sağlıklı embriyonun seçilmesine olanak tanır.', imageSrc: '/service-ivf.jpg' },
+  { slug: 'genetik-tani', title: 'Genetik Tanı İşlemleri (PGT)', longDescription: 'Genetik hastalık riski taşıyan çiftlerde veya tekrarlayan tüp bebek başarısızlıklarında, embriyoların genetik olarak incelenerek sağlıklı olanların transfer edilmesidir.', imageSrc: '/service-ivf.jpg' },
+  { slug: 'yumurta-dondurma', title: 'Yumurta Dondurma', longDescription: 'Over rezervi düşük olan veya kanser tedavisi görecek kadınların doğurganlıklarını gelecekte korumak için yumurtalarının dondurularak saklanmasıdır.', imageSrc: '/dr-aysin-akdogan-lab1.jpg' }
 ];
 
+const allServices = [...conditionsTreated, ...treatmentMethods];
+
 export default function ServicesPage() {
-  // Use the new type for our state
   const [selectedItem, setSelectedItem] = useState<ServiceItem | null>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const itemToOpen = allServices.find(item => item.slug === hash);
+      if (itemToOpen) {
+        setSelectedItem(itemToOpen);
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -123,7 +84,6 @@ export default function ServicesPage() {
       </section>
       
       {/* Section 3: Treatment Methods */}
-      <AnimatedSection>
         <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
@@ -144,7 +104,6 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* The Modal Component */}
       <InfoModal item={selectedItem} onClose={() => setSelectedItem(null)} />

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lora } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import BackToTopButton from '@/components/BackToTopButton';
+import FloatingActionHub from '@/components/FloatingActionHub';
 import "./globals.css";
 
 const inter = Inter({
@@ -33,7 +33,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <BackToTopButton />
+        <FloatingActionHub />
       </body>
     </html>
   );
