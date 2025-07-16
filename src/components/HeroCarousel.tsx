@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 
 const images = [
@@ -14,45 +14,69 @@ const images = [
 ];
 
 export default function HeroCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true, 
+    align: 'start', 
+    dragFree: false 
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!emblaApi) return;
+    
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 8000); // Change image every 8 seconds
+      emblaApi.scrollNext();
+    }, 8000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [emblaApi]);
+
+  const scrollTo = useCallback((index: number) => {
+    if (!emblaApi) return;
+    emblaApi.scrollTo(index);
+  }, [emblaApi]);
 
   return (
-    <div className="w-full h-96 md:h-full rounded-lg shadow-lg relative overflow-hidden bg-gray-200">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: 'easeInOut' }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={images[currentIndex]}
-            alt={`Hero image ${currentIndex + 1}`}
-            fill
-            className="object-cover"
-            priority={currentIndex === 0}
-          />
-        </motion.div>
-      </AnimatePresence>
+    <div className="w-full h-full rounded-lg shadow-lg relative overflow-hidden bg-gray-200">
+      <div className="embla overflow-hidden h-full" ref={emblaRef}>
+        <div className="embla__container flex h-full">
+          {images.map((image, index) => (
+            <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 relative">
+              <Image
+                src={image}
+                alt={`Hero image ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       
-      {/* Optional: Add dots indicator */}
+      {/* Dots indicator */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => scrollTo(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-white' : 'bg-white/50'
+              index === selectedIndex ? 'bg-white' : 'bg-white/50'
             }`}
           />
         ))}

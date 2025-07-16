@@ -93,7 +93,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
             {/* Photo Column */}
             <div className="lg:col-span-1">
-              <div className="w-full h-[500px] rounded-lg shadow-xl overflow-hidden relative sticky top-24">
+              <div className="w-full h-[400px] md:h-[500px] rounded-lg shadow-xl overflow-hidden relative md:sticky md:top-24">
                 <HeroCarousel />
               </div>
             </div>
