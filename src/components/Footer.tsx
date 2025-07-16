@@ -6,7 +6,6 @@ import Button from '@/components/Button';
 import { Instagram } from 'lucide-react';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
 
   const siteLinks = [
     { href: '/hakkimda', label: 'Hakkımda' },
@@ -35,7 +34,7 @@ export default function Footer() {
         <div className="hidden md:grid md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
             <Logo variant="light" />
-            <p className="font-sans text-white">İzmir'de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
+            <p className="font-sans text-white">İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
           </div>
           <div>
             <h3 className="font-serif text-lg font-bold mb-4">Site Haritası</h3>
@@ -58,7 +57,7 @@ export default function Footer() {
         <div className="md:hidden space-y-10">
             <div>
               <Logo variant="light" />
-              <p className="font-sans text-white mt-4">İzmir'de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
+              <p className="font-sans text-white mt-4">İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
             </div>
             
             <div className="border-t border-white/20 pt-8">

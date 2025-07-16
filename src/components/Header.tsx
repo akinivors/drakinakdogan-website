@@ -4,8 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
-import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, FlaskConical, Instagram } from 'lucide-react';
-import { clsx } from 'clsx';
+import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Data for the Mega Menu (Updated to match hizmetler page) ---
