@@ -3,6 +3,7 @@ import { Inter, Lora } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingActionHub from '@/components/FloatingActionHub';
+import Script from 'next/script';
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +31,19 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${inter.variable} ${lora.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-HNR7LXKP66"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HNR7LXKP66');
+          `}
+        </Script>
         <Header />
         <main>{children}</main>
         <Footer />

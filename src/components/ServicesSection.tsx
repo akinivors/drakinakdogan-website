@@ -17,7 +17,7 @@ const services = [
   {
     title: 'Endometriozis (Çikolata Kisti)',
     description: 'Ağrı ve infertiliteye neden olabilen bu kronik durum için modern tanı ve tedavi.',
-    imageUrl: '/pcos-sendromu.jpeg',
+    imageUrl: '/endometriozis.jpg',
     href: '/hizmetler#endometriozis', // Links to the specific modal
   },
   {

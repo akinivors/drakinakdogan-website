@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const images = [
   '/dr-aysin-akdogan-standingbackgroundhospital.jpg',
-  '/dr-aysin-akdogan-desk1.jpg',
+  '/dr-aysin-akdogan-smilingatthedesk.jpg',
   '/dr-aysin-akdogan-lab1.jpg',
   '/dr-aysin-akdogan.png', // The surgery photo
   '/dr-aysin-akdogan-standinginsidehospital.jpg',

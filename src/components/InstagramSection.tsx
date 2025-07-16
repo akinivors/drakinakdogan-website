@@ -6,9 +6,9 @@ import { Instagram } from 'lucide-react';
 const instagramImages = [
   { src: '/dr-aysin-akdogan-standingnextodesk.jpg', alt: 'Dr. Ayşin Akdoğan in her office' },
   { src: '/dr-aysin-akdogan-lab1.jpg', alt: 'Dr. Ayşin Akdoğan working in the lab' },
-  { src: '/service-pregnancy.jpg', alt: 'A photo representing pregnancy care' },
+  { src: '/dr-aysin-akdogan-standinginsidehospital2.jpg', alt: 'Dr. Ayşin Akdoğan in the hospital' },
   { src: '/dr-aysin-akdogan-standingbackgroundhospital.jpg', alt: 'Dr. Ayşin Akdoğan at the hospital' },
-  { src: '/service-infertility.jpg', alt: 'A hopeful couple during consultation' },
+  { src: '/dr-aysin-akdogan-staringatcomputerwithnurses.jpg', alt: 'Dr. Ayşin Akdoğan working with nurses' },
   { src: '/dr-aysin-akdogan-standinginsidehospital.jpg', alt: 'Dr. Ayşin Akdoğan in the clinic' },
 ];
 

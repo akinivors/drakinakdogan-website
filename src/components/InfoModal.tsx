@@ -1,5 +1,7 @@
+'use client';
+
 import { X } from 'lucide-react';
-import Image from 'next/image';
+import Image from 'next/image'; // Import the Next.js Image component
 
 interface InfoModalProps {
   item: {
@@ -21,18 +23,21 @@ export default function InfoModal({ item, onClose }: InfoModalProps) {
     >
       {/* Modal Panel */}
       <div 
-        onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside the modal
+        onClick={(e) => e.stopPropagation()}
         className="bg-white rounded-lg shadow-2xl w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 overflow-hidden"
       >
-        {/* Image */}
-        <div className="w-full h-64 md:h-full bg-secondary relative">
-          <Image
-            src={item.imageSrc}
-            alt={item.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+        {/* --- UPDATED IMAGE SECTION --- */}
+        <div className="relative w-full h-64 md:h-full bg-secondary">
+           <Image
+              src={item.imageSrc}
+              alt={item.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 90vw, 40vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+           />
         </div>
 
         {/* Content */}

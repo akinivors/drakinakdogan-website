@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
-import { X, Menu, Stethoscope, FlaskConical, Home } from 'lucide-react';
+import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, FlaskConical, Instagram } from 'lucide-react';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -27,19 +27,33 @@ const treatmentMethods = [
   { slug: 'yumurta-dondurma', title: 'Yumurta Dondurma' }
 ];
 
-// --- Main Navigation Links ---
+// --- Main Navigation Links with ICONS ---
 const navLinks = [
-    { href: '/hakkimda', label: 'Hakkımda' },
-    // We remove "Hizmetler" here because it's a special case now
-    { href: '/hasta-rehberi', label: 'Hasta Rehberi' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/iletisim', label: 'İletişim' },
+  { href: '/', label: 'Ana Sayfa', icon: <Home size={24} /> },
+  { href: '/hakkimda', label: 'Hakkımda', icon: <User size={24} /> },
+  { href: '/hizmetler', label: 'Hizmetler', icon: <Briefcase size={24} /> },
+  { href: '/hasta-rehberi', label: 'Hasta Rehberi', icon: <BookOpen size={24} /> },
+  { href: '/blog', label: 'Blog', icon: <Stethoscope size={24} /> },
+  { href: '/iletisim', label: 'İletişim', icon: <MessageSquare size={24} /> },
 ];
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Add effect to prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
@@ -56,8 +70,11 @@ export default function Header() {
 
   return (
     // The main container for hover logic
-    <div onMouseLeave={handleMouseLeave} className="relative">
-      <header className="w-full bg-white/80 backdrop-blur-sm sticky top-0 z-40 border-b border-gray-200">
+    <div 
+      onMouseLeave={handleMouseLeave} 
+      className="sticky top-0 z-40"
+    >
+      <header className="w-full bg-white/80 backdrop-blur-sm border-b border-gray-200">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Logo />
 
@@ -72,7 +89,7 @@ export default function Header() {
             <Link href="/hakkimda" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Hakkımda</Link>
             
             {/* Services Mega Menu Trigger */}
-            <div onMouseEnter={handleMouseEnter}>
+            <div onMouseEnter={handleMouseEnter} className="relative">
               <Link href="/hizmetler" className="font-sans text-text-main hover:text-primary transition-colors">
                 Hizmetler
               </Link>
@@ -89,9 +106,9 @@ export default function Header() {
           </div>
 
           <div className="hidden md:block">
-            <Link href="/iletisim#form">
-              <Button variant="primary">İletişime Geçin</Button>
-            </Link>
+            <a href="https://mobil.mph.com.tr/" target="_blank" rel="noopener noreferrer">
+              <Button variant="primary">Randevu Al</Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -108,33 +125,49 @@ export default function Header() {
         {isServicesMenuOpen && <MegaMenu />}
       </AnimatePresence>
 
-      {/* --- Mobile Menu Panel (Unchanged) --- */}
-      <div className={clsx('fixed top-0 right-0 h-full w-full bg-primary/90 backdrop-blur-lg z-50 transition-transform duration-300 ease-in-out', isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full')}>
-        <div className="flex justify-end p-6">
-          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
-            <X className="h-8 w-8 text-white" />
-          </button>
-        </div>
-        <div className="flex flex-col items-center justify-center h-full -mt-16">
-          <nav className="flex flex-col items-center gap-8">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-3xl text-white hover:text-accent transition-colors">Ana Sayfa</Link>
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-3xl text-white hover:text-accent transition-colors">
-                {link.label}
-              </Link>
-            ))}
-            <Link href="/hizmetler" onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-3xl text-white hover:text-accent transition-colors">Hizmetler</Link>
-            <div className="mt-8">
-              <Link 
-                href="/iletisim#form" 
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Button variant="secondary">İletişime Geçin</Button>
-              </Link>
+      {/* --- REBUILT MOBILE MENU PANEL --- */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-primary/90 backdrop-blur-lg z-50 p-6 flex flex-col"
+          >
+            <div className="flex justify-between items-center">
+              <Logo variant="light" />
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
+                <X className="h-8 w-8 text-white" />
+              </button>
             </div>
-          </nav>
-        </div>
-      </div>
+            
+            <nav className="flex flex-col items-center justify-center flex-grow gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-4 w-full justify-center font-serif text-3xl text-white hover:text-accent transition-colors"
+                >
+                  {link.icon}
+                  <span>{link.label}</span>
+                </Link>
+              ))}
+            </nav>
+
+            <div className="py-6 text-center">
+              <Link href="/iletisim#form" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="secondary" className="w-full max-w-xs mx-auto">İletişime Geçin</Button>
+              </Link>
+              <div className="flex justify-center mt-6">
+                <a href="https://www.instagram.com/draysinakdogan/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white">
+                  <Instagram size={28} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -169,7 +202,7 @@ function MegaMenu() {
           {/* Column 2: Treatments */}
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2">
-              <FlaskConical size={20} /> Uygulanan Tedavi Yöntemleri
+              <Stethoscope size={20} /> Uygulanan Tedavi Yöntemleri
             </h3>
             <ul className="space-y-2">
               {treatmentMethods.map(item => (
