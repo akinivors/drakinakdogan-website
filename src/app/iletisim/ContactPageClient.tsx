@@ -4,8 +4,7 @@ import { useForm, Controller } from 'react-hook-form'; // Import Controller
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Loader2, CheckCircle, AlertTriangle, HelpCircle, X } from 'lucide-react';
-import Button from '@/components/Button';
+import { Phone, Mail, MapPin, CheckCircle, HelpCircle } from 'lucide-react';
 
 // --- Helper function to format the phone number ---
 const formatPhoneNumber = (value: string) => {
@@ -34,9 +33,6 @@ type ContactFormInputs = z.infer<typeof contactFormSchema>;
 
 export default function ContactPageClient() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isInfoVisible, setInfoVisible] = useState(false);
-  const [isTopInfoVisible, setTopInfoVisible] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, reset, control } = useForm<ContactFormInputs>({ // Add 'control'
     resolver: zodResolver(contactFormSchema),
@@ -45,7 +41,6 @@ export default function ContactPageClient() {
 
   const onSubmit = async (data: ContactFormInputs) => {
     setFormState('loading');
-    setErrorMessage('');
     const submissionData = { ...data, phone: `${data.countryCode} ${data.phoneNumber}` };
     try {
       const response = await fetch('/api/send', {
@@ -59,8 +54,8 @@ export default function ContactPageClient() {
       reset();
     } catch (error: unknown) {
       setFormState('error');
-      if (error instanceof Error) { setErrorMessage(error.message); } 
-      else { setErrorMessage('Bilinmeyen bir hata oluştu.'); }
+      if (error instanceof Error) { } 
+      else { }
     }
   };
 
@@ -106,7 +101,6 @@ export default function ContactPageClient() {
               <div className="absolute top-4 right-4">
                 <button 
                   type="button" 
-                  onClick={() => setTopInfoVisible(true)} 
                   className="text-gray-400 hover:text-primary transition-colors"
                   title="Yardım"
                 >
