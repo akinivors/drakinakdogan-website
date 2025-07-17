@@ -28,16 +28,16 @@ export default function InfoModal({ item, onClose }: InfoModalProps) {
       >
         {/* --- UPDATED IMAGE SECTION --- */}
         <div className="relative w-full h-64 md:h-full bg-secondary">
-           <Image
-              src={item.imageSrc}
-              alt={item.title}
-              fill
+          <Image
+            src={item.imageSrc}
+            alt={item.title}
+            fill
               priority
-              className="object-cover"
+            className="object-cover"
               sizes="(max-width: 768px) 90vw, 40vw"
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-           />
+          />
         </div>
 
         {/* Content */}

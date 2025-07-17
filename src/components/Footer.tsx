@@ -8,12 +8,12 @@ import { Instagram } from 'lucide-react';
 export default function Footer() {
 
   const siteLinks = [
-    { href: '/hakkimda', label: 'Hakkımda' },
-    { href: '/hizmetler', label: 'Hizmetler' },
-    { href: '/hasta-rehberi', label: 'Hasta Rehberi' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/iletisim', label: 'İletişim' },
-  ];
+  { href: '/hakkimda', label: 'Hakkımda' },
+  { href: '/hizmetler', label: 'Hizmetler' },
+  { href: '/hasta-rehberi', label: 'Hasta Rehberi' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/iletisim', label: 'İletişim' },
+];
 
   const contactDetails = (
     <div className="font-sans space-y-3 text-white">
@@ -49,9 +49,9 @@ export default function Footer() {
             <p className="font-sans text-white mb-4">Sorularınız veya randevu talepleriniz için bize ulaşın.</p>
             <Link href="/iletisim#form">
               <Button variant="secondary" className="w-full">İletişime Geçin</Button>
-            </Link>
+              </Link>
+            </div>
           </div>
-        </div>
 
         {/* --- NEW MOBILE VIEW: SECTIONED LIST --- */}
         <div className="md:hidden space-y-10">

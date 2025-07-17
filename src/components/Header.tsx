@@ -105,9 +105,9 @@ export default function Header() {
           </div>
 
           <div className="hidden md:block">
-            <a href="https://mobil.mph.com.tr/" target="_blank" rel="noopener noreferrer">
-              <Button variant="primary">Randevu Al</Button>
-            </a>
+            <Link href="/iletisim#form">
+              <Button variant="primary">İletişime Geçin</Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -135,13 +135,13 @@ export default function Header() {
           >
             <div className="flex justify-between items-center">
               <Logo variant="light" />
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
-                <X className="h-8 w-8 text-white" />
-              </button>
-            </div>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
+            <X className="h-8 w-8 text-white" />
+          </button>
+        </div>
             
             <nav className="flex flex-col items-center justify-center flex-grow gap-6">
-              {navLinks.map((link) => (
+            {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -150,8 +150,8 @@ export default function Header() {
                 >
                   {link.icon}
                   <span>{link.label}</span>
-                </Link>
-              ))}
+              </Link>
+            ))}
             </nav>
 
             <div className="py-6 text-center">

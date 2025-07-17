@@ -1,37 +1,55 @@
-'use client';
+import { Metadata } from 'next';
+import HomePageClient from './HomePageClient';
+import Script from 'next/script';
 
-import dynamic from 'next/dynamic';
-import AnimatedSection from '@/components/AnimatedSection';
-import ResourceHub from '@/components/ResourceHub';
-import InstagramSection from '@/components/InstagramSection';
+export const metadata: Metadata = {
+  title: 'İzmir Tüp Bebek ve İnfertilite Uzmanı | Op. Dr. Ayşin Akdoğan',
+  description: "25+ yıllık deneyimle, İzmir Karşıyaka'daki kliniğimizde kişiye özel tüp bebek, aşılama ve ileri infertilite tedavileri sunuyoruz.",
+};
 
-// --- DYNAMIC IMPORTS ---
-// Instead of direct imports, we now use next/dynamic to lazy-load each section.
-const Hero = dynamic(() => import('@/components/Hero'));
-const AboutSection = dynamic(() => import('@/components/AboutSection'));
-const ServicesSection = dynamic(() => import('@/components/ServicesSection'));
-const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
-
-export default function Home() {
+export default function Page() {
   return (
     <>
-      <Hero /> {/* No longer wrapped - visible immediately */}
-      
-      <AnimatedSection>
-        <ResourceHub /> {/* The new section */}
-      </AnimatedSection>
-      <AnimatedSection>
-        <AboutSection showButton={true} />
-      </AnimatedSection>
-      <AnimatedSection>
-        <ServicesSection />
-      </AnimatedSection>
-      <AnimatedSection>
-        <InstagramSection />
-      </AnimatedSection>
-      <AnimatedSection>
-        <TestimonialsSection />
-      </AnimatedSection>
+      <Script id="clinic-schema-home" type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "MedicalClinic",
+          "name": "Op. Dr. Ayşin Akdoğan | Tüp Bebek ve İnfertilite Kliniği",
+          "description": "Op. Dr. Ayşin Akdoğan liderliğinde, İzmir'de kişiye özel tüp bebek, kısırlık ve jinekolojik tedaviler sunan uzman klinik.",
+          "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-lab1.jpg",
+          "url": "https://www.draysinakdogan.com",
+          "telephone": "+90 554 871 05 90",
+          "medicalSpecialty": "Infertility",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Yeni Girne Bulvarı, 1825. Sk. No:12",
+            "addressLocality": "Karşıyaka",
+            "addressRegion": "İzmir",
+            "postalCode": "35575",
+            "addressCountry": "TR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "38.4550",
+            "longitude": "27.1550"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "18:00"
+            }
+          ]
+        })}
+      </Script>
+      <HomePageClient />
     </>
   );
 }

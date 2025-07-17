@@ -1,6 +1,11 @@
 import { supabase } from '@/lib/supabaseClient';
 import BlogPageClient from './page_client'; // Import the component we just created
 
+export const metadata = {
+  title: 'Tüp Bebek & İnfertilite Blogu | Güncel Bilgiler - Dr. Ayşin Akdoğan',
+  description: 'Tüp bebek süreci, başarı oranları, PCOS ve endometriozis gibi konularda en güncel bilimsel makaleler ve hasta rehberleri.'
+};
+
 // This parent component fetches the data on the server
 export default async function BlogPage() {
   const { data: posts, error } = await supabase

@@ -57,13 +57,13 @@ export default function HeroCarousel() {
         <div className="embla__container flex h-full">
           {images.map((image, index) => (
             <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 relative">
-              <Image
+          <Image
                 src={image}
                 alt={`Hero image ${index + 1}`}
-                fill
-                className="object-cover"
+            fill
+            className="object-cover"
                 priority={index === 0}
-              />
+          />
             </div>
           ))}
         </div>
