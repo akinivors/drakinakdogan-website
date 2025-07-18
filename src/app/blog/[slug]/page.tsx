@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: Props) {
     "author": { "@type": "Person", "name": "Op. Dr. Ayşin Akdoğan", "url": "https://www.drayinakdogan.com/hakkimda" },
     "image": post.image_url,
     "publisher": { "@type": "Organization", "name": "Op. Dr. Ayşin Akdoğan Kliniği", "logo": { "@type": "ImageObject", "url": "https://www.drayinakdogan.com/path-to-your-logo.png" }},
-    "datePublished": new Date(post.created_at).toISOString().split('T')[0]
+    "datePublished": new Date(post.created_at).toISOString()
   };
 
   const jsonLd: JsonLdSchema = {
