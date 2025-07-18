@@ -17,12 +17,12 @@ export default function Page() {
           "name": "Op. Dr. Ayşin Akdoğan",
           "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-standingbackgroundhospital.jpg",
           "url": "https://www.draysinakdogan.com/hakkimda",
-          "telephone": "+90 554 871 05 90",
+          "telephone": "+90-554-871-0590",
           "medicalSpecialty": [
-            "In Vitro Fertilisation(IVF)",
-            "Infertility",
-            "Reproductive Endocrinology",
-            "Obstetrics & Gynecology"
+            "Tüp Bebek (IVF)",
+            "İnfertilite",
+            "Üreme Endokrinolojisi",
+            "Kadın Hastalıkları ve Doğum"
           ],
           "address": {
             "@type": "PostalAddress",
@@ -32,13 +32,13 @@ export default function Page() {
             "postalCode": "35575",
             "addressCountry": "TR"
           },
-          "alumniOf": "Hacettepe University Faculty of Medicine",
+          "alumniOf": "Hacettepe Üniversitesi Tıp Fakültesi",
           "knowsAbout": [
-            "In Vitro Fertilisation (IVF)",
-            "Polycystic Ovary Syndrome (PCOS)",
-            "Endometriosis",
-            "Oocyte Cryopreservation",
-            "Intrauterine Insemination (IUI)"
+            "Tüp Bebek (IVF)",
+            "Polikistik Over Sendromu (PCOS)",
+            "Endometriozis",
+            "Yumurta Dondurma",
+            "Aşılama (IUI)"
           ]
         })}
       </Script>

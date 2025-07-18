@@ -57,6 +57,7 @@ function ContactCTA() {
             alt="Op. Dr. Ayşin Akdoğan ile iletişime geçin"
             fill
             className="object-cover"
+            sizes="64px"
           />
           {/* --- MESSAGE ICON OVERLAY --- */}
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center">

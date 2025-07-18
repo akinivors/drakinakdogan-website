@@ -80,7 +80,7 @@ export default function Footer() {
 
         {/* Bottom copyright bar */}
         <div className="mt-12 pt-8 border-t border-white/20 text-center text-white/60 font-sans">
-          <p>&copy; {new Date().getFullYear()} Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır.</p>
+          <p>&copy; 2024 Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>

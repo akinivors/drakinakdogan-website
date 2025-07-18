@@ -49,13 +49,18 @@ type OvulationInputs = z.infer<typeof ovulationSchema>;
 
 // --- Reusable Date Picker Component ---
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function DatePickerField({ control, name }: { control: any, name: string }) {
+function DatePickerField({ control, name, id }: { control: any, name: string, id?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Controller name={name} control={control}
       render={({ field }) => (
         <div className="relative">
-          <button type="button" className={clsx("w-full rounded-md border border-gray-300 shadow-sm bg-white px-3 py-2 text-left font-sans flex justify-between items-center h-10", "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary", !field.value && "text-gray-500")} onClick={() => setIsOpen(!isOpen)}>
+          <button
+            type="button"
+            id={id}
+            className={clsx("w-full rounded-md border border-gray-300 shadow-sm bg-white px-3 py-2 text-left font-sans flex justify-between items-center h-10", "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary", !field.value && "text-gray-500")}
+            onClick={() => setIsOpen(!isOpen)}
+          >
             {field.value ? format(field.value, 'PPP', { locale: tr }) : <span>Tarih seçin...</span>}
             <CalendarIcon className="h-4 w-4 text-gray-400" />
           </button>
@@ -125,8 +130,8 @@ export default function PatientCalculators() {
               <button onClick={() => setActiveInfo(infoContent.dueDate)} className="text-gray-400 hover:text-primary"><HelpCircle size={20} /></button>
             </div>
             <form onSubmit={handleDueDateSubmit(onDueDateSubmit)} className="space-y-6">
-              <div className="min-h-[95px]"><label className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={dueDateControl} name="lmp" />{dueDateErrors.lmp && <p className="text-red-600 text-sm mt-1">{dueDateErrors.lmp.message}</p>}</div>
-              <div className="min-h-[95px]"><label htmlFor="dueDateCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={dueDateControl} render={({ field }) => (<input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{dueDateErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{dueDateErrors.cycleLength.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="dueDateLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={dueDateControl} name="lmp" id="dueDateLmp" />{dueDateErrors.lmp && <p className="text-red-600 text-sm mt-1">{dueDateErrors.lmp.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="dueDateCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={dueDateControl} render={({ field }) => (<input type="number" {...field} id="dueDateCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{dueDateErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{dueDateErrors.cycleLength.message}</p>}</div>
               <Button type="submit" variant="primary" className="w-full">Hesapla</Button>
             </form>
             <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{dueDateResult && (<><p className="font-sans text-text-light">Tahmini Doğum Tarihi:</p><p className="font-serif text-xl font-bold text-primary">{dueDateResult}</p></>)}</div>
@@ -137,8 +142,8 @@ export default function PatientCalculators() {
               <button onClick={() => setActiveInfo(infoContent.ovulation)} className="text-gray-400 hover:text-primary"><HelpCircle size={20} /></button>
             </div>
             <form onSubmit={handleOvulationSubmit(onOvulationSubmit)} className="space-y-6">
-              <div className="min-h-[95px]"><label className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={ovulationControl} name="lmp" />{ovulationErrors.lmp && <p className="text-red-600 text-sm mt-1">{ovulationErrors.lmp.message}</p>}</div>
-              <div className="min-h-[95px]"><label htmlFor="ovulationCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={ovulationControl} render={({ field }) => (<input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{ovulationErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{ovulationErrors.cycleLength.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="ovulationLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={ovulationControl} name="lmp" id="ovulationLmp" />{ovulationErrors.lmp && <p className="text-red-600 text-sm mt-1">{ovulationErrors.lmp.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="ovulationCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={ovulationControl} render={({ field }) => (<input type="number" {...field} id="ovulationCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{ovulationErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{ovulationErrors.cycleLength.message}</p>}</div>
               <Button type="submit" variant="primary" className="w-full">Hesapla</Button>
             </form>
             <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{fertileWindowResult && (<><p className="font-sans text-text-light">Tahmini Doğurganlık Pencereniz:</p><p className="font-serif text-xl font-bold text-primary">{fertileWindowResult}</p><p className="text-xs text-gray-400 mt-2">Bu hesaplama bir tahmindir. Kesin sonuçlar için ovulasyon test kitleri veya doktor muayenesi önerilir.</p></>)}</div>

@@ -124,6 +124,7 @@ export default function ContactPageClient() {
                       id="name"
                       className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent"
                       placeholder="Ad Soyad" 
+                      autoComplete="name"
                     />
                     <label 
                       htmlFor="name" 
@@ -142,6 +143,7 @@ export default function ContactPageClient() {
                       id="email" 
                       className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent"
                       placeholder="E-posta Adresi"
+                      autoComplete="email"
                     />
                     <label 
                       htmlFor="email" 
@@ -154,10 +156,12 @@ export default function ContactPageClient() {
                   
                   {/* --- UPDATED PHONE NUMBER INPUT --- */}
                   <div>
-                    <label className="font-sans text-sm font-bold text-text-light">Telefon Numarası</label>
+                    <label htmlFor="countryCode" className="font-sans text-sm font-bold text-text-light">Telefon Numarası</label>
                     <div className="flex gap-2 mt-2">
                       <div className="relative w-1/4">
-                          <input {...register('countryCode')} type="tel" id="countryCode" className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent" placeholder="Kod" />
+                          <input {...register('countryCode')} type="tel" id="countryCode" className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent" placeholder="Kod" 
+                          autoComplete="country"
+                          />
                           <label htmlFor="countryCode" className="absolute left-3 -top-2.5 bg-secondary px-1 text-sm text-text-light transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary">Kod</label>
                       </div>
                       <div className="relative w-3/4">
@@ -175,6 +179,7 @@ export default function ContactPageClient() {
                                     id="phoneNumber"
                                     className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent"
                                     placeholder="5xx-xxx-xx-xx"
+                                    autoComplete="tel"
                                 />
                             )}
                           />
@@ -186,15 +191,51 @@ export default function ContactPageClient() {
 
                   {/* Message Field */}
                   <div className="relative">
-                    <div className="flex justify-end absolute -top-3 right-3">
-                      {/* ...rest of the form... */}
-                    </div>
+                    <textarea
+                      {...register('message')}
+                      id="message"
+                      rows={5}
+                      className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-3 text-text-main bg-white peer focus:border-primary focus:ring-primary placeholder-transparent resize-none"
+                      placeholder="Mesajınız"
+                      autoComplete="off"
+                    />
+                    <label
+                      htmlFor="message"
+                      className="absolute left-3 -top-2.5 bg-secondary px-1 text-sm text-text-light transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary"
+                    >
+                      Mesajınız
+                    </label>
+                    {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
+                  </div>
+
+                  {/* Submit Button */}
+                  <div>
+                    <button
+                      type="submit"
+                      className="w-full bg-primary text-white font-bold py-3 rounded-md hover:bg-primary-dark transition-colors"
+                      disabled={formState === 'loading'}
+                    >
+                      {formState === 'loading' ? 'Gönderiliyor...' : 'Mesaj Gönder'}
+                    </button>
                   </div>
                 </form>
               )}
             </div>
           </div>
         </div>
+      </section>
+      {/* Full-Width Map */}
+      <section className="w-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18476.09670595653!2d27.092585311822393!3d38.466520006826286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd9d85530f323%3A0xf4e3a7e795bf6df7!2sMedical%20Point!5e0!3m2!1str!2str!4v1752770818193!5m2!1str!2str"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Klinik Konumu"
+        ></iframe>
       </section>
     </>
   );
