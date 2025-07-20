@@ -21,7 +21,11 @@ const itemVariants: Variants = {
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { 
+      duration: 0.6, // Slightly longer duration for smoother mobile animation
+      ease: 'easeOut',
+      delay: 0.1 // Small delay to ensure proper triggering
+    }
   },
 };
 
@@ -82,8 +86,12 @@ export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] 
             tag="div"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {otherPosts.map((post) => (
-              <motion.div key={post.id} variants={itemVariants}>
+            {otherPosts.map((post, index) => (
+              <motion.div 
+                key={post.id} 
+                variants={itemVariants}
+                custom={index} // Pass index for potential custom animation timing
+              >
                 <BlogPostCard post={post} />
               </motion.div>
             ))}

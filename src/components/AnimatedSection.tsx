@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -28,12 +28,28 @@ export default function AnimatedSection({
   variants = containerVariants 
 }: AnimatedSectionProps) {
   const MotionComponent = motion[tag as 'div'];
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <MotionComponent
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ 
+        once: true, 
+        amount: isMobile ? 0.05 : 0.1, // Lower threshold for mobile
+        margin: isMobile ? "-100px 0px -100px 0px" : "-50px 0px -50px 0px" // Larger margin for mobile
+      }}
       variants={variants}
       className={className}
     >
