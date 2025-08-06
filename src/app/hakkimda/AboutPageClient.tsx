@@ -110,7 +110,7 @@ export default function AboutPageClient() {
                 <motion.div className="relative" variants={itemVariants}>
                   <div className="absolute -left-[3.2rem] top-1 h-4 w-4 rounded-full bg-primary"></div>
                   <p className="font-sans text-sm text-accent font-medium">2018 - 2025</p>
-                  <h3 className="font-serif text-xl font-bold text-text-main mt-1">Özel Tüpbebek Merkezi</h3>
+                  <h3 className="font-serif text-xl font-bold text-text-main mt-1">Özel Tavmergen Tüpbebek Merkezi</h3>
                   <p className="font-sans text-text-light">Kadın Hastalıkları ve Doğum Uzmanı</p>
                 </motion.div>
                 {/* Timeline Item 3 */}
