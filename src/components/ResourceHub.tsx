@@ -1,34 +1,41 @@
+// Path: src/components/ResourceHub.tsx (Fully Refactored)
+
+'use client';
+
 import Link from 'next/link';
 import { HelpCircle, FileText, FlaskConical, Baby } from 'lucide-react';
-
-const resources = [
-  {
-    icon: <FlaskConical size={32} className="text-primary" />,
-    title: "İnfertilite Değerlendirmesi",
-    description: "Kısırlık nedenlerini ve size en uygun tedavi yolunu adım adım keşfedin.",
-    href: "/hasta-rehberi#infertility-journey"
-  },
-  {
-    icon: <Baby size={32} className="text-primary" />,
-    title: "Tüp Bebek (IVF) Süreci",
-    description: "Tüp bebek tedavisinin tüm aşamalarını detaylı bir şekilde inceleyin.",
-    href: "/hasta-rehberi#ivf-journey"
-  },
-  {
-    icon: <HelpCircle size={32} className="text-primary" />,
-    title: "Sıkça Sorulan Sorular",
-    description: "Tedavi süreçleriyle ilgili en merak edilen soruların yanıtlarını bulun.",
-    href: "/hasta-rehberi#faq"
-  },
-  {
-    icon: <FileText size={32} className="text-primary" />,
-    title: "Blog & Makaleler",
-    description: "Kadın sağlığı ve infertilite üzerine en güncel bilgilere ve yazılarımıza ulaşın.",
-    href: "/blog"
-  }
-];
+import { useTranslations } from 'next-intl';
 
 export default function ResourceHub() {
+  const t = useTranslations('ResourceHub');
+
+  const resources = [
+    {
+      icon: <FlaskConical size={32} className="text-primary" />,
+      title: t('infertilityTitle'),
+      description: t('infertilityDescription'),
+      href: "/hasta-rehberi#infertility-journey"
+    },
+    {
+      icon: <Baby size={32} className="text-primary" />,
+      title: t('ivfTitle'),
+      description: t('ivfDescription'),
+      href: "/hasta-rehberi#ivf-journey"
+    },
+    {
+      icon: <HelpCircle size={32} className="text-primary" />,
+      title: t('faqTitle'),
+      description: t('faqDescription'),
+      href: "/hasta-rehberi#faq"
+    },
+    {
+      icon: <FileText size={32} className="text-primary" />,
+      title: t('blogTitle'),
+      description: t('blogDescription'),
+      href: "/blog"
+    }
+  ];
+
   return (
     <section className="w-full bg-white py-16">
       <div className="container mx-auto px-6">
@@ -43,7 +50,7 @@ export default function ResourceHub() {
                 {resource.description}
               </p>
               <div className="font-sans font-bold text-primary mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Detayları Gör →
+                {t('viewDetails')}
               </div>
             </Link>
           ))}
@@ -51,4 +58,4 @@ export default function ResourceHub() {
       </div>
     </section>
   );
-} 
+}

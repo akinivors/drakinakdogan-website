@@ -4,16 +4,21 @@ import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
 import { Instagram } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  const tNav = useTranslations('Navigation');
+  const locale = useLocale();
 
+  // Translate the navigation links with locale prefix
   const siteLinks = [
-  { href: '/hakkimda', label: 'Hakkımda' },
-  { href: '/hizmetler', label: 'Hizmetler' },
-  { href: '/hasta-rehberi', label: 'Hasta Rehberi' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/iletisim', label: 'İletişim' },
-];
+    { href: `/${locale}/hakkimda`, label: tNav('about') },
+    { href: `/${locale}/hizmetler`, label: tNav('services') },
+    { href: `/${locale}/hasta-rehberi`, label: tNav('patientGuide') },
+    { href: `/${locale}/blog`, label: tNav('blog') },
+    { href: `/${locale}/iletisim`, label: tNav('contact') },
+  ];
 
   const contactDetails = (
     <div className="font-sans space-y-3 text-white">
@@ -34,21 +39,21 @@ export default function Footer() {
         <div className="hidden md:grid md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
             <Logo variant="light" />
-            <p className="font-sans text-white">İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
+            <p className="font-sans text-white">{t('description')}</p>
           </div>
           <div>
-            <h3 className="font-serif text-lg font-bold mb-4">Site Haritası</h3>
+            <h3 className="font-serif text-lg font-bold mb-4">{t('sitemap')}</h3>
             <ul className="space-y-2">{siteLinks.map(link => (<li key={link.href}><Link href={link.href} className="font-sans text-white hover:underline">{link.label}</Link></li>))}</ul>
           </div>
           <div>
-            <h3 className="font-serif text-lg font-bold mb-4">İletişim</h3>
+            <h3 className="font-serif text-lg font-bold mb-4">{t('contact')}</h3>
             {contactDetails}
           </div>
           <div>
-            <h3 className="font-serif text-lg font-bold mb-4">Hızlı İletişim</h3>
-            <p className="font-sans text-white mb-4">Sorularınız veya randevu talepleriniz için bize ulaşın.</p>
-            <Link href="/iletisim#form">
-              <Button variant="secondary" className="w-full">İletişime Geçin</Button>
+            <h3 className="font-serif text-lg font-bold mb-4">{t('quickContact')}</h3>
+            <p className="font-sans text-white mb-4">{t('quickContactDescription')}</p>
+            <Link href={`/${locale}/iletisim#form`}>
+              <Button variant="secondary" className="w-full">{t('getInTouch')}</Button>
               </Link>
             </div>
           </div>
@@ -57,30 +62,31 @@ export default function Footer() {
         <div className="md:hidden space-y-10">
             <div>
               <Logo variant="light" />
-              <p className="font-sans text-white mt-4">İzmir&apos;de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.</p>
+              <p className="font-sans text-white mt-4">{t('description')}</p>
             </div>
             
             <div className="border-t border-white/20 pt-8">
-                <h3 className="font-serif text-lg font-bold mb-4">Site Haritası</h3>
+                <h3 className="font-serif text-lg font-bold mb-4">{t('sitemap')}</h3>
                 <ul className="space-y-3">{siteLinks.map(link => (<li key={link.href}><Link href={link.href} className="font-sans text-white hover:underline">{link.label}</Link></li>))}</ul>
             </div>
 
             <div className="border-t border-white/20 pt-8">
-                <h3 className="font-serif text-lg font-bold mb-4">İletişim</h3>
+                <h3 className="font-serif text-lg font-bold mb-4">{t('contact')}</h3>
                 {contactDetails}
             </div>
 
             <div className="border-t border-white/20 pt-8">
-                <h3 className="font-serif text-lg font-bold mb-4">Hızlı İletişim</h3>
-                <Link href="/iletisim#form">
-                    <Button variant="secondary" className="w-full">İletişime Geçin</Button>
+                <h3 className="font-serif text-lg font-bold mb-4">{t('quickContact')}</h3>
+                 <p className="font-sans text-white mb-4">{t('quickContactDescription')}</p>
+                <Link href={`/${locale}/iletisim#form`}>
+                    <Button variant="secondary" className="w-full">{t('getInTouch')}</Button>
                 </Link>
             </div>
         </div>
 
         {/* Bottom copyright bar */}
         <div className="mt-12 pt-8 border-t border-white/20 text-center text-white/60 font-sans">
-          <p>&copy; 2024 Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır.</p>
+          <p>{t('copyright')}</p>
         </div>
       </div>
     </footer>

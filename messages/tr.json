@@ -1,0 +1,138 @@
+{
+  "Footer": {
+    "description": "İzmir'de kadın sağlığı ve gebelik takibi üzerine uzmanlaşmış kliniğimizle hizmetinizdeyiz.",
+    "sitemap": "Site Haritası",
+    "contact": "İletişim",
+    "quickContact": "Hızlı İletişim",
+    "quickContactDescription": "Sorularınız veya randevu talepleriniz için bize ulaşın.",
+    "getInTouch": "İletişime Geçin",
+    "copyright": "© 2024 Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır."
+  },
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "services": "Hizmetler",
+    "patientGuide": "Hasta Rehberi",
+    "blog": "Blog",
+    "contact": "İletişim"
+  },
+  "Header": {
+    "conditionsTitle": "Tanı ve Tedavisi Yapılan Hastalıklar",
+    "treatmentsTitle": "Uygulanan Tedavi Yöntemleri",
+    "featuredTitle": "Öne Çıkan Hizmet",
+    "featuredService": "Tüp Bebek (IVF)",
+    "featuredDescription": "Kişiye özel protokoller ve en güncel teknoloji ile başarıya giden yolda yanınızdayız.",
+    "featuredButton": "Detayları İncele",
+    "conditions": {
+      "infertility": "İnfertilite (Kısırlık)",
+      "pcos": "Polikistik Over Sendromu (PCOS)",
+      "endometriosis": "Endometriozis (Çikolata Kisti)",
+      "diminishedOvarianReserve": "Azalmış Over Rezervi",
+      "tubalBlockage": "Tüplerin Tıkalı Olması",
+      "uterineAnomalies": "Rahim Anomalileri",
+      "hypogonadotropicHypogonadism": "Hipogonadotropik Hipogonadizm"
+    },
+    "treatments": {
+      "ivf": "Tüp Bebek (IVF)",
+      "aiEmbryoSelection": "Yapay Zeka ile Embriyo Seçimi",
+      "icsi": "Mikroenjeksiyon (ICSI)",
+      "embryoscope": "Embriyoskop ile Takip",
+      "pgt": "Genetik Tanı İşlemleri (PGT)",
+      "eggFreezing": "Yumurta Dondurma"
+    }
+  },
+  "CTA": {
+    "getInTouch": "İletişime Geçin"
+  },
+  "Hero": {
+    "title": "Doğurganlık Yolculuğunuzda Güvenilir Rehberiniz",
+    "subtitle": "İleri teknoloji ve kişiye özel tedavi yöntemleriyle, yeni bir başlangıç yapmanız için size ve ailenize destek oluyoruz."
+  },
+  "ResourceHub": {
+    "infertilityTitle": "İnfertilite Değerlendirmesi",
+    "infertilityDescription": "Kısırlık nedenlerini ve size en uygun tedavi yolunu adım adım keşfedin.",
+    "ivfTitle": "Tüp Bebek (IVF) Süreci",
+    "ivfDescription": "Tüp bebek tedavisinin tüm aşamalarını detaylı bir şekilde inceleyin.",
+    "faqTitle": "Sıkça Sorulan Sorular",
+    "faqDescription": "Tedavi süreçleriyle ilgili en merak edilen soruların yanıtlarını bulun.",
+    "blogTitle": "Blog & Makaleler",
+    "blogDescription": "Kadın sağlığı ve infertilite üzerine en güncel bilgilere ve yazılarımıza ulaşın.",
+    "viewDetails": "Detayları Gör →"
+  },
+  "AboutSection": {
+    "title": "Bir Hekimden Daha Fazlası: Bir Rehber, Bir Dost",
+    "p1": "1971 yılının 10 Ekim sabahı Mersin'de başlayan hayat yolculuğum, beni insanlara yardım etme ve en büyük mutluluklarına tanıklık etme arzusuna götürdü. İki çocuk annesi olarak, bir ailenin kurulmasındaki o tarifsiz heyecanı ve her çocuğun bir mucize olduğunu kalbimin en derinlerinde hissediyorum. Bu his, mesleğime olan tutkumun ve hastalarıma olan bağlılığımın temelini oluşturuyor.",
+    "p2": "Hacettepe Üniversitesi'nde başlayan tıp eğitimim ve Ege Üniversitesi'nde tamamladığım uzmanlığım, bana bilimin ışığında yürüme fırsatı verdi. Ancak biliyorum ki, tıp sadece bilimden ibaret değildir; aynı zamanda şefkat, anlayış ve güvendir.",
+    "readMore": "Daha Fazlasını Oku"
+  },
+  "ServicesSection": {
+    "title": "Hizmetlerimiz",
+    "ivfTitle": "Tüp Bebek (IVF)",
+    "ivfDescription": "İleri teknoloji ve kişiye özel yaklaşımlarla IVF tedavisi.",
+    "infertilityTitle": "İnfertilite",
+    "infertilityDescription": "Kısırlık nedenlerini araştırma ve en etkili tedavi yöntemleri.",
+    "endometriosisTitle": "Endometriozis (Çikolata Kisti)",
+    "endometriosisDescription": "Ağrı ve infertiliteye neden olabilen bu kronik durum için modern tanı ve tedavi.",
+    "pcosTitle": "Polikistik Over Sendromu (PCOS)",
+    "pcosDescription": "Yumurtlama sorunlarının en sık nedeninin yönetimi ve tedavisi."
+  },
+  "InstagramSection": {
+    "title": "Bizi Instagram'da Takip Edin",
+    "description": "En güncel bilgiler, hasta hikayeleri ve klinik yaşamından anlar için <link>@draysinakdogan</link> hesabını takip edin.",
+    "button": "Instagram'da Takip Et"
+  },
+  "TestimonialsSection": {
+    "title": "Hastalarımız Ne Diyor?",
+    "description": "Tedavi sürecinde hastalarımızın memnuniyeti ve sağlığı bizim için her zaman önceliklidir.",
+    "shareExperience": "Deneyiminizi Paylaşın",
+    "loading": "Yorumlar Yükleniyor...",
+    "noComments": "Henüz onaylanmış bir yorum bulunmamaktadır."
+  },
+  "AboutPage": {
+    "headerTitle": "Dr. Ayşin Akdoğan'ı Yakından Tanıyın",
+    "headerDescription": "Yardımcı üreme teknikleri, infertilite tedavisi ve kadın sağlığında 25+ yıllık deneyim ile modern tıbbın ışığında, her hastam için kişiselleştirilmiş, şefkatli ve kapsamlı bir sağlık hizmeti sunuyorum.",
+    "careerJourneyTitle": "Kariyer Yolculuğu",
+    "timelineCurrent": "Günümüz",
+    "timelineMedicalPoint": "MedicalPoint Tüpbebek Merkezi",
+    "timelineTavmergen": "Özel Tavmergen Tüpbebek Merkezi",
+    "timelineEge": "Ege Üniversitesi Aile Planlaması Araştırma ve Uygulama Merkezi",
+    "timelineEgeSpecialization": "Ege Üniversitesi",
+    "timelineHacettepe": "Hacettepe Üniversitesi Tıp Fakültesi",
+    "role": "Kadın Hastalıkları ve Doğum Uzmanı",
+    "specialization": "Uzmanlık, Kadın Hastalıkları ve Doğum",
+    "degree": "Tıp Doktoru",
+    "membershipsTitle": "Mesleki Üyelikler",
+    "utcd": "ÜTCD Derneği",
+    "izmirTabip": "İzmir Tabip Odası",
+    "specializationsTitle": "Uzmanlık Alanları ve Tedavi Yöntemleri",
+    "specializationsDescription": "Geniş deneyimim ile kadın sağlığı, infertilite ve yardımcı üreme teknikleri konularında kapsamlı hizmet sunuyorum.",
+    "areasTitle": "Uzmanlık Alanları",
+    "treatmentsTitle": "Tedavi Yöntemleri",
+    "areasList": [
+      "Endometriozis",
+      "Erkek İnfertilitesi",
+      "İnfertilite",
+      "Konjenital Uterin Anomaliler",
+      "Miyoma Uteri",
+      "Polikistik Over Sendromu",
+      "Zayıf Over Cevabı"
+    ],
+    "treatmentsList": [
+      "Embriyo Transferi",
+      "Histerektomi",
+      "İntrauterin İnseminasyon (Aşılama)",
+      "Laparoskopi",
+      "Tüp Bebek"
+    ],
+    "publicationsTitle": "Araştırma ve Akademik Katkılar",
+    "publicationsDescription": "Uluslararası alanda tanınan yayınlar, kitap bölümleri ve klinik araştırmalar ile bilimsel gelişime katkı sağlıyorum.",
+    "internationalTitle": "Uluslararası Yayınlar",
+    "internationalDescription": "Fertility & Sterility ve European Journal of Obstetrics & Gynecology gibi prestijli dergilerde yayınlanmış makaleler.",
+    "nationalTitle": "Ulusal Yayınlar",
+    "nationalDescription": "Türkiye Klinikleri ve Ege Tıp Dergisi gibi ulusal tıp literatürüne katkıda bulunan araştırmalar.",
+    "booksTitle": "Kitap Bölümleri & Çeviriler",
+    "booksDescription": "Alanında öncü ders kitaplarına yazılan bölümler ve yapılan önemli çeviriler.",
+    "contactTitle": "Sağlık Yolculuğunuzda Yanınızdayım",
+    "contactDescription": "25 yıllık deneyimim ve modern tıp yaklaşımımla, her hastam için en uygun tedavi planını oluşturuyor ve bu yolculukta yanınızda olmaya devam ediyorum."
+  }
+}

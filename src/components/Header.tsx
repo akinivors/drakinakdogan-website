@@ -1,3 +1,5 @@
+// Path: src/components/Header.tsx (Fully Refactored)
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -6,42 +8,47 @@ import Logo from '@/components/Logo';
 import Button from '@/components/Button';
 import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// --- Data for the Mega Menu (Updated to match hizmetler page) ---
-const conditionsTreated = [
-  { slug: 'infertilite', title: 'İnfertilite (Kısırlık)' },
-  { slug: 'polikistik-over-sendromu', title: 'Polikistik Over Sendromu (PCOS)' },
-  { slug: 'endometriozis', title: 'Endometriozis (Çikolata Kisti)' },
-  { slug: 'azalmis-over-rezervi', title: 'Azalmış Over Rezervi' },
-  { slug: 'tuplerin-tikali-olmasi', title: 'Tüplerin Tıkalı Olması' },
-  { slug: 'rahim-anomalileri', title: 'Rahim Anomalileri' },
-  { slug: 'hipogonadotropik-hipogonadizm', title: 'Hipogonadotropik Hipogonadizm' }
-];
-const treatmentMethods = [
-  { slug: 'tup-bebek', title: 'Tüp Bebek (IVF)' },
-  { slug: 'yapay-zeka-embriyo', title: 'Yapay Zeka ile Embriyo Seçimi' },
-  { slug: 'mikroenjeksiyon', title: 'Mikroenjeksiyon (ICSI)' },
-  { slug: 'embriyoskop-takip', title: 'Embriyoskop ile Takip' },
-  { slug: 'genetik-tani', title: 'Genetik Tanı İşlemleri (PGT)' },
-  { slug: 'yumurta-dondurma', title: 'Yumurta Dondurma' }
-];
-
-// --- Main Navigation Links with ICONS ---
-const navLinks = [
-  { href: '/', label: 'Ana Sayfa', icon: <Home size={24} /> },
-  { href: '/hakkimda', label: 'Hakkımda', icon: <User size={24} /> },
-  { href: '/hizmetler', label: 'Hizmetler', icon: <Briefcase size={24} /> },
-  { href: '/hasta-rehberi', label: 'Hasta Rehberi', icon: <BookOpen size={24} /> },
-  { href: '/blog', label: 'Blog', icon: <Stethoscope size={24} /> },
-  { href: '/iletisim', label: 'İletişim', icon: <MessageSquare size={24} /> },
-];
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function Header() {
+  const t = useTranslations('Header');
+  const tNav = useTranslations('Navigation');
+  const tCta = useTranslations('CTA');
+  const locale = useLocale();
+
+  // --- Data for the Mega Menu (NOW TRANSLATED) ---
+  const conditionsTreated = [
+    { slug: 'infertilite', title: t('conditions.infertility') },
+    { slug: 'polikistik-over-sendromu', title: t('conditions.pcos') },
+    { slug: 'endometriozis', title: t('conditions.endometriosis') },
+    { slug: 'azalmis-over-rezervi', title: t('conditions.diminishedOvarianReserve') },
+    { slug: 'tuplerin-tikali-olmasi', title: t('conditions.tubalBlockage') },
+    { slug: 'rahim-anomalileri', title: t('conditions.uterineAnomalies') },
+    { slug: 'hipogonadotropik-hipogonadizm', title: t('conditions.hypogonadotropicHypogonadism') }
+  ];
+  const treatmentMethods = [
+    { slug: 'tup-bebek', title: t('treatments.ivf') },
+    { slug: 'yapay-zeka-embriyo', title: t('treatments.aiEmbryoSelection') },
+    { slug: 'mikroenjeksiyon', title: t('treatments.icsi') },
+    { slug: 'embriyoskop-takip', title: t('treatments.embryoscope') },
+    { slug: 'genetik-tani', title: t('treatments.pgt') },
+    { slug: 'yumurta-dondurma', title: t('treatments.eggFreezing') }
+  ];
+
+  // --- Main Navigation Links with ICONS (NOW TRANSLATED WITH LOCALE PREFIX) ---
+  const navLinks = [
+    { href: `/${locale}`, label: tNav('home'), icon: <Home size={24} /> },
+    { href: `/${locale}/hakkimda`, label: tNav('about'), icon: <User size={24} /> },
+    { href: `/${locale}/hizmetler`, label: tNav('services'), icon: <Briefcase size={24} /> },
+    { href: `/${locale}/hasta-rehberi`, label: tNav('patientGuide'), icon: <BookOpen size={24} /> },
+    { href: `/${locale}/blog`, label: tNav('blog'), icon: <Stethoscope size={24} /> },
+    { href: `/${locale}/iletisim`, label: tNav('contact'), icon: <MessageSquare size={24} /> },
+  ];
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Add effect to prevent scrolling when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -53,64 +60,39 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-
   const handleMouseEnter = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsServicesMenuOpen(true);
   };
 
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setIsServicesMenuOpen(false);
-    }, 200);
+    timeoutRef.current = setTimeout(() => setIsServicesMenuOpen(false), 200);
   };
 
   return (
-    // The main container for hover logic
-    <div 
-      onMouseLeave={handleMouseLeave} 
-      className="sticky top-0 z-40"
-    >
+    <div onMouseLeave={handleMouseLeave} className="sticky top-0 z-40">
       <header className="w-full bg-white/80 backdrop-blur-sm border-b border-gray-200">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Logo />
-
-          {/* --- Desktop Navigation --- */}
           <div className="hidden md:flex items-center gap-8">
-            {/* Home Icon Button */}
-            <Link href="/" className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title="Ana Sayfa">
+            <Link href={`/${locale}`} className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title={tNav('home')}>
               <Home size={20} />
             </Link>
-            
-            {/* Hakkımda */}
-            <Link href="/hakkimda" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Hakkımda</Link>
-            
-            {/* Services Mega Menu Trigger */}
+            <Link href={`/${locale}/hakkimda`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('about')}</Link>
             <div onMouseEnter={handleMouseEnter} className="relative">
-              <Link href="/hizmetler" className="font-sans text-text-main hover:text-primary transition-colors">
-                Hizmetler
+              <Link href={`/${locale}/hizmetler`} className="font-sans text-text-main hover:text-primary transition-colors">
+                {tNav('services')}
               </Link>
             </div>
-            
-            {/* Hasta Rehberi */}
-            <Link href="/hasta-rehberi" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Hasta Rehberi</Link>
-            
-            {/* Blog */}
-            <Link href="/blog" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>Blog</Link>
-            
-            {/* İletişim */}
-            <Link href="/iletisim" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>İletişim</Link>
+            <Link href={`/${locale}/hasta-rehberi`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('patientGuide')}</Link>
+            <Link href={`/${locale}/blog`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('blog')}</Link>
+            <Link href={`/${locale}/iletisim`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('contact')}</Link>
           </div>
-
           <div className="hidden md:block">
-            <Link href="/iletisim#form">
-              <Button variant="primary">İletişime Geçin</Button>
+            <Link href={`/${locale}/iletisim#form`}>
+              <Button variant="primary">{tCta('getInTouch')}</Button>
             </Link>
           </div>
-
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button onClick={() => setIsMobileMenuOpen(true)} className="p-2">
               <Menu className="h-6 w-6 text-primary" />
@@ -119,12 +101,10 @@ export default function Header() {
         </nav>
       </header>
       
-      {/* --- Mega Menu Panel --- */}
       <AnimatePresence>
-        {isServicesMenuOpen && <MegaMenu />}
+        {isServicesMenuOpen && <MegaMenu conditions={conditionsTreated} treatments={treatmentMethods} />}
       </AnimatePresence>
 
-      {/* --- REBUILT MOBILE MENU PANEL --- */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -135,13 +115,12 @@ export default function Header() {
           >
             <div className="flex justify-between items-center">
               <Logo variant="light" />
-          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
-            <X className="h-8 w-8 text-white" />
-          </button>
-        </div>
-            
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
+                <X className="h-8 w-8 text-white" />
+              </button>
+            </div>
             <nav className="flex flex-col items-center justify-center flex-grow gap-6">
-            {navLinks.map((link) => (
+              {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -150,13 +129,12 @@ export default function Header() {
                 >
                   {link.icon}
                   <span>{link.label}</span>
-              </Link>
-            ))}
+                </Link>
+              ))}
             </nav>
-
             <div className="py-6 text-center">
-              <Link href="/iletisim#form" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="secondary" className="w-full max-w-xs mx-auto">İletişime Geçin</Button>
+              <Link href={`/${locale}/iletisim#form`} onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="secondary" className="w-full max-w-xs mx-auto">{tCta('getInTouch')}</Button>
               </Link>
               <div className="flex justify-center mt-6">
                 <a href="https://www.instagram.com/draysinakdogan/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white">
@@ -171,8 +149,9 @@ export default function Header() {
   );
 }
 
-// --- The Mega Menu Component (Updated to match hizmetler page) ---
-function MegaMenu() {
+function MegaMenu({ conditions, treatments }: { conditions: {slug: string, title: string}[], treatments: {slug: string, title: string}[] }) {
+  const t = useTranslations('Header');
+  const locale = useLocale();
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
@@ -183,47 +162,44 @@ function MegaMenu() {
     >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-3 gap-8 py-8">
-          {/* Column 1: Conditions */}
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2">
-              <Stethoscope size={20} /> Tanı ve Tedavisi Yapılan Hastalıklar
+              <Stethoscope size={20} /> {t('conditionsTitle')}
             </h3>
             <ul className="space-y-2">
-              {conditionsTreated.map(item => (
+              {conditions.map(item => (
                 <li key={item.slug}>
-                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                  <Link href={`/${locale}/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
                     {item.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          {/* Column 2: Treatments */}
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-4 flex items-center gap-2">
-              <Stethoscope size={20} /> Uygulanan Tedavi Yöntemleri
+              <Stethoscope size={20} /> {t('treatmentsTitle')}
             </h3>
             <ul className="space-y-2">
-              {treatmentMethods.map(item => (
+              {treatments.map(item => (
                 <li key={item.slug}>
-                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                  <Link href={`/${locale}/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
                     {item.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          {/* Column 3: Featured Service */}
           <div className="bg-secondary p-6 rounded-lg">
-            <h3 className="font-serif text-lg font-bold text-primary mb-2">Öne Çıkan Hizmet</h3>
-            <p className="font-sans text-2xl font-bold text-text-main mb-4">Tüp Bebek (IVF)</p>
-            <p className="font-sans text-sm text-text-light mb-4">Kişiye özel protokoller ve en güncel teknoloji ile başarıya giden yolda yanınızdayız.</p>
-            <Link href="/hizmetler#tup-bebek">
-              <Button variant="primary" className="w-full">Detayları İncele</Button>
+            <h3 className="font-serif text-lg font-bold text-primary mb-2">{t('featuredTitle')}</h3>
+            <p className="font-sans text-2xl font-bold text-text-main mb-4">{t('featuredService')}</p>
+            <p className="font-sans text-sm text-text-light mb-4">{t('featuredDescription')}</p>
+            <Link href={`/${locale}/hizmetler#tup-bebek`}>
+              <Button variant="primary" className="w-full">{t('featuredButton')}</Button>
             </Link>
           </div>
         </div>
       </div>
     </motion.div>
   );
-} 
+}

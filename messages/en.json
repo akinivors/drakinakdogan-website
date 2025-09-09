@@ -1,0 +1,138 @@
+{
+  "Footer": {
+    "description": "We are at your service with our clinic specialized in women's health and pregnancy follow-up in Izmir.",
+    "sitemap": "Sitemap",
+    "contact": "Contact",
+    "quickContact": "Quick Contact",
+    "quickContactDescription": "Contact us for your questions or appointment requests.",
+    "getInTouch": "Get in Touch",
+    "copyright": "© 2024 Op. Dr. Ayşin Akdoğan. All rights reserved."
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About Me",
+    "services": "Services",
+    "patientGuide": "Patient Guide",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "Header": {
+    "conditionsTitle": "Diagnosis and Treatment of Diseases",
+    "treatmentsTitle": "Applied Treatment Methods",
+    "featuredTitle": "Featured Service",
+    "featuredService": "IVF Treatment",
+    "featuredDescription": "We are with you on the road to success with personalized protocols and the latest technology.",
+    "featuredButton": "View Details",
+    "conditions": {
+      "infertility": "Infertility",
+      "pcos": "Polycystic Ovary Syndrome (PCOS)",
+      "endometriosis": "Endometriosis",
+      "diminishedOvarianReserve": "Diminished Ovarian Reserve",
+      "tubalBlockage": "Tubal Blockage",
+      "uterineAnomalies": "Uterine Anomalies",
+      "hypogonadotropicHypogonadism": "Hypogonadotropic Hypogonadism"
+    },
+    "treatments": {
+      "ivf": "IVF Treatment",
+      "aiEmbryoSelection": "AI Embryo Selection",
+      "icsi": "Microinjection (ICSI)",
+      "embryoscope": "Embryoscope Monitoring",
+      "pgt": "Genetic Diagnostic Procedures (PGT)",
+      "eggFreezing": "Egg Freezing"
+    }
+  },
+  "CTA": {
+    "getInTouch": "Get in Touch"
+  },
+  "Hero": {
+    "title": "Your Trusted Guide on Your Fertility Journey",
+    "subtitle": "We support you and your family in making a new start with advanced technology and personalized treatment methods."
+  },
+  "ResourceHub": {
+    "infertilityTitle": "Infertility Evaluation",
+    "infertilityDescription": "Discover the causes of infertility and the most suitable treatment path for you, step by step.",
+    "ivfTitle": "IVF Process",
+    "ivfDescription": "Examine all stages of IVF treatment in detail.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqDescription": "Find answers to the most curious questions about treatment processes.",
+    "blogTitle": "Blog & Articles",
+    "blogDescription": "Access the most up-to-date information and our articles on women's health and infertility.",
+    "viewDetails": "View Details →"
+  },
+  "AboutSection": {
+    "title": "More Than a Doctor: A Guide, A Friend",
+    "p1": "My life journey, which began on the morning of October 10, 1971, in Mersin, led me to a desire to help people and witness their greatest joys. As a mother of two, I feel the indescribable excitement of starting a family and the miracle of every child deep in my heart. This feeling forms the foundation of my passion for my profession and my commitment to my patients.",
+    "p2": "My medical education, which began at Hacettepe University and was completed with my specialization at Ege University, gave me the opportunity to walk in the light of science. However, I know that medicine is not just about science; it is also about compassion, understanding, and trust.",
+    "readMore": "Read More"
+  },
+  "ServicesSection": {
+    "title": "Our Services",
+    "ivfTitle": "IVF Treatment",
+    "ivfDescription": "Advanced technology and personalized approaches to IVF treatment.",
+    "infertilityTitle": "Infertility",
+    "infertilityDescription": "Investigating the causes of infertility and the most effective treatment methods.",
+    "endometriosisTitle": "Endometriosis",
+    "endometriosisDescription": "Modern diagnosis and treatment for this chronic condition that can cause pain and infertility.",
+    "pcosTitle": "Polycystic Ovary Syndrome (PCOS)",
+    "pcosDescription": "Management and treatment of the most common cause of ovulation problems."
+  },
+  "InstagramSection": {
+    "title": "Follow Us on Instagram",
+    "description": "Follow <link>@draysinakdogan</link> for the latest information, patient stories, and moments from clinic life.",
+    "button": "Follow on Instagram"
+  },
+  "TestimonialsSection": {
+    "title": "What Our Patients Say",
+    "description": "The satisfaction and health of our patients are always our priority during the treatment process.",
+    "shareExperience": "Share Your Experience",
+    "loading": "Loading testimonials...",
+    "noComments": "There are no approved testimonials yet."
+  },
+  "AboutPage": {
+    "headerTitle": "Get to Know Dr. Ayşin Akdoğan",
+    "headerDescription": "With over 25 years of experience in assisted reproductive technologies, infertility treatment, and women's health, I offer personalized, compassionate, and comprehensive healthcare for every patient in the light of modern medicine.",
+    "careerJourneyTitle": "Career Journey",
+    "timelineCurrent": "Present",
+    "timelineMedicalPoint": "MedicalPoint IVF Center",
+    "timelineTavmergen": "Private Tavmergen IVF Center",
+    "timelineEge": "Ege University Family Planning Research and Application Center",
+    "timelineEgeSpecialization": "Ege University",
+    "timelineHacettepe": "Hacettepe University Faculty of Medicine",
+    "role": "Obstetrics and Gynecology Specialist",
+    "specialization": "Specialization, Obstetrics and Gynecology",
+    "degree": "Medical Doctor",
+    "membershipsTitle": "Professional Memberships",
+    "utcd": "TSRM Association",
+    "izmirTabip": "İzmir Medical Chamber",
+    "specializationsTitle": "Areas of Expertise and Treatment Methods",
+    "specializationsDescription": "With my extensive experience, I offer comprehensive services in women's health, infertility, and assisted reproductive technologies.",
+    "areasTitle": "Areas of Expertise",
+    "treatmentsTitle": "Treatment Methods",
+    "areasList": [
+      "Endometriosis",
+      "Male Infertility",
+      "Infertility",
+      "Congenital Uterine Anomalies",
+      "Uterine Myoma",
+      "Polycystic Ovary Syndrome",
+      "Poor Ovarian Response"
+    ],
+    "treatmentsList": [
+      "Embryo Transfer",
+      "Hysterectomy",
+      "Intrauterine Insemination (IUI)",
+      "Laparoscopy",
+      "IVF"
+    ],
+    "publicationsTitle": "Research and Academic Contributions",
+    "publicationsDescription": "I contribute to scientific advancement through internationally recognized publications, book chapters, and clinical research.",
+    "internationalTitle": "International Publications",
+    "internationalDescription": "Articles published in prestigious journals such as Fertility & Sterility and the European Journal of Obstetrics & Gynecology.",
+    "nationalTitle": "National Publications",
+    "nationalDescription": "Research contributing to the national medical literature in journals such as Turkiye Klinikleri and Ege Tıp Dergisi.",
+    "booksTitle": "Book Chapters & Translations",
+    "booksDescription": "Chapters written for leading textbooks in the field and significant translations.",
+    "contactTitle": "By Your Side on Your Health Journey",
+    "contactDescription": "With 25 years of experience and a modern medical approach, I create the most suitable treatment plan for each of my patients and continue to be by your side on this journey."
+  }
+}

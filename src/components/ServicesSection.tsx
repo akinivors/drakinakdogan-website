@@ -1,39 +1,45 @@
-import Link from 'next/link';
+// Path: src/components/ServicesSection.tsx (Fully Refactored)
 
-// The new, focused list of services for the homepage
-const services = [
-  {
-    title: 'Tüp Bebek (IVF)',
-    description: 'İleri teknoloji ve kişiye özel yaklaşımlarla IVF tedavisi.',
-    imageUrl: '/service-ivf.jpg',
-    href: '/hizmetler#tup-bebek', // Links to the specific modal
-  },
-  {
-    title: 'İnfertilite',
-    description: 'Kısırlık nedenlerini araştırma ve en etkili tedavi yöntemleri.',
-    imageUrl: '/service-infertility.jpg',
-    href: '/hizmetler#infertilite', // Links to the specific modal
-  },
-  {
-    title: 'Endometriozis (Çikolata Kisti)',
-    description: 'Ağrı ve infertiliteye neden olabilen bu kronik durum için modern tanı ve tedavi.',
-    imageUrl: '/endometriozis.jpg',
-    href: '/hizmetler#endometriozis', // Links to the specific modal
-  },
-  {
-    title: 'Polikistik Over Sendromu (PCOS)',
-    description: 'Yumurtlama sorunlarının en sık nedeninin yönetimi ve tedavisi.',
-    imageUrl: '/pcos-sendromu.jpeg',
-    href: '/hizmetler#polikistik-over-sendromu', // Links to the specific modal
-  },
-];
+'use client';
+
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function ServicesSection() {
+  const t = useTranslations('ServicesSection');
+
+  const services = [
+    {
+      title: t('ivfTitle'),
+      description: t('ivfDescription'),
+      imageUrl: '/service-ivf.jpg',
+      href: '/hizmetler#tup-bebek',
+    },
+    {
+      title: t('infertilityTitle'),
+      description: t('infertilityDescription'),
+      imageUrl: '/service-infertility.jpg',
+      href: '/hizmetler#infertilite',
+    },
+    {
+      title: t('endometriosisTitle'),
+      description: t('endometriosisDescription'),
+      imageUrl: '/endometriozis.jpg',
+      href: '/hizmetler#endometriozis',
+    },
+    {
+      title: t('pcosTitle'),
+      description: t('pcosDescription'),
+      imageUrl: '/pcos-sendromu.jpeg',
+      href: '/hizmetler#polikistik-over-sendromu',
+    },
+  ];
+
   return (
     <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-16">
       <div className="container mx-auto px-6 text-center">
         <h2 className="font-serif text-4xl font-bold text-primary mb-12">
-          Hizmetlerimiz
+          {t('title')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {services.map((service, index) => (
@@ -57,4 +63,4 @@ export default function ServicesSection() {
       </div>
     </section>
   );
-} 
+}

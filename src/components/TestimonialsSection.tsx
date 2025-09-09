@@ -1,3 +1,5 @@
+// Path: src/components/TestimonialsSection.tsx (Fully Refactored)
+
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -6,9 +8,9 @@ import { Loader2 } from 'lucide-react';
 import Button from '@/components/Button';
 import TestimonialFormModal from './TestimonialFormModal';
 import { supabase } from '@/lib/supabaseClient';
-import TestimonialCard from './TestimonialCard'; // 1. Import the new component
+import TestimonialCard from './TestimonialCard';
+import { useTranslations } from 'next-intl';
 
-// 1. Define the Testimonial type
 type Testimonial = {
   id: number;
   created_at: string;
@@ -17,16 +19,15 @@ type Testimonial = {
 };
 
 export default function TestimonialsSection() {
+  const t = useTranslations('TestimonialsSection');
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // 2. Add state for testimonials and loading
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 3. Fetch data from Supabase
   useEffect(() => {
     const fetchTestimonials = async () => {
       setIsLoading(true);
@@ -70,38 +71,36 @@ export default function TestimonialsSection() {
 
   return (
     <>
-    <section className="w-full bg-white py-16">
-      <div className="container mx-auto px-6">
-        <div className="text-center">
-          <h2 className="font-serif text-4xl font-bold text-primary mb-4">
-            Hastalarımız Ne Diyor?
-          </h2>
-          <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
-            Tedavi sürecinde hastalarımızın memnuniyeti ve sağlığı bizim için her zaman önceliklidir.
-          </p>
-          {/* --- ADD THIS BUTTON --- */}
-          <Button variant="secondary" onClick={() => setIsModalOpen(true)}>
-            Deneyiminizi Paylaşın
-          </Button>
-        </div>
+      <section className="w-full bg-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <h2 className="font-serif text-4xl font-bold text-primary mb-4">
+              {t('title')}
+            </h2>
+            <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
+              {t('description')}
+            </p>
+            <Button variant="secondary" onClick={() => setIsModalOpen(true)}>
+              {t('shareExperience')}
+            </Button>
+          </div>
 
           <div className="mt-12">
             {isLoading ? (
               <div className="flex justify-center items-center h-48">
                 <Loader2 className="animate-spin text-primary" size={40} />
-                <p className="ml-4 font-sans text-text-light">Yorumlar Yükleniyor...</p>
+                <p className="ml-4 font-sans text-text-light">{t('loading')}</p>
               </div>
             ) : testimonials.length === 0 ? (
               <div className="text-center h-48 flex items-center justify-center">
-                <p className="font-sans text-text-light italic">Henüz onaylanmış bir yorum bulunmamaktadır.</p>
+                <p className="font-sans text-text-light italic">{t('noComments')}</p>
               </div>
             ) : (
               <>
                 <div className="overflow-hidden" ref={emblaRef}>
-                  {/* Add items-stretch here */}
-                  <div className="flex items-stretch">
+                  <div className="embla__container flex items-stretch"> 
                     {testimonials.map((testimonial) => (
-                      <div key={testimonial.id} className="flex-grow-0 flex-shrink-0 w-full h-full">
+                      <div key={testimonial.id} className="embla__slide flex-[0_0_100%] min-w-0 h-full">
                         <TestimonialCard testimonial={testimonial} />
                       </div>
                     ))}
@@ -123,11 +122,10 @@ export default function TestimonialsSection() {
               </>
             )}
           </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    {/* --- RENDER THE MODAL --- */}
-    <TestimonialFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <TestimonialFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
-} 
+}

@@ -1,3 +1,5 @@
+// Path: src/app/[lang]/layout.tsx (Corrected Version)
+
 import type { Metadata } from "next";
 import { Inter, Lora } from 'next/font/google';
 import Header from '@/components/Header';
@@ -5,6 +7,10 @@ import Footer from '@/components/Footer';
 import FloatingActionHub from '@/components/FloatingActionHub';
 import Script from 'next/script';
 import "./globals.css";
+// --- THIS IS THE FIX ---
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+// --------------------
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,7 +24,6 @@ const lora = Lora({
   variable: '--font-lora',
 });
 
-// The metadata object correctly handles all favicons and icons
 export const metadata: Metadata = {
   title: "Op. Dr. Ayşin Akdoğan | Kadın Hastalıkları ve Doğum Uzmanı",
   description: "İzmir'de kadın sağlığı, gebelik takibi, infertilite ve tüp bebek tedavisi üzerine uzmanlaşmış Op. Dr. Ayşin Akdoğan.",
@@ -34,15 +39,22 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+  
+  
+  // Load messages for the specific locale
+  const messages = (await import(`../../../messages/${lang}.json`)).default;
+
   return (
-    <html lang="tr" className={`${inter.variable} ${lora.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${inter.variable} ${lora.variable}`} suppressHydrationWarning>
       <head>
-        {/* Google Tag Manager Script - Placed in the <head> as recommended */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -54,7 +66,6 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) - Placed immediately after <body> */}
         <noscript>
           <iframe 
             src="https://www.googletagmanager.com/ns.html?id=GTM-T6TFV75V"
@@ -64,12 +75,12 @@ export default function RootLayout({
           />
         </noscript>
         
-        {/* The old Google Analytics scripts have been REMOVED to prevent double counting */}
-
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <FloatingActionHub />
+        <NextIntlClientProvider locale={lang} messages={messages}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <FloatingActionHub />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
