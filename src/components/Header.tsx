@@ -95,7 +95,8 @@ export default function Header() {
               <Button variant="primary">{tCta('getInTouch')}</Button>
             </Link>
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageSwitcher />
             <button onClick={() => setIsMobileMenuOpen(true)} className="p-2">
               <Menu className="h-6 w-6 text-primary" />
             </button>
