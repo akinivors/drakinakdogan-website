@@ -6,7 +6,7 @@
     "quickContact": "Hızlı İletişim",
     "quickContactDescription": "Sorularınız veya randevu talepleriniz için bize ulaşın.",
     "getInTouch": "İletişime Geçin",
-    "copyright": "© 2024 Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır."
+    "copyright": "© 2025 Op. Dr. Ayşin Akdoğan. Tüm hakları saklıdır."
   },
   "Navigation": {
     "home": "Ana Sayfa",
@@ -134,5 +134,144 @@
     "booksDescription": "Alanında öncü ders kitaplarına yazılan bölümler ve yapılan önemli çeviriler.",
     "contactTitle": "Sağlık Yolculuğunuzda Yanınızdayım",
     "contactDescription": "25 yıllık deneyimim ve modern tıp yaklaşımımla, her hastam için en uygun tedavi planını oluşturuyor ve bu yolculukta yanınızda olmaya devam ediyorum."
+  },
+  "ServicesPage": {
+    "title": "Hizmetlerimiz",
+    "description": "25 yılı aşkın deneyimimle, kadın sağlığı ve üreme tıbbı alanında sunduğum modern ve kişiye özel tedavi yaklaşımlarını keşfedin.",
+    "conditionsTitle": "Tanı ve Tedavisi Yapılan Hastalıklar",
+    "conditionsDescription": "Aşağıdaki alanlarda ve daha fazlasında güncel tanı ve tedavi yöntemleriyle hizmetinizdeyim.",
+    "treatmentsTitle": "Uygulanan Tedavi Yöntemleri",
+    "treatmentsDescription": "En güncel teknoloji ve bilimsel kanıta dayalı yaklaşımlarla uygulanan başlıca tedavi yöntemleri.",
+    "descriptions": {
+      "infertility": "Bir yıl (35 yaş üstü kadınlarda 6 ay) boyunca korunmasız ve düzenli cinsel ilişkiye rağmen gebelik oluşmaması durumudur. Çiftlerin yaklaşık %20'sini etkileyebilir.",
+      "pcos": "Yumurtlama problemlerinin en sık nedenlerinden biridir. Adet düzensizliği, hormonal dengesizlikler ve yumurtalıklarda çok sayıda küçük kist oluşumu ile karakterizedir.",
+      "endometriosis": "Rahim içini döşeyen endometrium dokusunun, rahim dışında (yumurtalıklar, tüpler vb.) yerleşmesi durumudur. Kronik ağrı ve infertiliteye neden olabilir.",
+      "diminishedOvarianReserve": "Genellikle ileri yaşa bağlı olarak kadının yumurtalıklarındaki yumurta sayısı ve kalitesinin azalmasıdır. Bu durum, gebelik şansını doğal olarak düşürebilir.",
+      "tubalBlockage": "Geçirilmiş enfeksiyonlar veya cerrahiler sonucu fallop tüplerinin tıkanması, sperm ve yumurtanın buluşmasını engelleyerek infertiliteye neden olur.",
+      "uterineAnomalies": "Myom, polip, rahim içi yapışıklıklar veya perde gibi doğuştan gelen ya da sonradan oluşan yapısal bozukluklardir. Embriyonun tutunmasını engelleyebilir.",
+      "hypogonadotropicHypogonadism": "Beyinden (hipofiz ve hipotalamus) yumurtalıkları uyaran FSH ve LH hormonlarının yetersiz salgılanması sonucu yumurtlama fonksiyonlarının olmaması durumudur.",
+      "ivf": "Vücut dışında döllenme işlemi olan IVF, birçok çift için en etkili tedavi yöntemidir. Laboratuvarda embriyo oluşturulup rahime transfer edilmesi esasına dayanır.",
+      "aiEmbryoSelection": "Embriyoskop ile elde edilen binlerce görüntü, yapay zeka algoritmaları ile analiz edilerek tutunma potansiyeli en yüksek olan embriyonun seçilmesini sağlayan en ileri teknolojidir.",
+      "icsi": "Tek bir spermin doğrudan yumurta içine enjekte edildiği bu yöntem, özellikle erkek faktörlü infertilitede döllenme oranlarını büyük ölçüde artırır.",
+      "embryoscope": "Embriyoların gelişimini 7/24 kesintisiz olarak izleyen özel inkübatör sistemidir. En sağlıklı embriyonun seçilmesine olanak tanır.",
+      "pgt": "Genetik hastalık riski taşıyan çiftlerde veya tekrarlayan tüp bebek başarısızlıklarında, embriyoların genetik olarak incelenerek sağlıklı olanların transfer edilmesidir.",
+      "eggFreezing": "Over rezervi düşük olan veya kanser tedavisi görecek kadınların doğurganlıklarını gelecekte korumak için yumurtalarının dondurularak saklanmasıdır."
+    }
+  },
+  "PatientGuidePage": {
+    "title": "Hasta Rehberi",
+    "description": "Tedavi sürecinizle ilgili kaynaklar, araçlar ve sıkça sorulan soruların yanıtları.",
+    "journeyTitle": "Tedavi Yolculuğunuz",
+    "journeyDescription": "Her hastamızın hikayesi ve ihtiyaçları farklıdır. Size en uygun tedavi yolunu birlikte çizelim.",
+    "tabInfertility": "İnfertilite Değerlendirmesi",
+    "tabIvf": "Tüp Bebek (IVF) Süreci",
+    "infertilityStep1Title": "İlk Danışma & Anamnez",
+    "infertilityStep1Description": "Her iki eşe eş zamanlı olarak medikal öykü alınır, jinekolojik muayene yapılır ve tedavi süreci planlanır.",
+    "infertilityStep2Title": "Kadın & Erkek Değerlendirmesi",
+    "infertilityStep2Description": "Kadın için AMH, kan sayımı, tiroid testleri ve papsmear; erkek için ise sperm analizi gibi temel testler istenir. Gerekirse rahim filmi (HSG) veya ileri cerrahi (histeroskopi/laparoskopi) planlanır.",
+    "infertilityStep3Title": "Tanı ve Sonuç Değerlendirme",
+    "infertilityStep3Description": "Test sonuçlarına göre infertilite nedeni (yumurtlama sorunları, tüp faktörü, erkek faktörü vb.) belirlenir ve size özel tedavi yol haritası çizilir.",
+    "infertilityStep4Title": "Tedavi Planlaması",
+    "infertilityStep4Description": "Aşılama (IUI) veya Tüp Bebek (IVF) gibi size en uygun yönteme, başarı oranları ve bireysel durumunuz göz önünde bulundurularak birlikte karar verilir.",
+    "ivfStep1Title": "1. Adım: Yumurtalıkların Uyarılması",
+    "ivfStep1Description": "Genellikle adetin 2. veya 3. günü başlanan ve yaklaşık 8-12 gün süren hormon iğneleri ile çok sayıda kaliteli yumurta (follikül) geliştirmeyi amaçlıyoruz. Süreç, ultrason ve hormon testleriyle yakından takip edilir.",
+    "ivfStep2Title": "2. Adım: Yumurta Toplama (OPU)",
+    "ivfStep2Description": "Folliküller yeterli büyüklüğe ulaştığında, olgunlaştırma iğnesi yapılır ve 35-37 saat sonra, hafif anestezi altında 15-20 dakikalık bir işlemle yumurtalar toplanır.",
+    "ivfStep3Title": "3. Adım: Döllenme & Embriyo Gelişimi",
+    "ivfStep3Description": "Laboratuvarda toplanan yumurtalar, mikroenjeksiyon (ICSI) yöntemiyle sperm hücreleriyle döllenir. Döllenmiş embriyolar, 3 ila 5 gün boyunca özel inkübatörlerde (Embriyoskop) gelişimleri takip edilerek izlenir.",
+    "ivfStep4Title": "4. Adım: Embriyo Transferi",
+    "ivfStep4Description": "En kaliteli embriyo veya embriyolar seçilerek, ağrısız ve basit bir işlemle, ultrason eşliğinde rahim içine yerleştirilir. Bu aşamada embriyo yapıştırıcı (embryo glue) gibi ek yöntemler kullanılabilir.",
+    "ivfStep5Title": "5. Adım: Gebelik Testi",
+    "ivfStep5Description": "Embriyo transferinden 12-14 gün sonra kanda gebelik testi (Beta-hCG) yapılarak sonucun pozitif olup olmadığı öğrenilir. Pozitif sonuç durumunda gebelik takibi başlar.",
+    "gettingStartedTitle": "Tedaviye Başlarken",
+    "gettingStartedDescription": "Tedavinizde herhangi bir aksama olmaması için lütfen aşağıdaki adımları dikkatlice takip ediniz.",
+    "documentsTitle": "Gerekli Belgeler",
+    "documentsList": [
+      "Nüfus cüzdan fotokopileri",
+      "Evlilik cüzdanı fotokopisi",
+      "Çiftlere ait birer adet vesikalık fotoğraf",
+      "Kliniğimizde okunup imzalanacak olan rıza formları"
+    ],
+    "notesTitle": "Önemli Notlar",
+    "notesList": [
+      "Size verilen muayene randevularına uyunuz.",
+      "Önerilen ilaç ve diğer uygulamaları titizlikle yerine getiriniz.",
+      "İlaçlarınızı tedaviden önce temin etmeniz önemlidir."
+    ],
+    "finalNote": "Unutmayın; tüm çabamız sağlıklı bir gebeliğe ulaşmanız içindir. Her türlü bilgilendirme hakkınıza saygılı bir 'Hasta Dostu' tedavi politikası izlemek bizim için önemlidir.",
+    "calculatorsTitle": "Faydalı Araçlar",
+    "dueDateTitle": "Tahmini Doğum Tarihi Hesaplayıcı",
+    "dueDateInfo": "Bu araç, son adet tarihinize (SAT) ve ortalama adet döngüsü uzunluğunuza dayanarak tahmini doğum tarihinizi hesaplamak için geliştirilmiş {strong}Parikh Formülünü{/strong} kullanır. Bu, standart 28 günlük döngüye sahip olmayan kadınlar için daha doğru bir sonuç sağlar.",
+    "ovulationTitle": "Yumurtlama Günü Hesaplayıcı",
+    "ovulationInfo": "Bu araç, yumurtlamanın genellikle bir sonraki adet döneminden {strong}14 gün önce{/strong} gerçekleştiği ilkesine dayanarak çalışır. Girdiğiniz son adet tarihi ve döngü uzunluğuna göre en verimli olduğunuz günleri tahmin eder.",
+    "lmpLabel": "Son Adet Tarihiniz (SAT)",
+    "cycleLabel": "Adet Döngüsü Uzunluğu (gün)",
+    "calculateButton": "Hesapla",
+    "datePlaceholder": "Tarih seçin...",
+    "dueDateResultLabel": "Tahmini Doğum Tarihi:",
+    "fertileWindowResultLabel": "Tahmini Doğurganlık Pencereniz:",
+    "disclaimer": "Bu hesaplama bir tahmindir. Kesin sonuçlar için ovulasyon test kitleri veya doktor muayenesi önerilir.",
+    "faqSectionTitle": "Sıkça Sorulan Sorular"
+  },
+  "BlogPage": {
+    "metaTitle": "Tüp Bebek & İnfertilite Blogu | Güncel Bilgiler - Dr. Ayşin Akdoğan",
+    "metaDescription": "Tüp bebek süreci, başarı oranları, PCOS ve endometriozis gibi konularda en güncel bilimsel makaleler ve hasta rehberleri.",
+    "title": "Blog & Makaleler",
+    "description": "Kadın sağlığı, gebelik ve infertilite üzerine güncel bilgiler, ipuçları ve bilimsel gelişmeleri takip edin.",
+    "allCategories": "Tümü",
+    "readMore": "Daha Fazla Oku"
+  },
+  "ContactPage": {
+    "title": "İletişim Kurun",
+    "description": "Sorularınız, randevu talepleriniz veya diğer konular için bize aşağıdaki bilgilerden ulaşabilirsiniz.",
+    "infoTitle": "İletişim Bilgileri",
+    "hoursTitle": "Çalışma Saatleri",
+    "hours_weekdays": "Pazartesi - Cuma",
+    "hours_saturday": "Cumartesi",
+    "hours_sunday": "Pazar",
+    "hours_closed": "Kapalı",
+    "formTitle": "Bize Mesaj Gönderin",
+    "form_name": "Ad Soyad",
+    "form_email": "E-posta Adresi",
+    "form_phone": "Telefon Numarası",
+    "form_phone_code": "Kod",
+    "form_message": "Mesajınız",
+    "form_button_send": "Mesaj Gönder",
+    "form_button_sending": "Gönderiliyor...",
+    "form_success_title": "Mesajınız başarıyla gönderildi!",
+    "form_success_description": "En kısa sürede size geri dönüş yapacağız.",
+    "form_error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "modal_info_title": "İletişim Rehberi",
+    "modal_info_response_time": "<strong>Yanıt Süreleri:</strong> Mesajlarınıza genellikle 24 saat içinde yanıt verilir.",
+    "modal_info_appointments": "<strong>Randevu Talepleri:</strong> Ekibimiz sizi arayarak uygun bir zaman planlaması için 1-2 iş günü içinde geri dönüş yapacaktır.",
+    "modal_info_emergency": "<strong>Acil Durumlar:</strong> Tıbbi acil durumlar için lütfen bu formu kullanmayın. Doğrudan 112'yi arayın.",
+    "modal_message_title": "Mesaj Bilgilendirmesi",
+    "modal_message_body": "Bu form aracılığıyla gönderdiğiniz mesaj doğrudan Dr. Ayşin Akdoğan'ın ekibine iletilir. Size en kısa sürede belirttiğiniz e-posta adresi ve telefon numarası üzerinden geri dönüş yapılacaktır."
+  },
+  "TestimonialForm": {
+    "title": "Yorum Bırakın",
+    "fields": {
+      "authorLabel": "Adınız Soyadınız",
+      "authorPlaceholder": "Örn: Ayşe Yılmaz, Ayşe Y., A.Yılmaz",
+      "quoteLabel": "Yorumunuz",
+      "quotePlaceholder": "Deneyimlerinizi paylaşın..."
+    },
+    "buttons": {
+      "submit": "Yorumu Gönder",
+      "submitting": "Gönderiliyor..."
+    },
+    "success": {
+      "title": "Teşekkür Ederiz!",
+      "message": "Yorumunuz onaylandıktan sonra sitemizde yayınlanacaktır.",
+      "closeButton": "Kapat"
+    },
+    "validation": {
+      "authorMin": "İsim en az 2 karakter olmalıdır.",
+      "quoteMin": "Yorumunuz en az 10 karakter olmalıdır."
+    },
+    "errors": {
+      "submissionFailed": "Form gönderimi başarısız oldu.",
+      "general": "Bir hata oluştu. Lütfen tekrar deneyin."
+    }
   }
 }

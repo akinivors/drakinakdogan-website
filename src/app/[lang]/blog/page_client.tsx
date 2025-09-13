@@ -1,9 +1,12 @@
+// Path: src/app/[lang]/blog/page_client.tsx (Fully Refactored)
+
 'use client';
 
 import { useState, useMemo } from 'react';
 import BlogPostCard from '@/components/BlogPostCard';
 import AnimatedSection from '@/components/AnimatedSection';
 import { motion, Variants } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 type Post = {
   id: string;
@@ -15,41 +18,40 @@ type Post = {
   created_at: string;
 };
 
-// Define the animation for each individual item in the grid
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: { 
-      duration: 0.6, // Slightly longer duration for smoother mobile animation
+      duration: 0.6,
       ease: 'easeOut',
-      delay: 0.1 // Small delay to ensure proper triggering
+      delay: 0.1
     }
   },
 };
 
 export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] }) {
-  const [activeCategory, setActiveCategory] = useState('Tümü');
+  const t = useTranslations('BlogPage');
+  const [activeCategory, setActiveCategory] = useState(t('allCategories'));
 
-  const categories = ['Tümü', ...Array.from(new Set(initialPosts.map(p => p.category)))];
+  const categories = [t('allCategories'), ...Array.from(new Set(initialPosts.map(p => p.category)))];
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'Tümü') return initialPosts;
+    if (activeCategory === t('allCategories')) return initialPosts;
     return initialPosts.filter(post => post.category === activeCategory);
-  }, [activeCategory, initialPosts]);
+  }, [activeCategory, initialPosts, t]);
 
   const featuredPost = filteredPosts[0];
   const otherPosts = filteredPosts.slice(1);
 
   return (
     <>
-      {/* Section 1: Page Header */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="font-serif text-5xl font-bold text-primary">Blog & Makaleler</h1>
+          <h1 className="font-serif text-5xl font-bold text-primary">{t('title')}</h1>
           <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
-            Kadın sağlığı, gebelik ve infertilite üzerine güncel bilgiler, ipuçları ve bilimsel gelişmeleri takip edin.
+            {t('description')}
           </p>
         </div>
       </section>
@@ -72,7 +74,6 @@ export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] 
             ))}
           </div>
 
-          {/* Featured Post with its own animation */}
           {featuredPost && (
             <AnimatedSection className="mb-16">
                <motion.div variants={itemVariants}>
@@ -81,7 +82,6 @@ export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] 
             </AnimatedSection>
           )}
 
-          {/* Regular Post Grid with staggered animation */}
           <AnimatedSection
             tag="div"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -90,7 +90,7 @@ export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] 
               <motion.div 
                 key={post.id} 
                 variants={itemVariants}
-                custom={index} // Pass index for potential custom animation timing
+                custom={index}
               >
                 <BlogPostCard post={post} />
               </motion.div>
@@ -100,4 +100,4 @@ export default function BlogPageClient({ initialPosts }: { initialPosts: Post[] 
       </section>
     </>
   );
-} 
+}

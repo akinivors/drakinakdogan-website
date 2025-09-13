@@ -4,7 +4,8 @@ import { supabase } from '@/lib/supabaseClient';
 import ReactMarkdown from 'react-markdown';
 import { Metadata } from 'next';
 import Accordion from '@/components/Accordion';
-import Breadcrumbs from '@/components/Breadcrumbs'; // --- BREADCRUMB: 1. Import the new component ---
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 // --- TYPES (with Breadcrumb added) ---
 type FaqItem = { 
@@ -73,44 +74,63 @@ type JsonLdSchema = {
 }; // Add BreadcrumbSchema to the graph type
 
 type Props = { 
-  params: Promise<{ slug: string }> 
+  params: Promise<{ slug: string, lang: string }> 
 }; // --- CORRECTED: Next.js 15 params type ---
 
 // --- DYNAMIC METADATA FUNCTION (with corrected params type) ---
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, lang } = await params;
+  const titleColumn = lang === 'en' ? 'title_en' : 'title_tr';
+  const excerptColumn = lang === 'en' ? 'excerpt_en' : 'excerpt_tr';
+
   const { data: post } = await supabase
     .from('posts')
-    .select('title, excerpt')
+    .select(`${titleColumn}, ${excerptColumn}`)
     .eq('slug', slug)
     .single();
   
   if (!post) return {};
   
   return { 
-    title: post.title, 
-    description: post.excerpt 
+    title: (post as any)[titleColumn], 
+    description: (post as any)[excerptColumn] 
   };
 }
 
-// --- THE MAIN PAGE COMPONENT (UPDATED) ---
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params; // --- CORRECTED: 'await' needed for Next.js 15 ---
-  const { data: post, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .single<Post>();
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string; lang: string }> }) {
+  const { slug, lang } = await params;
+  const t = await getTranslations({locale: lang, namespace: 'Navigation'});
+  const tBlog = await getTranslations({locale: lang, namespace: 'BlogPage'});
 
-  if (error || !post) {
+  const titleColumn = lang === 'en' ? 'title_en' : 'title_tr';
+  const excerptColumn = lang === 'en' ? 'excerpt_en' : 'excerpt_tr';
+  const contentColumn = lang === 'en' ? 'content_en' : 'content_tr';
+  const categoryColumn = lang === 'en' ? 'category_en' : 'category_tr';
+  const faqsColumn = lang === 'en' ? 'faqs_en' : 'faqs_tr';
+
+  const { data: postData, error } = await supabase
+    .from('posts')
+    .select(`*, ${titleColumn}, ${excerptColumn}, ${contentColumn}, ${categoryColumn}, ${faqsColumn}`)
+    .eq('slug', slug)
+    .single();
+
+  if (error || !postData) {
     notFound();
   }
+
+  const post = {
+    ...postData,
+    title: (postData as any)[titleColumn] || (postData as any).title_tr,
+    excerpt: (postData as any)[excerptColumn] || (postData as any).excerpt_tr,
+    content: (postData as any)[contentColumn] || (postData as any).content_tr,
+    category: (postData as any)[categoryColumn] || (postData as any).category_tr,
+    faqs: (postData as any)[faqsColumn] || (postData as any).faqs_tr || [],
+  };
   
-  // --- BREADCRUMB: 2. Define the items for our breadcrumbs ---
   const breadcrumbItems = [
-    { name: "Anasayfa", href: "/" },
-    { name: "Blog", href: "/blog" },
-    { name: post.title, href: `/blog/${post.slug}` }
+    { name: t("home"), href: `/${lang}` },
+    { name: t("blog"), href: `/${lang}/blog` },
+    { name: post.title, href: `/${lang}/blog/${post.slug}` }
   ];
 
   // --- DYNAMIC JSON-LD SCHEMA GENERATION (with Breadcrumb added) ---
@@ -152,7 +172,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (post.faqs && post.faqs.length > 0) {
     const faqSchema: FaqSchema = { 
       "@type": "FAQPage", 
-      "mainEntity": post.faqs.map(faq => ({ 
+      "mainEntity": post.faqs.map((faq: FaqItem) => ({ 
         "@type": "Question", 
         "name": faq.question, 
         "acceptedAnswer": { 
@@ -166,11 +186,6 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
       <article className="bg-white">
         <div className="relative w-full h-80 md:h-96">
           <Image 
@@ -200,7 +215,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.faqs && post.faqs.length > 0 && (
               <div className="mt-16">
                 <h2 className="font-serif text-3xl font-bold text-primary mb-8">
-                  Sıkça Sorulan Sorular
+                  {tBlog('faqSectionTitle')}
                 </h2>
                 <Accordion items={post.faqs} />
               </div>

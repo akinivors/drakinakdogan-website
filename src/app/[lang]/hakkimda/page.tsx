@@ -1,22 +1,29 @@
 import { Metadata } from 'next';
 import AboutPageClient from './AboutPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs'; // --- 1. Import Breadcrumbs ---
+import { getTranslations } from 'next-intl/server';
 
 // Define schema types for clarity
 type PhysicianSchema = { "@type": "Physician"; name: string; image: string; url: string; telephone: string; medicalSpecialty: string[]; address: object; alumniOf: string; knowsAbout: string[]; };
 type BreadcrumbSchema = { "@type": "BreadcrumbList"; itemListElement: Array<{ "@type": "ListItem"; position: number; name: string; item: string; }>; };
 
-export const metadata: Metadata = {
-  title: 'Op. Dr. Ayşin Akdoğan Hakkında | İnfertilite & Tüp Bebek Uzmanı',
-  description: "Op. Dr. Ayşin Akdoğan'ın Hacettepe'den başlayan, uluslararası çalışmalarla devam eden 25+ yıllık uzmanlık kariyerini keşfedin."
-};
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
+  const {lang} = await params;
+  const t = await getTranslations({locale: lang, namespace: 'AboutPage'});
+  return {
+    title: t('headerTitle'),
+    description: t('headerDescription')
+  };
+}
 
-export default function Page() {
+export default async function Page({params}: {params: Promise<{lang: string}>}) {
+  const {lang: locale} = await params;
+  const t = await getTranslations({locale, namespace: 'Navigation'});
   
   // --- 2. Define the breadcrumb path for this page ---
   const breadcrumbItems = [
-    { name: "Anasayfa", href: "/" },
-    { name: "Hakkımda", href: "/hakkimda" }
+    { name: t("home"), href: `/${locale}` },
+    { name: t("about"), href: `/${locale}/hakkimda` }
   ];
 
   // --- 3. Restructure the schema to include both types ---

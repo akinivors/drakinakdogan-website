@@ -9,14 +9,12 @@ import { useState } from 'react';
 import { X, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '@/components/Button';
+import { useLocale, useTranslations } from 'next-intl';
 
-// 1. Define the validation schema
-const testimonialSchema = z.object({
-  author: z.string().min(2, { message: "İsim en az 2 karakter olmalıdır." }),
-  quote: z.string().min(10, { message: "Yorumunuz en az 10 karakter olmalıdır." }),
-});
-
-type TestimonialFormInputs = z.infer<typeof testimonialSchema>;
+type TestimonialFormInputs = {
+  author: string;
+  quote: string;
+};
 
 interface TestimonialFormModalProps {
   isOpen: boolean;
@@ -24,7 +22,16 @@ interface TestimonialFormModalProps {
 }
 
 export default function TestimonialFormModal({ isOpen, onClose }: TestimonialFormModalProps) {
+  const locale = useLocale();
+  const t = useTranslations('TestimonialForm');
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  
+  // Create dynamic validation schema based on locale
+  const testimonialSchema = z.object({
+    author: z.string().min(2, { message: t('validation.authorMin') }),
+    quote: z.string().min(10, { message: t('validation.quoteMin') }),
+  });
+
   const { register, handleSubmit, formState: { errors }, reset } = useForm<TestimonialFormInputs>({
     resolver: zodResolver(testimonialSchema),
   });
@@ -32,14 +39,20 @@ export default function TestimonialFormModal({ isOpen, onClose }: TestimonialFor
   const onSubmit = async (data: TestimonialFormInputs) => {
     setFormState('loading');
     try {
+      // Include locale information in the submission
+      const submissionData = {
+        ...data,
+        locale, // Include current locale for proper storage
+      };
+
       const response = await fetch('/api/testimonials/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(submissionData),
       });
 
       if (!response.ok) {
-        throw new Error('Form gönderimi başarısız oldu.');
+        throw new Error(t('errors.submissionFailed'));
       }
       
       setFormState('success');
@@ -80,39 +93,39 @@ export default function TestimonialFormModal({ isOpen, onClose }: TestimonialFor
             {formState === 'success' ? (
               <div className="p-12 text-center flex flex-col items-center">
                 <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
-                <h2 className="font-serif text-2xl font-bold text-primary">Teşekkür Ederiz!</h2>
-                <p className="font-sans text-text-light mt-2 mb-6">Yorumunuz onaylandıktan sonra sitemizde yayınlanacaktır.</p>
-                <Button onClick={handleClose} variant="secondary">Kapat</Button>
+                <h2 className="font-serif text-2xl font-bold text-primary">{t('success.title')}</h2>
+                <p className="font-sans text-text-light mt-2 mb-6">{t('success.message')}</p>
+                <Button onClick={handleClose} variant="secondary">{t('success.closeButton')}</Button>
               </div>
             ) : (
               <div className="p-8">
-                <h2 className="font-serif text-3xl font-bold text-primary mb-6">Yorum Bırakın</h2>
+                <h2 className="font-serif text-3xl font-bold text-primary mb-6">{t('title')}</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div>
-                    <label htmlFor="author" className="font-sans text-sm font-bold text-text-light mb-2 block">Adınız Soyadınız</label>
+                    <label htmlFor="author" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('fields.authorLabel')}</label>
                     <input 
                       {...register('author')} 
                       id="author"
                       className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-text-main focus:border-primary focus:ring-primary"
-                      placeholder="Örn: Ayşe Yılmaz , Ayşe Y. , A.Yılmaz" 
+                      placeholder={t('fields.authorPlaceholder')} 
                     />
                     {errors.author && <p className="mt-1 text-sm text-red-600">{errors.author.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="quote" className="font-sans text-sm font-bold text-text-light mb-2 block">Yorumunuz</label>
+                    <label htmlFor="quote" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('fields.quoteLabel')}</label>
                     <textarea 
                       {...register('quote')} 
                       id="quote"
                       rows={5}
                       className="block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-text-main focus:border-primary focus:ring-primary"
-                      placeholder="Deneyimlerinizi paylaşın..."
+                      placeholder={t('fields.quotePlaceholder')}
                     />
                     {errors.quote && <p className="mt-1 text-sm text-red-600">{errors.quote.message}</p>}
                   </div>
                   <Button type="submit" disabled={formState === 'loading'} className="w-full">
-                    {formState === 'loading' ? 'Gönderiliyor...' : 'Yorumu Gönder'}
+                    {formState === 'loading' ? t('buttons.submitting') : t('buttons.submit')}
                   </Button>
-                  {formState === 'error' && <p className="text-red-600 text-sm text-center">Bir hata oluştu. Lütfen tekrar deneyin.</p>}
+                  {formState === 'error' && <p className="text-red-600 text-sm text-center">{t('errors.general')}</p>}
                 </form>
               </div>
             )}

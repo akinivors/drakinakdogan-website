@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Accordion from '@/components/Accordion';
 import { HelpCircle } from 'lucide-react';
 import { clsx } from 'clsx';
+import { useTranslations } from 'next-intl';
 
 // Define the shape of an FAQ item from Supabase
 type Faq = {
@@ -19,6 +20,8 @@ type FaqCategory = {
 };
 
 export default function FaqSection({ faqs }: { faqs: Faq[] }) {
+  const t = useTranslations('PatientGuidePage');
+  
   // Group the flat array of FAQs from Supabase into categories
   const faqCategories = faqs.reduce<FaqCategory[]>((acc, faq) => {
     let category = acc.find(c => c.name === faq.category);
@@ -40,7 +43,7 @@ export default function FaqSection({ faqs }: { faqs: Faq[] }) {
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl font-bold text-primary mb-4 flex items-center justify-center gap-3">
             <HelpCircle className="text-accent" size={36} />
-            Sıkça Sorulan Sorular
+            {t('faqSectionTitle')}
           </h2>
         </div>
 

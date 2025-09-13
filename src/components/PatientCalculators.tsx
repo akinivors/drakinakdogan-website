@@ -1,9 +1,11 @@
+// Path: src/components/PatientCalculators.tsx (Fully Refactored)
+
 'use client';
 
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import Button from '@/components/Button';
 import AnimatedSection from '@/components/AnimatedSection';
 import { Calculator, Calendar as CalendarIcon, HelpCircle, X } from 'lucide-react';
@@ -13,8 +15,8 @@ import 'react-day-picker/dist/style.css';
 import { tr } from 'date-fns/locale';
 import { format } from 'date-fns';
 import { clsx } from 'clsx';
+import { useTranslations } from 'next-intl';
 
-// Animation variants for staggered items
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
@@ -24,32 +26,32 @@ const itemVariants: Variants = {
   },
 };
 
-// --- Reusable Info Modal ---
-function InfoPopup({ content, onClose }: { content: { title: string; body: string; }; onClose: () => void; }) {
+function InfoPopup({ content, onClose }: { content: { title: string; body: ReactNode; }; onClose: () => void; }) {
   return (
     <div onClick={onClose} className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-lg shadow-2xl w-full max-w-md p-8 relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-800"><X size={24} /></button>
         <h3 className="font-serif text-2xl text-primary mb-4">{content.title}</h3>
-        <p className="font-sans text-text-light" dangerouslySetInnerHTML={{ __html: content.body }} />
+        {/* Updated to render ReactNode directly */}
+        <div className="font-sans text-text-light">{content.body}</div>
       </div>
     </div>
   );
 }
 
-// --- Validation Schemas ---
-const commonSchema = {
+const commonShape = {
   lmp: z.date({ required_error: "Tarih seçmek zorunludur." }),
   cycleLength: z.number({ invalid_type_error: "Sayı girin."}).min(20, "Döngü 20 günden kısa olamaz.").max(50, "Döngü 50 günden uzun olamaz."),
 };
-const dueDateSchema = z.object(commonSchema);
+
+const dueDateSchema = z.object({ ...commonShape });
 type DueDateInputs = z.infer<typeof dueDateSchema>;
-const ovulationSchema = z.object(commonSchema);
+
+const ovulationSchema = z.object({ ...commonShape });
 type OvulationInputs = z.infer<typeof ovulationSchema>;
 
-// --- Reusable Date Picker Component ---
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function DatePickerField({ control, name, id }: { control: any, name: string, id?: string }) {
+
+function DatePickerField({ control, name, id, placeholder }: { control: any, name: string, id?: string, placeholder: string }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Controller name={name} control={control}
@@ -61,7 +63,7 @@ function DatePickerField({ control, name, id }: { control: any, name: string, id
             className={clsx("w-full rounded-md border border-gray-300 shadow-sm bg-white px-3 py-2 text-left font-sans flex justify-between items-center h-10", "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary", !field.value && "text-gray-500")}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {field.value ? format(field.value, 'PPP', { locale: tr }) : <span>Tarih seçin...</span>}
+            {field.value ? format(field.value, 'PPP', { locale: tr }) : <span>{placeholder}</span>}
             <CalendarIcon className="h-4 w-4 text-gray-400" />
           </button>
           {isOpen && (
@@ -76,9 +78,10 @@ function DatePickerField({ control, name, id }: { control: any, name: string, id
 }
 
 export default function PatientCalculators() {
+  const t = useTranslations('PatientGuidePage');
   const [dueDateResult, setDueDateResult] = useState('');
   const [fertileWindowResult, setFertileWindowResult] = useState('');
-  const [activeInfo, setActiveInfo] = useState<{ title: string; body: string; } | null>(null);
+  const [activeInfo, setActiveInfo] = useState<{ title: string; body: ReactNode; } | null>(null);
 
   const { control: dueDateControl, handleSubmit: handleDueDateSubmit, formState: { errors: dueDateErrors } } = useForm<DueDateInputs>({
     resolver: zodResolver(dueDateSchema), defaultValues: { cycleLength: 28 }
@@ -106,12 +109,16 @@ export default function PatientCalculators() {
 
   const infoContent = {
     dueDate: {
-      title: "Doğum Tarihi Hesaplayıcı",
-      body: "Bu araç, son adet tarihinize (SAT) ve ortalama adet döngüsü uzunluğunuza dayanarak tahmini doğum tarihinizi hesaplamak için geliştirilmiş <strong>Parikh Formülünü</strong> kullanır. Bu, standart 28 günlük döngüye sahip olmayan kadınlar için daha doğru bir sonuç sağlar."
+      title: t('dueDateTitle'),
+      body: t.rich('dueDateInfo', {
+        strong: (chunks) => <strong>{chunks}</strong>
+      })
     },
     ovulation: {
-      title: "Yumurtlama Günü Hesaplayıcı",
-      body: "Bu araç, yumurtlamanın genellikle bir sonraki adet döneminden <strong>14 gün önce</strong> gerçekleştiği ilkesine dayanarak çalışır. Girdiğiniz son adet tarihi ve döngü uzunluğuna göre en verimli olduğunuz günleri tahmin eder."
+      title: t('ovulationTitle'),
+      body: t.rich('ovulationInfo', {
+        strong: (chunks) => <strong>{chunks}</strong>
+      })
     }
   }
 
@@ -120,37 +127,37 @@ export default function PatientCalculators() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl font-bold text-text-main mb-4 flex items-center justify-center gap-3">
-            <Calculator className="text-accent" size={36} /> Faydalı Araçlar
+            <Calculator className="text-accent" size={36} /> {t('calculatorsTitle')}
           </h2>
         </div>
         <AnimatedSection tag="div" className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
           <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg shadow-sm" variants={itemVariants}>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-serif text-2xl font-bold text-text-main">Tahmini Doğum Tarihi Hesaplayıcı</h3>
+            <div className="flex justify-between items-center mb-6 min-h-[64px]">
+              <h3 className="font-serif text-2xl font-bold text-text-main">{t('dueDateTitle')}</h3>
               <button onClick={() => setActiveInfo(infoContent.dueDate)} className="text-gray-400 hover:text-primary"><HelpCircle size={20} /></button>
             </div>
             <form onSubmit={handleDueDateSubmit(onDueDateSubmit)} className="space-y-6">
-              <div className="min-h-[95px]"><label htmlFor="dueDateLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={dueDateControl} name="lmp" id="dueDateLmp" />{dueDateErrors.lmp && <p className="text-red-600 text-sm mt-1">{dueDateErrors.lmp.message}</p>}</div>
-              <div className="min-h-[95px]"><label htmlFor="dueDateCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={dueDateControl} render={({ field }) => (<input type="number" {...field} id="dueDateCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{dueDateErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{dueDateErrors.cycleLength.message}</p>}</div>
-              <Button type="submit" variant="primary" className="w-full">Hesapla</Button>
+              <div className="min-h-[95px]"><label htmlFor="dueDateLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('lmpLabel')}</label><DatePickerField control={dueDateControl} name="lmp" id="dueDateLmp" placeholder={t('datePlaceholder')} />{dueDateErrors.lmp && <p className="text-red-600 text-sm mt-1">{dueDateErrors.lmp.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="dueDateCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('cycleLabel')}</label><Controller name="cycleLength" control={dueDateControl} render={({ field }) => (<input type="number" {...field} id="dueDateCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{dueDateErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{dueDateErrors.cycleLength.message}</p>}</div>
+              <Button type="submit" variant="primary" className="w-full">{t('calculateButton')}</Button>
             </form>
-            <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{dueDateResult && (<><p className="font-sans text-text-light">Tahmini Doğum Tarihi:</p><p className="font-serif text-xl font-bold text-primary">{dueDateResult}</p></>)}</div>
+            <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{dueDateResult && (<><p className="font-sans text-text-light">{t('dueDateResultLabel')}</p><p className="font-serif text-xl font-bold text-primary">{dueDateResult}</p></>)}</div>
           </motion.div>
           <motion.div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg shadow-sm" variants={itemVariants}>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-serif text-2xl font-bold text-text-main">Yumurtlama Günü Hesaplayıcı</h3>
+            <div className="flex justify-between items-center mb-6 min-h-[64px]">
+              <h3 className="font-serif text-2xl font-bold text-text-main">{t('ovulationTitle')}</h3>
               <button onClick={() => setActiveInfo(infoContent.ovulation)} className="text-gray-400 hover:text-primary"><HelpCircle size={20} /></button>
             </div>
             <form onSubmit={handleOvulationSubmit(onOvulationSubmit)} className="space-y-6">
-              <div className="min-h-[95px]"><label htmlFor="ovulationLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">Son Adet Tarihiniz (SAT)</label><DatePickerField control={ovulationControl} name="lmp" id="ovulationLmp" />{ovulationErrors.lmp && <p className="text-red-600 text-sm mt-1">{ovulationErrors.lmp.message}</p>}</div>
-              <div className="min-h-[95px]"><label htmlFor="ovulationCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">Adet Döngüsü Uzunluğu (gün)</label><Controller name="cycleLength" control={ovulationControl} render={({ field }) => (<input type="number" {...field} id="ovulationCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{ovulationErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{ovulationErrors.cycleLength.message}</p>}</div>
-              <Button type="submit" variant="primary" className="w-full">Hesapla</Button>
+              <div className="min-h-[95px]"><label htmlFor="ovulationLmp" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('lmpLabel')}</label><DatePickerField control={ovulationControl} name="lmp" id="ovulationLmp" placeholder={t('datePlaceholder')} />{ovulationErrors.lmp && <p className="text-red-600 text-sm mt-1">{ovulationErrors.lmp.message}</p>}</div>
+              <div className="min-h-[95px]"><label htmlFor="ovulationCycle" className="font-sans text-sm font-bold text-text-light mb-2 block">{t('cycleLabel')}</label><Controller name="cycleLength" control={ovulationControl} render={({ field }) => (<input type="number" {...field} id="ovulationCycle" onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-10 px-3" />)} />{ovulationErrors.cycleLength && <p className="text-red-600 text-sm mt-1">{ovulationErrors.cycleLength.message}</p>}</div>
+              <Button type="submit" variant="primary" className="w-full">{t('calculateButton')}</Button>
             </form>
-            <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{fertileWindowResult && (<><p className="font-sans text-text-light">Tahmini Doğurganlık Pencereniz:</p><p className="font-serif text-xl font-bold text-primary">{fertileWindowResult}</p><p className="text-xs text-gray-400 mt-2">Bu hesaplama bir tahmindir. Kesin sonuçlar için ovulasyon test kitleri veya doktor muayenesi önerilir.</p></>)}</div>
+            <div className="bg-white p-4 rounded-md text-center mt-6 min-h-[95px] flex flex-col justify-center">{fertileWindowResult && (<><p className="font-sans text-text-light">{t('fertileWindowResultLabel')}</p><p className="font-serif text-xl font-bold text-primary">{fertileWindowResult}</p><p className="text-xs text-gray-400 mt-2">{t('disclaimer')}</p></>)}</div>
           </motion.div>
         </AnimatedSection>
       </div>
       {activeInfo && <InfoPopup content={activeInfo} onClose={() => setActiveInfo(null)} />}
     </>
   );
-} 
+}

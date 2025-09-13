@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { clsx } from 'clsx';
+import { useLocale } from 'next-intl';
 
 interface LogoProps {
   variant?: 'dark' | 'light';
@@ -9,9 +10,11 @@ interface LogoProps {
 }
 
 export default function Logo({ variant = 'dark', className }: LogoProps) {
+  const locale = useLocale();
+  
   return (
     <Link 
-      href="/" 
+      href={`/${locale}`} 
       className={clsx(
         "text-2xl font-serif font-bold transition-colors",
         {

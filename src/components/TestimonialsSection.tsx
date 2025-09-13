@@ -1,4 +1,4 @@
-// Path: src/components/TestimonialsSection.tsx (Fully Refactored)
+// Path: src/components/TestimonialsSection.tsx (Updated)
 
 'use client';
 
@@ -9,7 +9,7 @@ import Button from '@/components/Button';
 import TestimonialFormModal from './TestimonialFormModal';
 import { supabase } from '@/lib/supabaseClient';
 import TestimonialCard from './TestimonialCard';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 type Testimonial = {
   id: number;
@@ -20,6 +20,7 @@ type Testimonial = {
 
 export default function TestimonialsSection() {
   const t = useTranslations('TestimonialsSection');
+  const locale = useLocale();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -31,6 +32,8 @@ export default function TestimonialsSection() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       setIsLoading(true);
+
+      // First, fetch all columns to see what's available
       const { data, error } = await supabase
         .from('testimonials')
         .select('*')
@@ -39,14 +42,28 @@ export default function TestimonialsSection() {
 
       if (error) {
         console.error('Error fetching testimonials:', error);
-      } else {
-        setTestimonials(data);
+        setTestimonials([]);
+      } else if (data) {
+        console.log('Testimonials fetched successfully:', data.length);
+        if (data.length > 0) {
+          console.log('Sample testimonial structure:', data[0]);
+        }
+
+        const quoteColumn = locale === 'en' ? 'quote_en' : 'quote_tr';
+        
+        const formattedData = data.map(item => ({
+            id: item.id,
+            created_at: item.created_at,
+            author: item.author, // Single author column for all languages
+            quote: (item as any)[quoteColumn] || (item as any).quote_tr || (item as any).quote // Fallback chain
+        }));
+        setTestimonials(formattedData);
       }
       setIsLoading(false);
     };
 
     fetchTestimonials();
-  }, []);
+  }, [locale]); // Add locale to the dependency array
 
   const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
@@ -56,7 +73,7 @@ export default function TestimonialsSection() {
   }, [emblaApi, setSelectedIndex]);
 
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || testimonials.length === 0) return;
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
@@ -67,7 +84,7 @@ export default function TestimonialsSection() {
       }, 6000);
       return () => clearInterval(timer);
     }
-  }, [emblaApi, onSelect, testimonials.length]);
+  }, [emblaApi, onSelect, testimonials]);
 
   return (
     <>

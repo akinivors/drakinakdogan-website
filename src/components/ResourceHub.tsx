@@ -4,35 +4,36 @@
 
 import Link from 'next/link';
 import { HelpCircle, FileText, FlaskConical, Baby } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function ResourceHub() {
   const t = useTranslations('ResourceHub');
+  const locale = useLocale();
 
   const resources = [
     {
       icon: <FlaskConical size={32} className="text-primary" />,
       title: t('infertilityTitle'),
       description: t('infertilityDescription'),
-      href: "/hasta-rehberi#infertility-journey"
+      href: `/${locale}/hasta-rehberi#infertility-journey`
     },
     {
       icon: <Baby size={32} className="text-primary" />,
       title: t('ivfTitle'),
       description: t('ivfDescription'),
-      href: "/hasta-rehberi#ivf-journey"
+      href: `/${locale}/hasta-rehberi#ivf-journey`
     },
     {
       icon: <HelpCircle size={32} className="text-primary" />,
       title: t('faqTitle'),
       description: t('faqDescription'),
-      href: "/hasta-rehberi#faq"
+      href: `/${locale}/hasta-rehberi#faq`
     },
     {
       icon: <FileText size={32} className="text-primary" />,
       title: t('blogTitle'),
       description: t('blogDescription'),
-      href: "/blog"
+      href: `/${locale}/blog`
     }
   ];
 

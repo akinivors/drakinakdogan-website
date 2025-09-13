@@ -6,7 +6,7 @@
     "quickContact": "Quick Contact",
     "quickContactDescription": "Contact us for your questions or appointment requests.",
     "getInTouch": "Get in Touch",
-    "copyright": "© 2024 Op. Dr. Ayşin Akdoğan. All rights reserved."
+    "copyright": "© 2025 Op. Dr. Ayşin Akdoğan. All rights reserved."
   },
   "Navigation": {
     "home": "Home",
@@ -134,5 +134,145 @@
     "booksDescription": "Chapters written for leading textbooks in the field and significant translations.",
     "contactTitle": "By Your Side on Your Health Journey",
     "contactDescription": "With 25 years of experience and a modern medical approach, I create the most suitable treatment plan for each of my patients and continue to be by your side on this journey."
+  },
+  "ServicesPage": {
+    "title": "Our Services",
+    "description": "Discover the modern and personalized treatment approaches I offer in the field of women's health and reproductive medicine with over 25 years of experience.",
+    "conditionsTitle": "Diagnosis and Treatment of Diseases",
+    "conditionsDescription": "I am at your service with up-to-date diagnosis and treatment methods in the following areas and more.",
+    "treatmentsTitle": "Applied Treatment Methods",
+    "treatmentsDescription": "The main treatment methods applied with the latest technology and evidence-based approaches.",
+    "descriptions": {
+      "infertility": "The condition of not being able to conceive despite one year (6 months for women over 35) of regular, unprotected sexual intercourse. It can affect about 20% of couples.",
+      "pcos": "One of the most common causes of ovulation problems. It is characterized by menstrual irregularities, hormonal imbalances, and the formation of multiple small cysts in the ovaries.",
+      "endometriosis": "A condition in which the endometrium tissue that lines the inside of the uterus grows outside the uterus (ovaries, fallopian tubes, etc.). It can cause chronic pain and infertility.",
+      "diminishedOvarianReserve": "A decrease in the number and quality of a woman's eggs in the ovaries, usually due to advanced age. This condition can naturally reduce the chances of pregnancy.",
+      "tubalBlockage": "Blockage of the fallopian tubes due to past infections or surgeries, which prevents the sperm and egg from meeting, causing infertility.",
+      "uterineAnomalies": "Congenital or acquired structural abnormalities such as fibroids, polyps, intrauterine adhesions, or a uterine septum. They can prevent the embryo from implanting.",
+      "hypogonadotropicHypogonadism": "A condition in which there is no ovulation function due to insufficient secretion of the hormones FSH and LH from the brain (pituitary and hypothalamus) that stimulate the ovaries.",
+      "ivf": "IVF, which is an in-vitro fertilization process, is the most effective treatment method for many couples. It is based on creating an embryo in the laboratory and transferring it to the uterus.",
+      "aiEmbryoSelection": "The most advanced technology that allows the selection of the embryo with the highest implantation potential by analyzing thousands of images obtained with the Embryoscope using artificial intelligence algorithms.",
+      "icsi": "This method, in which a single sperm is injected directly into the egg, greatly increases fertilization rates, especially in male factor infertility.",
+      "embryoscope": "A special incubator system that continuously monitors the development of embryos 24/7. It allows for the selection of the healthiest embryo.",
+      "pgt": "The genetic examination of embryos in couples at risk of genetic diseases or with recurrent IVF failures, so that healthy ones can be transferred.",
+      "eggFreezing": "The freezing and storage of eggs for women with low ovarian reserve or who will undergo cancer treatment to preserve their fertility for the future."
+    }
+  },
+  "PatientGuidePage": {
+    "title": "Patient Guide",
+    "description": "Resources, tools, and answers to frequently asked questions about your treatment process.",
+    "journeyTitle": "Your Treatment Journey",
+    "journeyDescription": "Each patient's story and needs are different. Let's map out the most suitable treatment path for you together.",
+    "tabInfertility": "Infertility Evaluation",
+    "tabIvf": "IVF Process",
+    "infertilityStep1Title": "First Consultation & Anamnesis",
+    "infertilityStep1Description": "A medical history is taken from both partners simultaneously, a gynecological examination is performed, and the treatment process is planned.",
+    "infertilityStep2Title": "Female & Male Evaluation",
+    "infertilityStep2Description": "Basic tests such as AMH, blood count, thyroid tests, and Pap smear for the woman, and a sperm analysis for the man are requested. If necessary, a hysterosalpingogram (HSG) or advanced surgery (hysteroscopy/laparoscopy) is planned.",
+    "infertilityStep3Title": "Diagnosis and Result Evaluation",
+    "infertilityStep3Description": "The cause of infertility (e.g., ovulation problems, tubal factor, male factor) is determined based on the test results, and a personalized treatment roadmap is drawn up for you.",
+    "infertilityStep4Title": "Treatment Planning",
+    "infertilityStep4Description": "The most suitable method for you, such as Intrauterine Insemination (IUI) or In Vitro Fertilization (IVF), is decided upon together, taking into account success rates and your individual situation.",
+    "ivfStep1Title": "Step 1: Ovarian Stimulation",
+    "ivfStep1Description": "We aim to develop multiple high-quality eggs (follicles) with hormone injections that usually start on the 2nd or 3rd day of the menstrual cycle and last for about 8-12 days. The process is closely monitored with ultrasound and hormone tests.",
+    "ivfStep2Title": "Step 2: Egg Retrieval (OPU)",
+    "ivfStep2Description": "When the follicles reach a sufficient size, a maturation injection is given, and 35-37 hours later, the eggs are collected in a 15-20 minute procedure under light anesthesia.",
+    "ivfStep3Title": "Step 3: Fertilization & Embryo Development",
+    "ivfStep3Description": "The collected eggs are fertilized with sperm cells in the laboratory using the microinjection (ICSI) method. The fertilized embryos are monitored for 3 to 5 days in special incubators (Embryoscope) to track their development.",
+    "ivfStep4Title": "Step 4: Embryo Transfer",
+    "ivfStep4Description": "The highest quality embryo or embryos are selected and placed inside the uterus in a painless and simple procedure under ultrasound guidance. Additional methods such as embryo glue can be used at this stage.",
+    "ivfStep5Title": "Step 5: Pregnancy Test",
+    "ivfStep5Description": "A blood pregnancy test (Beta-hCG) is performed 12-14 days after the embryo transfer to determine if the result is positive. In case of a positive result, pregnancy follow-up begins.",
+    "gettingStartedTitle": "Getting Started with Treatment",
+    "gettingStartedDescription": "Please follow the steps below carefully to avoid any disruptions in your treatment.",
+    "documentsTitle": "Required Documents",
+    "documentsList": [
+      "Photocopies of ID cards",
+      "Photocopy of marriage certificate",
+      "One passport-sized photograph for each partner",
+      "Consent forms to be read and signed at our clinic"
+    ],
+    "notesTitle": "Important Notes",
+    "notesList": [
+      "Adhere to your scheduled appointments.",
+      "Diligently follow the prescribed medications and other instructions.",
+      "It is important to obtain your medications before starting the treatment."
+    ],
+    "finalNote": "Remember; all our efforts are for you to achieve a healthy pregnancy. It is important for us to follow a 'Patient-Friendly' treatment policy that respects your right to all kinds of information.",
+    "calculatorsTitle": "Helpful Tools",
+    "dueDateTitle": "Estimated Due Date Calculator",
+    "dueDateInfo": "This tool uses the <strong>Parikh Formula</strong> to calculate your estimated due date based on your last menstrual period (LMP) and average menstrual cycle length. This provides a more accurate result for women who do not have a standard 28-day cycle.",
+    "ovulationTitle": "Ovulation Day Calculator",
+    "ovulationInfo": "This tool works on the principle that ovulation usually occurs <strong>14 days before</strong> the next menstrual period. It estimates your most fertile days based on the last menstrual period and cycle length you enter.",
+    "lmpLabel": "Your Last Menstrual Period (LMP)",
+    "cycleLabel": "Menstrual Cycle Length (days)",
+    "calculateButton": "Calculate",
+    "datePlaceholder": "Select a date...",
+    "dueDateResultLabel": "Estimated Due Date:",
+    "fertileWindowResultLabel": "Your Estimated Fertile Window:",
+    "disclaimer": "This calculation is an estimate. For precise results, ovulation test kits or a doctor's examination is recommended.",
+    "faqSectionTitle": "Frequently Asked Questions"
+  },
+  "BlogPage": {
+    "metaTitle": "IVF & Infertility Blog | Latest Information - Dr. Ayşin Akdoğan",
+    "metaDescription": "Latest scientific articles and patient guides on IVF process, success rates, PCOS and endometriosis.",
+    "title": "Blog & Articles",
+    "description": "Access the most up-to-date information and our articles on women's health and infertility.",
+    "allCategories": "All Categories",
+    "readMore": "Read More",
+    "faqSectionTitle": "Frequently Asked Questions"
+  },
+  "ContactPage": {
+    "title": "Get in Touch",
+    "description": "You can reach us using the information below for your questions, appointment requests, or other matters.",
+    "infoTitle": "Contact Information",
+    "hoursTitle": "Working Hours",
+    "hours_weekdays": "Monday - Friday",
+    "hours_saturday": "Saturday",
+    "hours_sunday": "Sunday",
+    "hours_closed": "Closed",
+    "formTitle": "Send Us a Message",
+    "form_name": "Full Name",
+    "form_email": "Email Address",
+    "form_phone": "Phone Number",
+    "form_phone_code": "Code",
+    "form_message": "Your Message",
+    "form_button_send": "Send Message",
+    "form_button_sending": "Sending...",
+    "form_success_title": "Your message has been sent successfully!",
+    "form_success_description": "We will get back to you as soon as possible.",
+    "form_error": "An error occurred. Please try again.",
+    "modal_info_title": "Contact Guide",
+    "modal_info_response_time": "<strong>Response Times:</strong> Messages are usually answered within 24 hours.",
+    "modal_info_appointments": "<strong>Appointment Requests:</strong> Our team will get back to you within 1-2 business days to schedule a suitable time.",
+    "modal_info_emergency": "<strong>Emergencies:</strong> Please do not use this form for medical emergencies. Call 112 directly.",
+    "modal_message_title": "Message Information",
+    "modal_message_body": "The message you send through this form is delivered directly to Dr. Ayşin Akdoğan's team. You will be contacted as soon as possible via the email address and phone number you provided."
+  },
+  "TestimonialForm": {
+    "title": "Leave a Review",
+    "fields": {
+      "authorLabel": "Your Full Name",
+      "authorPlaceholder": "e.g., Jane Smith, Jane S., J.Smith",
+      "quoteLabel": "Your Review",
+      "quotePlaceholder": "Share your experience..."
+    },
+    "buttons": {
+      "submit": "Submit Review",
+      "submitting": "Submitting..."
+    },
+    "success": {
+      "title": "Thank You!",
+      "message": "Your review will be published on our website after approval.",
+      "closeButton": "Close"
+    },
+    "validation": {
+      "authorMin": "Name must be at least 2 characters long.",
+      "quoteMin": "Your review must be at least 10 characters long."
+    },
+    "errors": {
+      "submissionFailed": "Form submission failed.",
+      "general": "An error occurred. Please try again."
+    }
   }
 }

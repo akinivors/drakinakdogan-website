@@ -1,18 +1,25 @@
 import { Metadata } from 'next';
 import ServicesPageClient from './ServicesPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs'; // --- 1. Import Breadcrumbs ---
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'İleri İnfertilite & Tüp Bebek Tedavileri | Dr. Ayşin Akdoğan, İzmir',
-  description: 'Yapay zeka ile embriyo seçimi, PGT, yumurta dondurma ve kişiye özel IVF protokolleri gibi en güncel tedavi yöntemlerimiz hakkında bilgi alın.'
-};
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
+  const {lang} = await params;
+  const t = await getTranslations({locale: lang, namespace: 'ServicesPage'});
+  return {
+    title: t('title'),
+    description: t('description')
+  };
+}
 
-export default function Page() {
+export default async function Page({params}: {params: Promise<{lang: string}>}) {
+  const {lang: locale} = await params;
+  const t = await getTranslations({locale, namespace: 'Navigation'});
   
   // --- 2. Define the breadcrumb path for this page ---
   const breadcrumbItems = [
-    { name: "Anasayfa", href: "/" },
-    { name: "Hizmetler", href: "/hizmetler" }
+    { name: t("home"), href: `/${locale}` },
+    { name: t("services"), href: `/${locale}/hizmetler` }
   ];
 
   // --- 3. Create the BreadcrumbList schema ---

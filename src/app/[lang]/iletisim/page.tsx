@@ -1,18 +1,25 @@
 import { Metadata } from 'next';
 import ContactPageClient from './ContactPageClient';
 import Breadcrumbs from '@/components/Breadcrumbs'; // --- 1. Import Breadcrumbs ---
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'İletişim & Randevu | Dr. Ayşin Akdoğan Tüp Bebek Merkezi, İzmir',
-  description: "Dr. Ayşin Akdoğan ile iletişime geçin. İzmir, Karşıyaka'daki kliniğimizden tüp bebek ve infertilite tedavisi için randevu alın.",
-};
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
+  const {lang} = await params;
+  const t = await getTranslations({locale: lang, namespace: 'ContactPage'});
+  return {
+    title: t('title'),
+    description: t('description')
+  };
+}
 
-export default function Page() {
+export default async function Page({params}: {params: Promise<{lang: string}>}) {
+  const {lang: locale} = await params;
+  const t = await getTranslations({locale, namespace: 'Navigation'});
   
   // --- 2. Define the breadcrumb path for this page ---
   const breadcrumbItems = [
-    { name: "Anasayfa", href: "/" },
-    { name: "İletişim", href: "/iletisim" }
+    { name: t("home"), href: `/${locale}` },
+    { name: t("contact"), href: `/${locale}/iletisim` }
   ];
 
   // --- 3. Restructure the schema to include both types ---
