@@ -6,9 +6,10 @@ import PatientCalculators from '@/components/PatientCalculators';
 import PatientJourneyMap from '@/components/PatientJourneyMap';
 import FaqSection from '@/components/FaqSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata({params: {locale}}: {params: {locale: string}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
+  const {lang: locale} = await params;
   const t = await getTranslations({locale, namespace: 'PatientGuidePage'});
   return {
     title: t('title'),
@@ -40,9 +41,9 @@ export default async function HastaRehberiPage({params}: {params: Promise<{lang:
   // Map the fetched data to a consistent structure for the client component
   const formattedFaqs = faqs?.map(faq => ({
       ...faq,
-      question: (faq as any)[questionColumn] || (faq as any).question_tr, // Fallback to TR if EN is null
-      answer: (faq as any)[answerColumn] || (faq as any).answer_tr,
-      category: (faq as any)[categoryColumn] || (faq as any).category_tr,
+      question: (faq as Record<string, unknown>)[questionColumn] as string || (faq as Record<string, unknown>).question_tr as string, // Fallback to TR if EN is null
+      answer: (faq as Record<string, unknown>)[answerColumn] as string || (faq as Record<string, unknown>).answer_tr as string,
+      category: (faq as Record<string, unknown>)[categoryColumn] as string || (faq as Record<string, unknown>).category_tr as string,
   })) || [];
 
   // Debug: Let's see what we're actually getting

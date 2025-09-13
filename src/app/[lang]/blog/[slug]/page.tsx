@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { Metadata } from 'next';
 import Accordion from '@/components/Accordion';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 // --- TYPES (with Breadcrumb added) ---
 type FaqItem = { 
@@ -13,18 +13,6 @@ type FaqItem = {
   answer: string; 
 };
 
-type Post = { 
-  id: number; 
-  created_at: string; 
-  title: string; 
-  slug: string; 
-  category: string; 
-  excerpt: string; 
-  image_url: string; 
-  content: string; 
-  is_published: boolean; 
-  faqs?: FaqItem[]; 
-};
 
 type ArticleSchema = { 
   "@type": "Article"; 
@@ -92,8 +80,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
   
   return { 
-    title: (post as any)[titleColumn], 
-    description: (post as any)[excerptColumn] 
+    title: (post as Record<string, unknown>)[titleColumn] as string, 
+    description: (post as Record<string, unknown>)[excerptColumn] as string 
   };
 }
 
@@ -120,11 +108,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const post = {
     ...postData,
-    title: (postData as any)[titleColumn] || (postData as any).title_tr,
-    excerpt: (postData as any)[excerptColumn] || (postData as any).excerpt_tr,
-    content: (postData as any)[contentColumn] || (postData as any).content_tr,
-    category: (postData as any)[categoryColumn] || (postData as any).category_tr,
-    faqs: (postData as any)[faqsColumn] || (postData as any).faqs_tr || [],
+    title: (postData as Record<string, unknown>)[titleColumn] as string || (postData as Record<string, unknown>).title_tr as string,
+    excerpt: (postData as Record<string, unknown>)[excerptColumn] as string || (postData as Record<string, unknown>).excerpt_tr as string,
+    content: (postData as Record<string, unknown>)[contentColumn] as string || (postData as Record<string, unknown>).content_tr as string,
+    category: (postData as Record<string, unknown>)[categoryColumn] as string || (postData as Record<string, unknown>).category_tr as string,
+    faqs: (postData as Record<string, unknown>)[faqsColumn] as FaqItem[] || (postData as Record<string, unknown>).faqs_tr as FaqItem[] || [],
   };
   
   const breadcrumbItems = [

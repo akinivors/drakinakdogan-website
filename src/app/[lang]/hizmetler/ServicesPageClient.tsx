@@ -1,11 +1,8 @@
-// Path: src/app/hizmetler/ServicesPageClient.tsx (Fully Refactored)
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import { Stethoscope, FlaskConical } from 'lucide-react';
 import InfoModal from '@/components/InfoModal';
-import { useTranslations } from 'next-intl';
 
 interface ServiceItem {
   slug: string;
@@ -14,34 +11,30 @@ interface ServiceItem {
   imageSrc: string;
 }
 
+const conditionsTreated: ServiceItem[] = [
+  { slug: 'infertilite', title: 'İnfertilite (Kısırlık)', longDescription: 'Bir yıl (35 yaş üstü kadınlarda 6 ay) boyunca korunmasız ve düzenli cinsel ilişkiye rağmen gebelik oluşmaması durumudur. Çiftlerin yaklaşık %20\'sini etkileyebilir.', imageSrc: '/service-infertility.jpg' },
+  { slug: 'polikistik-over-sendromu', title: 'Polikistik Over Sendromu (PCOS)', longDescription: 'Yumurtlama problemlerinin en sık nedenlerinden biridir. Adet düzensizliği, hormonal dengesizlikler ve yumurtalıklarda çok sayıda küçük kist oluşumu ile karakterizedir.', imageSrc: '/pcos-sendromu.jpeg' },
+  { slug: 'endometriozis', title: 'Endometriozis (Çikolata Kisti)', longDescription: 'Rahim içini döşeyen endometrium dokusunun, rahim dışında (yumurtalıklar, tüpler vb.) yerleşmesi durumudur. Kronik ağrı ve infertiliteye neden olabilir.', imageSrc: '/endometriozis.jpg' },
+  { slug: 'azalmis-over-rezervi', title: 'Azalmış Over Rezervi', longDescription: 'Genellikle ileri yaşa bağlı olarak kadının yumurtalıklarındaki yumurta sayısı ve kalitesinin azalmasıdır. Bu durum, gebelik şansını doğal olarak düşürebilir.', imageSrc: '/azalmışover.png' },
+  { slug: 'tuplerin-tikali-olmasi', title: 'Tüplerin Tıkalı Olması', longDescription: 'Geçirilmiş enfeksiyonlar veya cerrahiler sonucu fallop tüplerinin tıkanması, sperm ve yumurtanın buluşmasını engelleyerek infertiliteye neden olur.', imageSrc: '/tüplerin-tıkalı.jpg' },
+  { slug: 'rahim-anomalileri', title: 'Rahim Anomalileri', longDescription: 'Myom, polip, rahim içi yapışıklıklar veya perde gibi doğuştan gelen ya da sonradan oluşan yapısal bozukluklardir. Embriyonun tutunmasını engelleyebilir.', imageSrc: '/rahim-anomalileri.webp' },
+  { slug: 'hipogonadotropik-hipogonadizm', title: 'Hipogonadotropik Hipogonadizm', longDescription: 'Beyinden (hipofiz ve hipotalamus) yumurtalıkları uyaran FSH ve LH hormonlarının yetersiz salgılanması sonucu yumurtlama fonksiyonlarının olmaması durumudur.', imageSrc: '/hipogonadotropik-hipogonadizm.webp' }
+];
+
+const treatmentMethods: ServiceItem[] = [
+  { slug: 'tup-bebek', title: 'Tüp Bebek (IVF)', longDescription: 'Vücut dışında döllenme işlemi olan IVF, birçok çift için en etkili tedavi yöntemidir. Laboratuvarda embriyo oluşturulup rahime transfer edilmesi esasına dayanır.', imageSrc: '/service-ivf.jpg' },
+  { slug: 'yapay-zeka-embriyo', title: 'Yapay Zeka ile Embriyo Seçimi', longDescription: 'Embriyoskop ile elde edilen binlerce görüntü, yapay zeka algoritmaları ile analiz edilerek tutunma potansiyeli en yüksek olan embriyonun seçilmesini sağlayan en ileri teknolojidir.', imageSrc: '/yapay-zeka-embriyo.jpg' },
+  { slug: 'mikroenjeksiyon', title: 'Mikroenjeksiyon (ICSI)', longDescription: 'Tek bir spermin doğrudan yumurta içine enjekte edildiği bu yöntem, özellikle erkek faktörlü infertilitede döllenme oranlarını büyük ölçüde artırır.', imageSrc: '/mikroenjeksiyon.jpeg' },
+  { slug: 'embriyoskop-takip', title: 'Embriyoskop ile Takip', longDescription: 'Embriyoların gelişimini 7/24 kesintisiz olarak izleyen özel inkübatör sistemidir. En sağlıklı embriyonun seçilmesine olanak tanır.', imageSrc: '/embriyoskop.jpg' },
+  { slug: 'genetik-tani', title: 'Genetik Tanı İşlemleri (PGT)', longDescription: 'Genetik hastalık riski taşıyan çiftlerde veya tekrarlayan tüp bebek başarısızlıklarında, embriyoların genetik olarak incelenerek sağlıklı olanların transfer edilmesidir.', imageSrc: '/pgt.jpg' },
+  { slug: 'yumurta-dondurma', title: 'Yumurta Dondurma', longDescription: 'Over rezervi düşük olan veya kanser tedavisi görecek kadınların doğurganlıklarını gelecekte korumak için yumurtalarının dondurularak saklanmasıdır.', imageSrc: '/yumurta-dondurma.jpg' }
+];
+
 export default function ServicesPageClient() {
-  const t = useTranslations('ServicesPage');
-  const tHeader = useTranslations('Header');
-
-  // Rebuild the services arrays using translations
-  const conditionsTreated: ServiceItem[] = [
-    { slug: 'infertilite', title: tHeader('conditions.infertility'), longDescription: t('descriptions.infertility'), imageSrc: '/service-infertility.jpg' },
-    { slug: 'polikistik-over-sendromu', title: tHeader('conditions.pcos'), longDescription: t('descriptions.pcos'), imageSrc: '/pcos-sendromu.jpeg' },
-    { slug: 'endometriozis', title: tHeader('conditions.endometriosis'), longDescription: t('descriptions.endometriosis'), imageSrc: '/endometriozis.jpg' },
-    { slug: 'azalmis-over-rezervi', title: tHeader('conditions.diminishedOvarianReserve'), longDescription: t('descriptions.diminishedOvarianReserve'), imageSrc: '/azalmışover.png' },
-    { slug: 'tuplerin-tikali-olmasi', title: tHeader('conditions.tubalBlockage'), longDescription: t('descriptions.tubalBlockage'), imageSrc: '/tüplerin-tıkalı.jpg' },
-    { slug: 'rahim-anomalileri', title: tHeader('conditions.uterineAnomalies'), longDescription: t('descriptions.uterineAnomalies'), imageSrc: '/rahim-anomalileri.webp' },
-    { slug: 'hipogonadotropik-hipogonadizm', title: tHeader('conditions.hypogonadotropicHypogonadism'), longDescription: t('descriptions.hypogonadotropicHypogonadism'), imageSrc: '/hipogonadotropik-hipogonadizm.webp' }
-  ];
-
-  const treatmentMethods: ServiceItem[] = [
-    { slug: 'tup-bebek', title: tHeader('treatments.ivf'), longDescription: t('descriptions.ivf'), imageSrc: '/service-ivf.jpg' },
-    { slug: 'yapay-zeka-embriyo', title: tHeader('treatments.aiEmbryoSelection'), longDescription: t('descriptions.aiEmbryoSelection'), imageSrc: '/yapay-zeka-embriyo.jpg' },
-    { slug: 'mikroenjeksiyon', title: tHeader('treatments.icsi'), longDescription: t('descriptions.icsi'), imageSrc: '/mikroenjeksiyon.jpeg' },
-    { slug: 'embriyoskop-takip', title: tHeader('treatments.embryoscope'), longDescription: t('descriptions.embryoscope'), imageSrc: '/embriyoskop.jpg' },
-    { slug: 'genetik-tani', title: tHeader('treatments.pgt'), longDescription: t('descriptions.pgt'), imageSrc: '/pgt.jpg' },
-    { slug: 'yumurta-dondurma', title: tHeader('treatments.eggFreezing'), longDescription: t('descriptions.eggFreezing'), imageSrc: '/yumurta-dondurma.jpg' }
-  ];
-
-  const allServices = [...conditionsTreated, ...treatmentMethods];
   const [selectedItem, setSelectedItem] = useState<ServiceItem | null>(null);
 
   useEffect(() => {
+    const allServices = [...conditionsTreated, ...treatmentMethods];
     const hash = window.location.hash.replace('#', '');
     if (hash) {
       const itemToOpen = allServices.find(item => item.slug === hash);
@@ -49,30 +42,32 @@ export default function ServicesPageClient() {
         setSelectedItem(itemToOpen);
       }
     }
-  }, [allServices]);
+  }, []);
 
   return (
     <>
+      {/* Section 1: Page Header */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="font-serif text-5xl font-bold text-primary">
-            {t('title')}
+            Hizmetlerimiz
           </h1>
           <p className="font-sans text-lg text-text-light mt-4 max-w-3xl mx-auto">
-            {t('description')}
+            25 yılı aşkın deneyimimle, kadın sağlığı ve üreme tıbbı alanında sunduğum modern ve kişiye özel tedavi yaklaşımlarını keşfedin.
           </p>
         </div>
       </section>
 
+      {/* Section 2: Conditions Treated */}
       <section className="w-full bg-white py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl font-bold text-text-main mb-4 flex items-center justify-center gap-3">
               <Stethoscope className="text-accent" size={36} />
-              {t('conditionsTitle')}
+              Tanı ve Tedavisi Yapılan Hastalıklar
             </h2>
             <p className="font-sans text-text-light max-w-2xl mx-auto">
-              {t('conditionsDescription')}
+              Aşağıdaki alanlarda ve daha fazlasında güncel tanı ve tedavi yöntemleriyle hizmetinizdeyim.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -85,15 +80,16 @@ export default function ServicesPageClient() {
         </div>
       </section>
       
+      {/* Section 3: Treatment Methods */}
       <section className="w-full bg-gradient-to-b from-white to-primary-lightest py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl font-bold text-primary mb-4 flex items-center justify-center gap-3">
               <FlaskConical className="text-accent" size={36} />
-              {t('treatmentsTitle')}
+              Uygulanan Tedavi Yöntemleri
             </h2>
              <p className="font-sans text-text-light max-w-2xl mx-auto">
-              {t('treatmentsDescription')}
+              En güncel teknoloji ve bilimsel kanıta dayalı yaklaşımlarla uygulanan başlıca tedavi yöntemleri.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -106,7 +102,8 @@ export default function ServicesPageClient() {
         </div>
       </section>
 
+      {/* The Modal Component */}
       <InfoModal item={selectedItem} onClose={() => setSelectedItem(null)} />
     </>
   );
-}
+} 

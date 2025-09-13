@@ -55,7 +55,7 @@ export default function TestimonialsSection() {
             id: item.id,
             created_at: item.created_at,
             author: item.author, // Single author column for all languages
-            quote: (item as any)[quoteColumn] || (item as any).quote_tr || (item as any).quote // Fallback chain
+            quote: (item as Record<string, unknown>)[quoteColumn] as string || (item as Record<string, unknown>).quote_tr as string || (item as Record<string, unknown>).quote as string // Fallback chain
         }));
         setTestimonials(formattedData);
       }

@@ -5,10 +5,9 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useState, ReactNode } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, MapPin, CheckCircle, HelpCircle, X, Clock, Calendar, AlertCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/Button';
 
 declare global {
   interface Window {
@@ -72,7 +71,7 @@ export default function ContactPageClient() {
       
       setFormState('success');
       reset();
-    } catch (error: unknown) {
+    } catch {
       setFormState('error');
     }
   };

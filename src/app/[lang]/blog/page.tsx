@@ -3,7 +3,6 @@ import BlogPageClient from './page_client';
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getTranslations } from 'next-intl/server';
-import { getLocale } from 'next-intl/server';
 
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
@@ -41,9 +40,9 @@ export default async function BlogPage({params}: {params: Promise<{lang: string}
   const formattedPosts = posts?.map(post => ({
     id: post.id.toString(),
     slug: post.slug,
-    category: (post as any)[categoryColumn] || (post as any).category_tr, // Fallback to TR category if EN is null
-    title: (post as any)[titleColumn] || (post as any).title_tr, // Fallback to TR title
-    excerpt: (post as any)[excerptColumn] || (post as any).excerpt_tr, // Fallback to TR excerpt
+    category: (post as Record<string, unknown>)[categoryColumn] as string || (post as Record<string, unknown>).category_tr as string, // Fallback to TR category if EN is null
+    title: (post as Record<string, unknown>)[titleColumn] as string || (post as Record<string, unknown>).title_tr as string, // Fallback to TR title
+    excerpt: (post as Record<string, unknown>)[excerptColumn] as string || (post as Record<string, unknown>).excerpt_tr as string, // Fallback to TR excerpt
     image_url: post.image_url,
     created_at: post.created_at,
   })) || [];

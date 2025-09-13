@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, Control, Path } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState, ReactNode } from 'react';
@@ -51,7 +51,7 @@ const ovulationSchema = z.object({ ...commonShape });
 type OvulationInputs = z.infer<typeof ovulationSchema>;
 
 
-function DatePickerField({ control, name, id, placeholder }: { control: any, name: string, id?: string, placeholder: string }) {
+function DatePickerField<T extends Record<string, unknown>>({ control, name, id, placeholder }: { control: Control<T>, name: Path<T>, id?: string, placeholder: string }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Controller name={name} control={control}
@@ -63,12 +63,12 @@ function DatePickerField({ control, name, id, placeholder }: { control: any, nam
             className={clsx("w-full rounded-md border border-gray-300 shadow-sm bg-white px-3 py-2 text-left font-sans flex justify-between items-center h-10", "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary", !field.value && "text-gray-500")}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {field.value ? format(field.value, 'PPP', { locale: tr }) : <span>{placeholder}</span>}
+            {field.value ? format(field.value as unknown as Date, 'PPP', { locale: tr }) : <span>{placeholder}</span>}
             <CalendarIcon className="h-4 w-4 text-gray-400" />
           </button>
           {isOpen && (
             <><div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} /><div className="absolute z-20 mt-2 bg-white rounded-md shadow-lg border">
-              <DayPicker mode="single" selected={field.value} onSelect={(date) => { field.onChange(date); setIsOpen(false); }} initialFocus locale={tr} />
+              <DayPicker mode="single" selected={field.value as unknown as Date} onSelect={(date) => { field.onChange(date); setIsOpen(false); }} initialFocus locale={tr} />
             </div></>
           )}
         </div>

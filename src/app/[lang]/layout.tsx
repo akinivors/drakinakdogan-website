@@ -9,7 +9,6 @@ import Script from 'next/script';
 import "./globals.css";
 // --- THIS IS THE FIX ---
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 // --------------------
 
 const inter = Inter({
