@@ -236,7 +236,8 @@
     "title": "Blog & Makaleler",
     "description": "Kadın sağlığı, gebelik ve infertilite üzerine güncel bilgiler, ipuçları ve bilimsel gelişmeleri takip edin.",
     "allCategories": "Tümü",
-    "readMore": "Daha Fazla Oku"
+    "readMore": "Daha Fazla Oku",
+    "faqSectionTitle": "Sıkça Sorulan Sorular"
   },
   "ContactPage": {
     "title": "İletişim Kurun",
