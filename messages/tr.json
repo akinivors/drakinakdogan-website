@@ -142,6 +142,23 @@
     "conditionsDescription": "Aşağıdaki alanlarda ve daha fazlasında güncel tanı ve tedavi yöntemleriyle hizmetinizdeyim.",
     "treatmentsTitle": "Uygulanan Tedavi Yöntemleri",
     "treatmentsDescription": "En güncel teknoloji ve bilimsel kanıta dayalı yaklaşımlarla uygulanan başlıca tedavi yöntemleri.",
+    "conditions": {
+      "infertility": "İnfertilite (Kısırlık)",
+      "pcos": "Polikistik Over Sendromu (PCOS)",
+      "endometriosis": "Endometriozis (Çikolata Kisti)",
+      "diminishedOvarianReserve": "Azalmış Over Rezervi",
+      "tubalBlockage": "Tüplerin Tıkalı Olması",
+      "uterineAnomalies": "Rahim Anomalileri",
+      "hypogonadotropicHypogonadism": "Hipogonadotropik Hipogonadizm"
+    },
+    "treatments": {
+      "ivf": "Tüp Bebek (IVF)",
+      "aiEmbryoSelection": "Yapay Zeka ile Embriyo Seçimi",
+      "icsi": "Mikroenjeksiyon (ICSI)",
+      "embryoscope": "Embriyoskop ile Takip",
+      "pgt": "Genetik Tanı İşlemleri (PGT)",
+      "eggFreezing": "Yumurta Dondurma"
+    },
     "descriptions": {
       "infertility": "Bir yıl (35 yaş üstü kadınlarda 6 ay) boyunca korunmasız ve düzenli cinsel ilişkiye rağmen gebelik oluşmaması durumudur. Çiftlerin yaklaşık %20'sini etkileyebilir.",
       "pcos": "Yumurtlama problemlerinin en sık nedenlerinden biridir. Adet düzensizliği, hormonal dengesizlikler ve yumurtalıklarda çok sayıda küçük kist oluşumu ile karakterizedir.",

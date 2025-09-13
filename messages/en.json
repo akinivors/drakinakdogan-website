@@ -142,6 +142,23 @@
     "conditionsDescription": "I am at your service with up-to-date diagnosis and treatment methods in the following areas and more.",
     "treatmentsTitle": "Applied Treatment Methods",
     "treatmentsDescription": "The main treatment methods applied with the latest technology and evidence-based approaches.",
+    "conditions": {
+      "infertility": "Infertility",
+      "pcos": "Polycystic Ovary Syndrome (PCOS)",
+      "endometriosis": "Endometriosis",
+      "diminishedOvarianReserve": "Diminished Ovarian Reserve",
+      "tubalBlockage": "Tubal Blockage",
+      "uterineAnomalies": "Uterine Anomalies",
+      "hypogonadotropicHypogonadism": "Hypogonadotropic Hypogonadism"
+    },
+    "treatments": {
+      "ivf": "IVF Treatment",
+      "aiEmbryoSelection": "AI Embryo Selection",
+      "icsi": "Microinjection (ICSI)",
+      "embryoscope": "Embryoscope Monitoring",
+      "pgt": "Genetic Diagnostic Procedures (PGT)",
+      "eggFreezing": "Egg Freezing"
+    },
     "descriptions": {
       "infertility": "The condition of not being able to conceive despite one year (6 months for women over 35) of regular, unprotected sexual intercourse. It can affect about 20% of couples.",
       "pcos": "One of the most common causes of ovulation problems. It is characterized by menstrual irregularities, hormonal imbalances, and the formation of multiple small cysts in the ovaries.",

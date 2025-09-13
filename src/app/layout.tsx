@@ -5,11 +5,6 @@ export default function RootLayout({
 }) {
   // This layout is only for the root redirect page
   // The actual app layout is in [lang]/layout.tsx
-  return (
-    <html>
-      <body>
-        {children}
-      </body>
-    </html>
-  );
+  // We don't render html/body here to avoid nesting
+  return children;
 }

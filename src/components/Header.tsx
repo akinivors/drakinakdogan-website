@@ -9,6 +9,7 @@ import Button from '@/components/Button';
 import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -35,7 +36,7 @@ export default function Header() {
     { slug: 'yumurta-dondurma', title: t('treatments.eggFreezing') }
   ];
 
-  // --- Main Navigation Links with ICONS (NOW TRANSLATED WITH LOCALE PREFIX) ---
+  // --- Main Navigation Links with ICONS (NOW TRANSLATED) ---
   const navLinks = [
     { href: `/${locale}`, label: tNav('home'), icon: <Home size={24} /> },
     { href: `/${locale}/hakkimda`, label: tNav('about'), icon: <User size={24} /> },
@@ -74,7 +75,7 @@ export default function Header() {
       <header className="w-full bg-white/80 backdrop-blur-sm border-b border-gray-200">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Logo />
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             <Link href={`/${locale}`} className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title={tNav('home')}>
               <Home size={20} />
             </Link>
@@ -88,7 +89,8 @@ export default function Header() {
             <Link href={`/${locale}/blog`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('blog')}</Link>
             <Link href={`/${locale}/iletisim`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('contact')}</Link>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             <Link href={`/${locale}/iletisim#form`}>
               <Button variant="primary">{tCta('getInTouch')}</Button>
             </Link>
