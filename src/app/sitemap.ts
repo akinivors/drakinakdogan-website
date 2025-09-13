@@ -1,48 +1,45 @@
+// Path: src/app/sitemap.ts (Updated and Corrected)
+
 import { MetadataRoute } from 'next';
 import { supabase } from '@/lib/supabaseClient';
+import { routing } from '@/i18n/routing'; // 1. Import locales
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.draysinakdogan.com';
+  const { locales } = routing;
 
-  // 1. Get all published blog posts from Supabase to add them dynamically
+  // 2. Define static paths that should be included for every locale
+  const staticPaths = [
+    '', // Home page
+    '/hakkimda',
+    '/hizmetler',
+    '/iletisim',
+    '/hasta-rehberi',
+    '/blog'
+  ];
+
+  // 3. Generate static URLs for both 'tr' and 'en'
+  const staticUrls = locales.flatMap(locale => 
+    staticPaths.map(path => ({
+      url: `${baseUrl}/${locale}${path}`,
+      lastModified: new Date().toISOString(),
+    }))
+  );
+
+  // 4. Get all published blog posts from Supabase
   const { data: posts } = await supabase
     .from('posts')
     .select('slug, created_at')
     .eq('is_published', true);
 
-  const postUrls = posts?.map(({ slug, created_at }) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(created_at).toISOString(),
-  })) ?? [];
+  // 5. Generate blog post URLs for both 'tr' and 'en'
+  const postUrls = posts?.flatMap(({ slug, created_at }) => 
+    locales.map(locale => ({
+      url: `${baseUrl}/${locale}/blog/${slug}`,
+      lastModified: new Date(created_at).toISOString(),
+    }))
+  ) ?? [];
 
-  // 2. Add your static pages manually
-  const staticUrls = [
-    {
-      url: baseUrl,
-      lastModified: new Date().toISOString(),
-    },
-    {
-      url: `${baseUrl}/hakkimda`,
-      lastModified: new Date().toISOString(),
-    },
-    {
-      url: `${baseUrl}/hizmetler`,
-      lastModified: new Date().toISOString(),
-    },
-    {
-      url: `${baseUrl}/iletisim`,
-      lastModified: new Date().toISOString(),
-    },
-    {
-      url: `${baseUrl}/hasta-rehberi`,
-      lastModified: new Date().toISOString(),
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date().toISOString(),
-    }
-  ];
-
-  // 3. Combine and return all URLs
+  // 6. Combine and return all URLs
   return [...staticUrls, ...postUrls];
 } 
