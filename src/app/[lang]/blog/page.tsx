@@ -53,8 +53,8 @@ export default async function BlogPage({params}: {params: Promise<{lang: string}
   }
 
   const breadcrumbItems = [
-    { name: t("home"), href: `/${locale}` },
-    { name: t("blog"), href: `/${locale}/blog` }
+    { name: t("home"), href: "/" },
+    { name: t("blog"), href: "/blog" }
   ];
   
 

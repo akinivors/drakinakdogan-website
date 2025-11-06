@@ -116,9 +116,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
   
   const breadcrumbItems = [
-    { name: t("home"), href: `/${lang}` },
-    { name: t("blog"), href: `/${lang}/blog` },
-    { name: post.title, href: `/${lang}/blog/${post.slug}` }
+    { name: t("home"), href: "/" },
+    { name: t("blog"), href: "/blog" },
+    { name: post.title, href: `/blog/${post.slug}` }
   ];
 
   // --- DYNAMIC JSON-LD SCHEMA GENERATION (with Breadcrumb added) ---

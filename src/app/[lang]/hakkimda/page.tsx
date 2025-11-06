@@ -22,8 +22,8 @@ export default async function Page({params}: {params: Promise<{lang: string}>}) 
   
   // --- 2. Define the breadcrumb path for this page ---
   const breadcrumbItems = [
-    { name: t("home"), href: `/${locale}` },
-    { name: t("about"), href: `/${locale}/hakkimda` }
+    { name: t("home"), href: "/" },
+    { name: t("about"), href: "/hakkimda" }
   ];
 
   // --- 3. Restructure the schema to include both types ---

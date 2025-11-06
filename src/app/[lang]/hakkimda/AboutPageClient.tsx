@@ -6,9 +6,9 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Award, BookOpen, Users, FileText, Globe } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import PublicationModal from '@/components/PublicationModal';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 const Button = dynamic(() => import('@/components/Button'));
 const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
@@ -32,7 +32,6 @@ const itemVariants: Variants = {
 export default function AboutPageClient() {
   const t = useTranslations('AboutPage');
   const tCta = useTranslations('CTA');
-  const locale = useLocale();
   const [modalContent, setModalContent] = useState<PublicationData | null>(null);
 
   // Note: Publication data is static and doesn't need to be in the translation files
@@ -233,7 +232,7 @@ export default function AboutPageClient() {
           <p className="font-sans text-lg text-text-light mb-8 max-w-2xl mx-auto">
             {t('contactDescription')}
           </p>
-          <Link href={`/${locale}/iletisim#form`}>
+          <Link href="/iletisim#form">
             <Button variant="primary">
               {tCta('getInTouch')}
             </Button>

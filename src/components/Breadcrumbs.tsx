@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { Link } from '@/navigation';
 
 // Define the shape of a single breadcrumb item
 type BreadcrumbItem = {
@@ -16,17 +15,10 @@ type BreadcrumbsProps = {
 
 // This component will be used inside other pages and does not need schema itself
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const locale = useLocale();
-  
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className="flex items-center space-x-2 text-sm font-sans text-gray-500">
         {items.map((item, index) => {
-          // Add locale prefix to href if it doesn't already have one
-          const href = item.href.startsWith('/') && !item.href.startsWith(`/${locale}`) 
-            ? `/${locale}${item.href}` 
-            : item.href;
-            
           return (
             <li key={item.href} className="flex items-center">
               {index > 0 && (
@@ -36,7 +28,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 </svg>
               )}
               {index < items.length - 1 ? (
-                <Link href={href} className="hover:text-primary transition-colors">
+                <Link href={item.href} className="hover:text-primary transition-colors">
                   {item.name}
                 </Link>
               ) : (

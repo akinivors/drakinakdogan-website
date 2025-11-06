@@ -4,8 +4,8 @@
 
 import Image from 'next/image';
 import Button from '@/components/Button';
-import Link from 'next/link';
-import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 interface AboutSectionProps {
   showButton?: boolean;
@@ -13,7 +13,6 @@ interface AboutSectionProps {
 
 export default function AboutSection({ showButton = false }: AboutSectionProps) {
   const t = useTranslations('AboutSection');
-  const locale = useLocale();
 
   return (
     <section className="w-full bg-white py-20">
@@ -42,7 +41,7 @@ export default function AboutSection({ showButton = false }: AboutSectionProps) 
             </p>
           </div>
           {showButton && (
-            <Link href={`/${locale}/hakkimda`} className="mt-4">
+            <Link href="/hakkimda" className="mt-4">
               <Button variant="secondary">{t('readMore')}</Button>
             </Link>
           )}

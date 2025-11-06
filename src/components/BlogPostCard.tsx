@@ -3,10 +3,10 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 interface BlogPostCardProps {
   post: {
@@ -23,8 +23,7 @@ interface BlogPostCardProps {
 
 export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardProps) {
   const t = useTranslations('BlogPage');
-  const locale = useLocale();
-  const postUrl = `/${locale}/blog/${post.slug}`;
+  const postUrl = `/blog/${post.slug}`;
 
   if (isFeatured) {
     return (

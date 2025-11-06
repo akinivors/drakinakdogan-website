@@ -1,23 +1,22 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
 import { Instagram } from 'lucide-react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Navigation');
-  const locale = useLocale();
 
   // Translate the navigation links with locale prefix
   const siteLinks = [
-    { href: `/${locale}/hakkimda`, label: tNav('about') },
-    { href: `/${locale}/hizmetler`, label: tNav('services') },
-    { href: `/${locale}/hasta-rehberi`, label: tNav('patientGuide') },
-    { href: `/${locale}/blog`, label: tNav('blog') },
-    { href: `/${locale}/iletisim`, label: tNav('contact') },
+    { href: '/hakkimda', label: tNav('about') },
+    { href: '/hizmetler', label: tNav('services') },
+    { href: '/hasta-rehberi', label: tNav('patientGuide') },
+    { href: '/blog', label: tNav('blog') },
+    { href: '/iletisim', label: tNav('contact') },
   ];
 
   const contactDetails = (
@@ -52,7 +51,7 @@ export default function Footer() {
           <div>
             <h3 className="font-serif text-lg font-bold mb-4">{t('quickContact')}</h3>
             <p className="font-sans text-white mb-4">{t('quickContactDescription')}</p>
-            <Link href={`/${locale}/iletisim#form`}>
+            <Link href="/iletisim#form">
               <Button variant="secondary" className="w-full">{t('getInTouch')}</Button>
               </Link>
             </div>
@@ -78,7 +77,7 @@ export default function Footer() {
             <div className="border-t border-white/20 pt-8">
                 <h3 className="font-serif text-lg font-bold mb-4">{t('quickContact')}</h3>
                  <p className="font-sans text-white mb-4">{t('quickContactDescription')}</p>
-                <Link href={`/${locale}/iletisim#form`}>
+                <Link href="/iletisim#form">
                     <Button variant="secondary" className="w-full">{t('getInTouch')}</Button>
                 </Link>
             </div>

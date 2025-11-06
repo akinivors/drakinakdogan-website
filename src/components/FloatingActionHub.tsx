@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/navigation';
 import { useEffect, useState } from 'react';
 import { ChevronUp, MessageCircle } from 'lucide-react'; // Import the MessageCircle icon
 import { clsx } from 'clsx';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 // --- Sub-component for the Back to Top button ---
 function BackToTop() {
@@ -43,13 +43,12 @@ function BackToTop() {
 // --- Sub-component for the Floating Contact CTA (with new icon) ---
 function ContactCTA() {
   const pathname = usePathname();
-  const locale = useLocale();
   const tCta = useTranslations('CTA');
   
-  if (pathname === `/${locale}/iletisim`) return null;
+  if (pathname === '/iletisim') return null;
 
   return (
-    <Link href={`/${locale}/iletisim#form`} className="group">
+    <Link href="/iletisim#form" className="group">
       <div className="flex items-center justify-end">
         <div className="bg-primary text-white font-bold text-sm px-6 py-3 rounded-l-full -mr-8 opacity-0 group-hover:opacity-100 group-hover:-mr-0 transition-all duration-300">
           {tCta('getInTouch')}

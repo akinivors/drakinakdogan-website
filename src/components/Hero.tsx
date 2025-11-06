@@ -3,13 +3,12 @@
 'use client';
 
 import Button from '@/components/Button';
-import Link from 'next/link';
-import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
   const t = useTranslations('Hero');
   const tCta = useTranslations('CTA');
-  const locale = useLocale();
 
   return (
     <section className="relative h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
@@ -34,7 +33,7 @@ export default function Hero() {
           {t('subtitle')}
         </p>
         <div className="mt-8">
-          <Link href={`/${locale}/iletisim#form`}>
+          <Link href="/iletisim#form">
             <Button variant="primary">{tCta('getInTouch')}</Button>
           </Link>
         </div>

@@ -54,8 +54,8 @@ export default async function HastaRehberiPage({params}: {params: Promise<{lang:
   }
   
   const breadcrumbItems = [
-    { name: tNav("home"), href: `/${locale}` },
-    { name: t('title'), href: `/${locale}/hasta-rehberi` }
+    { name: tNav("home"), href: "/" },
+    { name: t('title'), href: "/hasta-rehberi" }
   ];
   
 

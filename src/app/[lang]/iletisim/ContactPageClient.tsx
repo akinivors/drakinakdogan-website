@@ -47,7 +47,13 @@ export default function ContactPageClient() {
 
   const { register, handleSubmit, formState: { errors }, reset, control } = useForm<ContactFormInputs>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: { countryCode: "+90" }
+    defaultValues: { 
+      countryCode: "+90",
+      phoneNumber: "",
+      name: "",
+      email: "",
+      message: ""
+    }
   });
 
   const onSubmit = async (data: ContactFormInputs) => {

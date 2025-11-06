@@ -3,19 +3,18 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
 import { X, Menu, Home, User, Stethoscope, BookOpen, MessageSquare, Briefcase, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const t = useTranslations('Header');
   const tNav = useTranslations('Navigation');
   const tCta = useTranslations('CTA');
-  const locale = useLocale();
 
   // --- Data for the Mega Menu (NOW TRANSLATED) ---
   const conditionsTreated = [
@@ -38,12 +37,12 @@ export default function Header() {
 
   // --- Main Navigation Links with ICONS (NOW TRANSLATED) ---
   const navLinks = [
-    { href: `/${locale}`, label: tNav('home'), icon: <Home size={24} /> },
-    { href: `/${locale}/hakkimda`, label: tNav('about'), icon: <User size={24} /> },
-    { href: `/${locale}/hizmetler`, label: tNav('services'), icon: <Briefcase size={24} /> },
-    { href: `/${locale}/hasta-rehberi`, label: tNav('patientGuide'), icon: <BookOpen size={24} /> },
-    { href: `/${locale}/blog`, label: tNav('blog'), icon: <Stethoscope size={24} /> },
-    { href: `/${locale}/iletisim`, label: tNav('contact'), icon: <MessageSquare size={24} /> },
+    { href: '/', label: tNav('home'), icon: <Home size={24} /> },
+    { href: '/hakkimda', label: tNav('about'), icon: <User size={24} /> },
+    { href: '/hizmetler', label: tNav('services'), icon: <Briefcase size={24} /> },
+    { href: '/hasta-rehberi', label: tNav('patientGuide'), icon: <BookOpen size={24} /> },
+    { href: '/blog', label: tNav('blog'), icon: <Stethoscope size={24} /> },
+    { href: '/iletisim', label: tNav('contact'), icon: <MessageSquare size={24} /> },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -76,22 +75,22 @@ export default function Header() {
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Logo />
           <div className="hidden md:flex items-center gap-6">
-            <Link href={`/${locale}`} className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title={tNav('home')}>
+            <Link href="/" className="p-2 text-text-main hover:text-primary transition-colors rounded-lg hover:bg-primary/10" onMouseEnter={handleMouseLeave} title={tNav('home')}>
               <Home size={20} />
             </Link>
-            <Link href={`/${locale}/hakkimda`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('about')}</Link>
+            <Link href="/hakkimda" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('about')}</Link>
             <div onMouseEnter={handleMouseEnter} className="relative">
-              <Link href={`/${locale}/hizmetler`} className="font-sans text-text-main hover:text-primary transition-colors">
+              <Link href="/hizmetler" className="font-sans text-text-main hover:text-primary transition-colors">
                 {tNav('services')}
               </Link>
             </div>
-            <Link href={`/${locale}/hasta-rehberi`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('patientGuide')}</Link>
-            <Link href={`/${locale}/blog`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('blog')}</Link>
-            <Link href={`/${locale}/iletisim`} className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('contact')}</Link>
+            <Link href="/hasta-rehberi" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('patientGuide')}</Link>
+            <Link href="/blog" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('blog')}</Link>
+            <Link href="/iletisim" className="font-sans text-text-main hover:text-primary transition-colors" onMouseEnter={handleMouseLeave}>{tNav('contact')}</Link>
           </div>
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
-            <Link href={`/${locale}/iletisim#form`}>
+            <Link href="/iletisim#form">
               <Button variant="primary">{tCta('getInTouch')}</Button>
             </Link>
           </div>
@@ -136,7 +135,7 @@ export default function Header() {
               ))}
             </nav>
             <div className="py-6 text-center">
-              <Link href={`/${locale}/iletisim#form`} onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/iletisim#form" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="secondary" className="w-full max-w-xs mx-auto">{tCta('getInTouch')}</Button>
               </Link>
               <div className="flex justify-center mt-6">
@@ -154,7 +153,6 @@ export default function Header() {
 
 function MegaMenu({ conditions, treatments }: { conditions: {slug: string, title: string}[], treatments: {slug: string, title: string}[] }) {
   const t = useTranslations('Header');
-  const locale = useLocale();
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
@@ -172,7 +170,7 @@ function MegaMenu({ conditions, treatments }: { conditions: {slug: string, title
             <ul className="space-y-2">
               {conditions.map(item => (
                 <li key={item.slug}>
-                  <Link href={`/${locale}/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
                     {item.title}
                   </Link>
                 </li>
@@ -186,7 +184,7 @@ function MegaMenu({ conditions, treatments }: { conditions: {slug: string, title
             <ul className="space-y-2">
               {treatments.map(item => (
                 <li key={item.slug}>
-                  <Link href={`/${locale}/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
+                  <Link href={`/hizmetler#${item.slug}`} className="font-sans text-text-light hover:text-primary transition-colors">
                     {item.title}
                   </Link>
                 </li>
@@ -197,7 +195,7 @@ function MegaMenu({ conditions, treatments }: { conditions: {slug: string, title
             <h3 className="font-serif text-lg font-bold text-primary mb-2">{t('featuredTitle')}</h3>
             <p className="font-sans text-2xl font-bold text-text-main mb-4">{t('featuredService')}</p>
             <p className="font-sans text-sm text-text-light mb-4">{t('featuredDescription')}</p>
-            <Link href={`/${locale}/hizmetler#tup-bebek`}>
+            <Link href="/hizmetler#tup-bebek">
               <Button variant="primary" className="w-full">{t('featuredButton')}</Button>
             </Link>
           </div>
