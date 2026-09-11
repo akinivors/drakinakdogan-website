@@ -30,7 +30,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
       <motion.div className="bg-white rounded-lg shadow-md overflow-hidden group transition-all duration-300 hover:shadow-xl">
         <Link href={postUrl} className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative w-full h-64 md:h-full min-h-[300px]">
-            <Image src={post.image_url || '/placeholder-image-1.jpg'} alt={post.title} fill className="object-cover" />
+            <Image src={post.image_url || '/placeholder-image-1.jpg'} alt={post.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
           </div>
           <div className="p-8 flex flex-col justify-center">
             <p className="font-sans text-sm font-medium text-accent mb-2">{post.category}</p>
@@ -49,7 +49,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
     <motion.div className="bg-white rounded-lg shadow-md overflow-hidden group transition-all duration-300 hover:shadow-xl h-full">
       <Link href={postUrl} className="flex flex-col h-full">
         <div className="relative w-full h-56">
-          <Image src={post.image_url || '/placeholder-image-1.jpg'} alt={post.title} fill className="object-cover" />
+          <Image src={post.image_url || '/placeholder-image-1.jpg'} alt={post.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
         </div>
         <div className="p-6 flex flex-col flex-grow">
           <p className="font-sans text-sm font-medium text-accent mb-2">{post.category}</p>

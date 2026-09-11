@@ -91,6 +91,8 @@
   "AboutPage": {
     "headerTitle": "Get to Know Dr. Ayşin Akdoğan",
     "headerDescription": "With over 25 years of experience in assisted reproductive technologies, infertility treatment, and women's health, I offer personalized, compassionate, and comprehensive healthcare for every patient in the light of modern medicine.",
+    "metaTitle": "Get to Know Dr. Ayşin Akdoğan | IVF Specialist in Izmir",
+    "metaDescription": "With 25+ years of experience in assisted reproduction, infertility treatment, and women's health, I offer personalized, comprehensive care using modern medicine.",
     "careerJourneyTitle": "Career Journey",
     "timelineCurrent": "Present",
     "timelineMedicalPoint": "MedicalPoint IVF Center",
@@ -138,6 +140,7 @@
   "ServicesPage": {
     "title": "Our Services",
     "description": "Discover the modern and personalized treatment approaches I offer in the field of women's health and reproductive medicine with over 25 years of experience.",
+    "metaTitle": "Our Services | IVF, Infertility & Gynecology in Izmir",
     "conditionsTitle": "Diagnosis and Treatment of Diseases",
     "conditionsDescription": "I am at your service with up-to-date diagnosis and treatment methods in the following areas and more.",
     "treatmentsTitle": "Applied Treatment Methods",
@@ -178,6 +181,7 @@
   "PatientGuidePage": {
     "title": "Patient Guide",
     "description": "Resources, tools, and answers to frequently asked questions about your treatment process.",
+    "metaTitle": "Patient Guide | Your IVF Journey - Dr. Ayşin Akdoğan",
     "journeyTitle": "Your Treatment Journey",
     "journeyDescription": "Each patient's story and needs are different. Let's map out the most suitable treatment path for you together.",
     "tabInfertility": "Infertility Evaluation",
@@ -242,6 +246,7 @@
   "ContactPage": {
     "title": "Get in Touch",
     "description": "You can reach us using the information below for your questions, appointment requests, or other matters.",
+    "metaTitle": "Contact Us | IVF Clinic in Izmir - Dr. Ayşin Akdoğan",
     "infoTitle": "Contact Information",
     "hoursTitle": "Working Hours",
     "hours_weekdays": "Monday - Friday",

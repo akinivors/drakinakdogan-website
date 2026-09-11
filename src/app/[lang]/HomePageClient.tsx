@@ -12,7 +12,14 @@ const AboutSection = dynamic(() => import('@/components/AboutSection'));
 const ServicesSection = dynamic(() => import('@/components/ServicesSection'));
 const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
 
-export default function HomePageClient() {
+type Testimonial = {
+  id: number;
+  created_at: string;
+  author: string;
+  quote: string;
+};
+
+export default function HomePageClient({ initialTestimonials }: { initialTestimonials: Testimonial[] }) {
   return (
     <>
       <Hero /> {/* No longer wrapped - visible immediately */}
@@ -30,7 +37,7 @@ export default function HomePageClient() {
         <InstagramSection />
       </AnimatedSection>
       <AnimatedSection>
-        <TestimonialsSection />
+        <TestimonialsSection initialTestimonials={initialTestimonials} />
       </AnimatedSection>
     </>
   );

@@ -7,9 +7,11 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
   const t = await getTranslations({locale: lang, namespace: 'BlogPage'});
+  const title = t('metaTitle');
+  const description = t('metaDescription');
   return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
+    title,
+    description,
     alternates: {
       canonical: `/${lang}/blog`,
       languages: {
@@ -17,6 +19,21 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         en: '/en/blog',
         'x-default': '/tr/blog',
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}/blog`,
+      type: 'website',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/dr-aysin-akdogan-smilingatthedesk.jpg', width: 2000, height: 1333 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/dr-aysin-akdogan-smilingatthedesk.jpg'],
     },
   };
 }

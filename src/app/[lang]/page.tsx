@@ -1,12 +1,15 @@
 import { Metadata } from 'next';
 import HomePageClient from './HomePageClient';
 import Script from 'next/script';
+import { supabase } from '@/lib/supabaseClient';
 
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
+  const title = 'İzmir Tüp Bebek ve İnfertilite Uzmanı | Op. Dr. Ayşin Akdoğan';
+  const description = "25+ yıllık deneyimle, İzmir Karşıyaka'daki kliniğimizde kişiye özel tüp bebek, aşılama ve ileri infertilite tedavileri sunuyoruz.";
   return {
-    title: 'İzmir Tüp Bebek ve İnfertilite Uzmanı | Op. Dr. Ayşin Akdoğan',
-    description: "25+ yıllık deneyimle, İzmir Karşıyaka'daki kliniğimizde kişiye özel tüp bebek, aşılama ve ileri infertilite tedavileri sunuyoruz.",
+    title,
+    description,
     alternates: {
       canonical: `/${lang}`,
       languages: {
@@ -15,10 +18,45 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         'x-default': '/tr',
       },
     },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}`,
+      type: 'website',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/dr-aysin-akdogan-lab1.jpg', width: 640, height: 798 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/dr-aysin-akdogan-lab1.jpg'],
+    },
   };
 }
 
-export default function Page() {
+export default async function Page({params}: {params: Promise<{lang: string}>}) {
+  const {lang: locale} = await params;
+
+  const { data: testimonialsData, error: testimonialsError } = await supabase
+    .from('testimonials')
+    .select('*')
+    .eq('is_approved', true)
+    .order('created_at', { ascending: false });
+
+  if (testimonialsError) {
+    console.error('Error fetching testimonials:', testimonialsError);
+  }
+
+  const quoteColumn = locale === 'en' ? 'quote_en' : 'quote_tr';
+  const initialTestimonials = (testimonialsData ?? []).map(item => ({
+    id: item.id,
+    created_at: item.created_at,
+    author: item.author as string,
+    quote: (item as Record<string, unknown>)[quoteColumn] as string || (item as Record<string, unknown>).quote_tr as string || (item as Record<string, unknown>).quote as string,
+  }));
+
   return (
     <>
       <Script id="clinic-schema-home" type="application/ld+json">
@@ -60,7 +98,7 @@ export default function Page() {
           ]
         })}
       </Script>
-      <HomePageClient />
+      <HomePageClient initialTestimonials={initialTestimonials} />
     </>
   );
 }

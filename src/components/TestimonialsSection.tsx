@@ -2,14 +2,12 @@
 
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Loader2 } from 'lucide-react';
 import Button from '@/components/Button';
 import TestimonialFormModal from './TestimonialFormModal';
-import { supabase } from '@/lib/supabaseClient';
 import TestimonialCard from './TestimonialCard';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 type Testimonial = {
   id: number;
@@ -18,47 +16,12 @@ type Testimonial = {
   quote: string;
 };
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ initialTestimonials: testimonials }: { initialTestimonials: Testimonial[] }) {
   const t = useTranslations('TestimonialsSection');
-  const locale = useLocale();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      setIsLoading(true);
-
-      // First, fetch all columns to see what's available
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .eq('is_approved', true)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching testimonials:', error);
-        setTestimonials([]);
-      } else if (data) {
-        const quoteColumn = locale === 'en' ? 'quote_en' : 'quote_tr';
-        
-        const formattedData = data.map(item => ({
-            id: item.id,
-            created_at: item.created_at,
-            author: item.author, // Single author column for all languages
-            quote: (item as Record<string, unknown>)[quoteColumn] as string || (item as Record<string, unknown>).quote_tr as string || (item as Record<string, unknown>).quote as string // Fallback chain
-        }));
-        setTestimonials(formattedData);
-      }
-      setIsLoading(false);
-    };
-
-    fetchTestimonials();
-  }, [locale]); // Add locale to the dependency array
 
   const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
@@ -98,12 +61,7 @@ export default function TestimonialsSection() {
           </div>
 
           <div className="mt-12">
-            {isLoading ? (
-              <div className="flex justify-center items-center h-48">
-                <Loader2 className="animate-spin text-primary" size={40} />
-                <p className="ml-4 font-sans text-text-light">{t('loading')}</p>
-              </div>
-            ) : testimonials.length === 0 ? (
+            {testimonials.length === 0 ? (
               <div className="text-center h-48 flex items-center justify-center">
                 <p className="font-sans text-text-light italic">{t('noComments')}</p>
               </div>

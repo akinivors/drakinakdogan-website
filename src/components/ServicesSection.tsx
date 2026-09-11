@@ -2,6 +2,7 @@
 
 'use client';
 
+import Image from 'next/image';
 import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -44,9 +45,12 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <Link href={service.href} key={index} className="group relative block rounded-lg overflow-hidden shadow-lg h-80">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-110"
-                style={{ backgroundImage: `url(${service.imageUrl})` }}
+              <Image
+                src={service.imageUrl}
+                alt={service.title}
+                fill
+                className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="relative h-full flex flex-col justify-end p-6 text-white text-left">

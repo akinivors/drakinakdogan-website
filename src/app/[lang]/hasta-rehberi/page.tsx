@@ -11,9 +11,11 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang: locale} = await params;
   const t = await getTranslations({locale, namespace: 'PatientGuidePage'});
+  const title = t('metaTitle');
+  const description = t('description');
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
     alternates: {
       canonical: `/${locale}/hasta-rehberi`,
       languages: {
@@ -21,6 +23,21 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         en: '/en/hasta-rehberi',
         'x-default': '/tr/hasta-rehberi',
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${locale}/hasta-rehberi`,
+      type: 'website',
+      locale: locale === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/dr-aysin-akdogan-standingnextodesk.jpg', width: 1440, height: 1800 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/dr-aysin-akdogan-standingnextodesk.jpg'],
     },
   };
 }

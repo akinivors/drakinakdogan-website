@@ -6,9 +6,11 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
   const t = await getTranslations({locale: lang, namespace: 'ServicesPage'});
+  const title = t('metaTitle');
+  const description = t('description');
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
     alternates: {
       canonical: `/${lang}/hizmetler`,
       languages: {
@@ -16,6 +18,21 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         en: '/en/hizmetler',
         'x-default': '/tr/hizmetler',
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}/hizmetler`,
+      type: 'website',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/service-ivf.jpg', width: 1600, height: 900 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/service-ivf.jpg'],
     },
   };
 }

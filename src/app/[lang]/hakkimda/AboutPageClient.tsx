@@ -8,10 +8,10 @@ import { Award, BookOpen, Users, FileText, Globe } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import { Link } from '@/navigation';
 import PublicationModal from '@/components/PublicationModal';
+import Button from '@/components/Button';
+import AnimatedSection from '@/components/AnimatedSection';
 import { useTranslations } from 'next-intl';
 
-const Button = dynamic(() => import('@/components/Button'));
-const AnimatedSection = dynamic(() => import('@/components/AnimatedSection'));
 const AboutSection = dynamic(() => import('@/components/AboutSection'));
 const HeroCarousel = dynamic(() => import('@/components/HeroCarousel'));
 

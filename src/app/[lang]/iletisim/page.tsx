@@ -6,9 +6,11 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
   const t = await getTranslations({locale: lang, namespace: 'ContactPage'});
+  const title = t('metaTitle');
+  const description = t('description');
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
     alternates: {
       canonical: `/${lang}/iletisim`,
       languages: {
@@ -16,6 +18,21 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         en: '/en/iletisim',
         'x-default': '/tr/iletisim',
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}/iletisim`,
+      type: 'website',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/dr-aysin-akdogan-lab1.jpg', width: 640, height: 798 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/dr-aysin-akdogan-lab1.jpg'],
     },
   };
 }

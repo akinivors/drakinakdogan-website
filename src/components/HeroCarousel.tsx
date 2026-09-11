@@ -5,12 +5,12 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 
 const images = [
-  '/dr-aysin-akdogan-standingbackgroundhospital.jpg',
-  '/dr-aysin-akdogan-smilingatthedesk.jpg',
-  '/dr-aysin-akdogan-lab1.jpg',
-  '/dr-aysin-akdogan.png', // The surgery photo
-  '/dr-aysin-akdogan-standinginsidehospital.jpg',
-  '/dr-aysin-akdogan-staringatthecomputer.jpg',
+  { src: '/dr-aysin-akdogan-standingbackgroundhospital.jpg', alt: 'Op. Dr. Ayşin Akdoğan hastane binası önünde' },
+  { src: '/dr-aysin-akdogan-smilingatthedesk.jpg', alt: 'Op. Dr. Ayşin Akdoğan masasında gülümserken' },
+  { src: '/dr-aysin-akdogan-lab1.jpg', alt: 'Op. Dr. Ayşin Akdoğan tüp bebek laboratuvarında' },
+  { src: '/dr-aysin-akdogan.png', alt: 'Op. Dr. Ayşin Akdoğan ameliyat sırasında' },
+  { src: '/dr-aysin-akdogan-standinginsidehospital.jpg', alt: 'Op. Dr. Ayşin Akdoğan klinik içerisinde' },
+  { src: '/dr-aysin-akdogan-staringatthecomputer.jpg', alt: 'Op. Dr. Ayşin Akdoğan hasta dosyalarını incelerken' },
 ];
 
 export default function HeroCarousel() {
@@ -57,13 +57,14 @@ export default function HeroCarousel() {
         <div className="embla__container flex h-full">
           {images.map((image, index) => (
             <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 relative">
-          <Image
-                src={image}
-                alt={`Hero image ${index + 1}`}
-            fill
-            className="object-cover"
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 33vw"
                 priority={index === 0}
-          />
+              />
             </div>
           ))}
         </div>

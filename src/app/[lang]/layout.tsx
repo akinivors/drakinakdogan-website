@@ -37,6 +37,19 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/manifest.json',
+  openGraph: {
+    siteName: 'Op. Dr. Ayşin Akdoğan',
+    title: "Op. Dr. Ayşin Akdoğan | Kadın Hastalıkları ve Doğum Uzmanı",
+    description: "İzmir'de kadın sağlığı, gebelik takibi, infertilite ve tüp bebek tedavisi üzerine uzmanlaşmış Op. Dr. Ayşin Akdoğan.",
+    type: 'website',
+    images: [{ url: '/dr-aysin-akdogan-lab1.jpg', width: 640, height: 798 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Op. Dr. Ayşin Akdoğan | Kadın Hastalıkları ve Doğum Uzmanı",
+    description: "İzmir'de kadın sağlığı, gebelik takibi, infertilite ve tüp bebek tedavisi üzerine uzmanlaşmış Op. Dr. Ayşin Akdoğan.",
+    images: ['/dr-aysin-akdogan-lab1.jpg'],
+  },
 };
 
 export default async function RootLayout({

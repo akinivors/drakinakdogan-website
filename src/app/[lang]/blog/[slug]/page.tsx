@@ -73,15 +73,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { data: post } = await supabase
     .from('posts')
-    .select(`${titleColumn}, ${excerptColumn}`)
+    .select(`${titleColumn}, ${excerptColumn}, image_url, created_at`)
     .eq('slug', slug)
     .single();
-  
+
   if (!post) return {};
 
+  const title = (post as Record<string, unknown>)[titleColumn] as string;
+  const description = (post as Record<string, unknown>)[excerptColumn] as string;
+  const imageUrl = (post as Record<string, unknown>).image_url as string | null;
+
   return {
-    title: (post as Record<string, unknown>)[titleColumn] as string,
-    description: (post as Record<string, unknown>)[excerptColumn] as string,
+    title,
+    description,
     alternates: {
       canonical: `/${lang}/blog/${slug}`,
       languages: {
@@ -89,6 +93,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         en: `/en/blog/${slug}`,
         'x-default': `/tr/blog/${slug}`,
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}/blog/${slug}`,
+      type: 'article',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      publishedTime: (post as Record<string, unknown>).created_at as string,
+      authors: ['Op. Dr. Ayşin Akdoğan'],
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: imageUrl ? [imageUrl] : undefined,
     },
   };
 }
@@ -188,12 +209,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       />
       <article className="bg-white">
         <div className="relative w-full h-80 md:h-96">
-          <Image 
-            src={post.image_url || '/placeholder-image-1.jpg'} 
-            alt={post.title} 
-            fill 
-            className="object-cover" 
-            priority 
+          <Image
+            src={post.image_url || '/placeholder-image-1.jpg'}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
           <div className="absolute inset-0 bg-black/50" />
         </div>

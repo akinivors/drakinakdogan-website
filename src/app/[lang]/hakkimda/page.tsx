@@ -10,9 +10,11 @@ type BreadcrumbSchema = { "@type": "BreadcrumbList"; itemListElement: Array<{ "@
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
   const t = await getTranslations({locale: lang, namespace: 'AboutPage'});
+  const title = t('metaTitle');
+  const description = t('metaDescription');
   return {
-    title: t('headerTitle'),
-    description: t('headerDescription'),
+    title,
+    description,
     alternates: {
       canonical: `/${lang}/hakkimda`,
       languages: {
@@ -20,6 +22,21 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
         en: '/en/hakkimda',
         'x-default': '/tr/hakkimda',
       },
+    },
+    openGraph: {
+      siteName: 'Op. Dr. Ayşin Akdoğan',
+      title,
+      description,
+      url: `/${lang}/hakkimda`,
+      type: 'profile',
+      locale: lang === 'en' ? 'en_US' : 'tr_TR',
+      images: [{ url: '/dr-aysin-akdogan-standingbackgroundhospital.jpg', width: 1200, height: 1600 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/dr-aysin-akdogan-standingbackgroundhospital.jpg'],
     },
   };
 }
