@@ -24,7 +24,7 @@ export default function AboutSection({ showButton = false }: AboutSectionProps) 
             alt="Op. Dr. Ayşin Akdoğan"
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1536px) 50vw, 768px"
           />
         </div>
 

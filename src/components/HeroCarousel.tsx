@@ -62,7 +62,7 @@ export default function HeroCarousel() {
                 alt={image.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 33vw"
+                sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 33vw, 512px"
                 priority={index === 0}
               />
             </div>

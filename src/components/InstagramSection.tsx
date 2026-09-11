@@ -39,7 +39,7 @@ export default function InstagramSection() {
                 alt={image.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16.6vw"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1536px) 16.6vw, 256px"
               />
             </div>
           ))}

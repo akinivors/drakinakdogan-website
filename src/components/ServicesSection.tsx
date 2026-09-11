@@ -50,7 +50,7 @@ export default function ServicesSection() {
                 alt={service.title}
                 fill
                 className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1536px) 25vw, 384px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="relative h-full flex flex-col justify-end p-6 text-white text-left">
