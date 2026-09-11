@@ -13,7 +13,15 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
   const t = await getTranslations({locale, namespace: 'PatientGuidePage'});
   return {
     title: t('title'),
-    description: t('description')
+    description: t('description'),
+    alternates: {
+      canonical: `/${locale}/hasta-rehberi`,
+      languages: {
+        tr: '/tr/hasta-rehberi',
+        en: '/en/hasta-rehberi',
+        'x-default': '/tr/hasta-rehberi',
+      },
+    },
   };
 }
 
@@ -46,21 +54,45 @@ export default async function HastaRehberiPage({params}: {params: Promise<{lang:
       category: (faq as Record<string, unknown>)[categoryColumn] as string || (faq as Record<string, unknown>).category_tr as string,
   })) || [];
 
-  // Debug: Let's see what we're actually getting
-  console.log("Current locale:", locale);
-  console.log("Using columns:", questionColumn, answerColumn, categoryColumn);
-  if (formattedFaqs.length > 0) {
-    console.log("Sample formatted FAQ:", formattedFaqs[0]);
-  }
-  
   const breadcrumbItems = [
     { name: tNav("home"), href: "/" },
     { name: t('title'), href: "/hasta-rehberi" }
   ];
-  
+
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": `https://www.draysinakdogan.com${item.href}`
+    }))
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      breadcrumbSchema,
+      ...(formattedFaqs.length > 0 ? [{
+        "@type": "FAQPage",
+        "mainEntity": formattedFaqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      }] : [])
+    ]
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="w-full bg-secondary py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="font-serif text-5xl font-bold text-primary">{t('title')}</h1>

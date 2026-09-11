@@ -29,21 +29,27 @@ const formatPhoneNumber = (value: string) => {
   return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 8)}-${phoneNumber.slice(8, 10)}`;
 };
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Ad Soyad en az 2 karakter olmalıdır." }),
-  email: z.string().email({ message: "Lütfen geçerli bir e-posta adresi girin." }),
-  countryCode: z.string().min(2, { message: "Kod gerekli."}).regex(/^\+[0-9]+$/, { message: "+## formatı"}),
-  phoneNumber: z.string().min(10, { message: "Lütfen 10 haneli bir numara girin." }),
-  message: z.string().min(10, { message: "Mesajınız en az 10 karakter olmalıdır." }),
-});
-
-type ContactFormInputs = z.infer<typeof contactFormSchema>;
+type ContactFormInputs = {
+  name: string;
+  email: string;
+  countryCode: string;
+  phoneNumber: string;
+  message: string;
+};
 
 export default function ContactPageClient() {
   const t = useTranslations('ContactPage');
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isMessageInfoVisible, setMessageInfoVisible] = useState(false);
   const [isTopInfoVisible, setTopInfoVisible] = useState(false);
+
+  const contactFormSchema = z.object({
+    name: z.string().min(2, { message: t('validation.nameMin') }),
+    email: z.string().email({ message: t('validation.emailInvalid') }),
+    countryCode: z.string().min(2, { message: t('validation.countryCodeMin') }).regex(/^\+[0-9]+$/, { message: t('validation.countryCodeFormat') }),
+    phoneNumber: z.string().min(10, { message: t('validation.phoneMin') }),
+    message: z.string().min(10, { message: t('validation.messageMin') }),
+  });
 
   const { register, handleSubmit, formState: { errors }, reset, control } = useForm<ContactFormInputs>({
     resolver: zodResolver(contactFormSchema),

@@ -43,9 +43,9 @@ export default function ResourceHub() {
           {resources.map((resource, index) => (
             <Link href={resource.href} key={index} className="group bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg shadow-md flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full">
               <div className="mb-4">{resource.icon}</div>
-              <h3 className="font-serif text-xl font-bold text-text-main mb-2">
+              <h2 className="font-serif text-xl font-bold text-text-main mb-2">
                 {resource.title}
-              </h3>
+              </h2>
               <p className="font-sans text-text-light flex-grow">
                 {resource.description}
               </p>

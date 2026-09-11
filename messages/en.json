@@ -264,7 +264,15 @@
     "modal_info_appointments": "<strong>Appointment Requests:</strong> Our team will get back to you within 1-2 business days to schedule a suitable time.",
     "modal_info_emergency": "<strong>Emergencies:</strong> Please do not use this form for medical emergencies. Call 112 directly.",
     "modal_message_title": "Message Information",
-    "modal_message_body": "The message you send through this form is delivered directly to Dr. Ayşin Akdoğan's team. You will be contacted as soon as possible via the email address and phone number you provided."
+    "modal_message_body": "The message you send through this form is delivered directly to Dr. Ayşin Akdoğan's team. You will be contacted as soon as possible via the email address and phone number you provided.",
+    "validation": {
+      "nameMin": "Full name must be at least 2 characters.",
+      "emailInvalid": "Please enter a valid email address.",
+      "countryCodeMin": "Code is required.",
+      "countryCodeFormat": "Format: +##",
+      "phoneMin": "Please enter a 10-digit number.",
+      "messageMin": "Your message must be at least 10 characters."
+    }
   },
   "TestimonialForm": {
     "title": "Leave a Review",

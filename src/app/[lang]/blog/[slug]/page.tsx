@@ -78,10 +78,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .single();
   
   if (!post) return {};
-  
-  return { 
-    title: (post as Record<string, unknown>)[titleColumn] as string, 
-    description: (post as Record<string, unknown>)[excerptColumn] as string 
+
+  return {
+    title: (post as Record<string, unknown>)[titleColumn] as string,
+    description: (post as Record<string, unknown>)[excerptColumn] as string,
+    alternates: {
+      canonical: `/${lang}/blog/${slug}`,
+      languages: {
+        tr: `/tr/blog/${slug}`,
+        en: `/en/blog/${slug}`,
+        'x-default': `/tr/blog/${slug}`,
+      },
+    },
   };
 }
 
@@ -174,6 +182,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="bg-white">
         <div className="relative w-full h-80 md:h-96">
           <Image 

@@ -2,10 +2,21 @@ import { Metadata } from 'next';
 import HomePageClient from './HomePageClient';
 import Script from 'next/script';
 
-export const metadata: Metadata = {
-  title: 'İzmir Tüp Bebek ve İnfertilite Uzmanı | Op. Dr. Ayşin Akdoğan',
-  description: "25+ yıllık deneyimle, İzmir Karşıyaka'daki kliniğimizde kişiye özel tüp bebek, aşılama ve ileri infertilite tedavileri sunuyoruz.",
-};
+export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
+  const {lang} = await params;
+  return {
+    title: 'İzmir Tüp Bebek ve İnfertilite Uzmanı | Op. Dr. Ayşin Akdoğan',
+    description: "25+ yıllık deneyimle, İzmir Karşıyaka'daki kliniğimizde kişiye özel tüp bebek, aşılama ve ileri infertilite tedavileri sunuyoruz.",
+    alternates: {
+      canonical: `/${lang}`,
+      languages: {
+        tr: '/tr',
+        en: '/en',
+        'x-default': '/tr',
+      },
+    },
+  };
+}
 
 export default function Page() {
   return (
@@ -17,7 +28,7 @@ export default function Page() {
           "name": "Op. Dr. Ayşin Akdoğan | Tüp Bebek ve İnfertilite Kliniği",
           "description": "Op. Dr. Ayşin Akdoğan liderliğinde, İzmir'de kişiye özel tüp bebek, kısırlık ve jinekolojik tedaviler sunan uzman klinik.",
           "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-lab1.jpg",          
-          "url": "https://www.drayinakdogan.com",
+          "url": "https://www.draysinakdogan.com",
           "telephone": "+90-554-871-0590",
           "medicalSpecialty": ["İnfertilite", "Tüp Bebek (IVF)" ],
           "address": {

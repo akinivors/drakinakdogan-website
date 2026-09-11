@@ -44,11 +44,6 @@ export default function TestimonialsSection() {
         console.error('Error fetching testimonials:', error);
         setTestimonials([]);
       } else if (data) {
-        console.log('Testimonials fetched successfully:', data.length);
-        if (data.length > 0) {
-          console.log('Sample testimonial structure:', data[0]);
-        }
-
         const quoteColumn = locale === 'en' ? 'quote_en' : 'quote_tr';
         
         const formattedData = data.map(item => ({

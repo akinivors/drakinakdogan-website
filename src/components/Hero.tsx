@@ -17,6 +17,7 @@ export default function Hero() {
         loop
         muted
         playsInline
+        poster="/dr-aysin-akdogan-standingbackgroundhospital.jpg"
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
         <source src="/clinic-video.mp4" type="video/mp4" />

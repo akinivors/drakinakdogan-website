@@ -9,7 +9,15 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
   const t = await getTranslations({locale: lang, namespace: 'BlogPage'});
   return {
     title: t('metaTitle'),
-    description: t('metaDescription')
+    description: t('metaDescription'),
+    alternates: {
+      canonical: `/${lang}/blog`,
+      languages: {
+        tr: '/tr/blog',
+        en: '/en/blog',
+        'x-default': '/tr/blog',
+      },
+    },
   };
 }
 
@@ -31,12 +39,6 @@ export default async function BlogPage({params}: {params: Promise<{lang: string}
     console.error('Error fetching posts:', error);
   }
 
-  console.log("Blog page locale:", locale);
-  console.log("Using category column:", categoryColumn);
-  if (posts && posts.length > 0) {
-    console.log("Sample post structure:", posts[0]);
-  }
-
   const formattedPosts = posts?.map(post => ({
     id: post.id.toString(),
     slug: post.slug,
@@ -46,11 +48,6 @@ export default async function BlogPage({params}: {params: Promise<{lang: string}
     image_url: post.image_url,
     created_at: post.created_at,
   })) || [];
-
-  if (formattedPosts.length > 0) {
-    console.log("Sample formatted post:", formattedPosts[0]);
-    console.log("All categories found:", [...new Set(formattedPosts.map(p => p.category))]);
-  }
 
   const breadcrumbItems = [
     { name: t("home"), href: "/" },

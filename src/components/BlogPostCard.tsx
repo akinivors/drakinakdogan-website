@@ -34,7 +34,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
           </div>
           <div className="p-8 flex flex-col justify-center">
             <p className="font-sans text-sm font-medium text-accent mb-2">{post.category}</p>
-            <h3 className="font-serif text-3xl font-bold text-text-main mb-4">{post.title}</h3>
+            <h2 className="font-serif text-3xl font-bold text-text-main mb-4">{post.title}</h2>
             <p className="font-sans text-text-light mb-6">{post.excerpt}</p>
             <div className="font-sans font-bold text-primary flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
               {t('readMore')} <ArrowRight size={16} />
@@ -53,7 +53,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
         </div>
         <div className="p-6 flex flex-col flex-grow">
           <p className="font-sans text-sm font-medium text-accent mb-2">{post.category}</p>
-          <h3 className="font-serif text-xl font-bold text-text-main mb-3">{post.title}</h3>
+          <h2 className="font-serif text-xl font-bold text-text-main mb-3">{post.title}</h2>
           <p className="font-sans text-text-light mb-4 flex-grow">{post.excerpt}</p>
           <div className="font-sans font-bold text-primary flex items-center gap-2 group-hover:gap-3 transition-all duration-300 mt-auto">
             {t('readMore')} <ArrowRight size={16} />

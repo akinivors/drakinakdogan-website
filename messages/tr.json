@@ -264,7 +264,15 @@
     "modal_info_appointments": "<strong>Randevu Talepleri:</strong> Ekibimiz sizi arayarak uygun bir zaman planlaması için 1-2 iş günü içinde geri dönüş yapacaktır.",
     "modal_info_emergency": "<strong>Acil Durumlar:</strong> Tıbbi acil durumlar için lütfen bu formu kullanmayın. Doğrudan 112'yi arayın.",
     "modal_message_title": "Mesaj Bilgilendirmesi",
-    "modal_message_body": "Bu form aracılığıyla gönderdiğiniz mesaj doğrudan Dr. Ayşin Akdoğan'ın ekibine iletilir. Size en kısa sürede belirttiğiniz e-posta adresi ve telefon numarası üzerinden geri dönüş yapılacaktır."
+    "modal_message_body": "Bu form aracılığıyla gönderdiğiniz mesaj doğrudan Dr. Ayşin Akdoğan'ın ekibine iletilir. Size en kısa sürede belirttiğiniz e-posta adresi ve telefon numarası üzerinden geri dönüş yapılacaktır.",
+    "validation": {
+      "nameMin": "Ad Soyad en az 2 karakter olmalıdır.",
+      "emailInvalid": "Lütfen geçerli bir e-posta adresi girin.",
+      "countryCodeMin": "Kod gerekli.",
+      "countryCodeFormat": "+## formatı",
+      "phoneMin": "Lütfen 10 haneli bir numara girin.",
+      "messageMin": "Mesajınız en az 10 karakter olmalıdır."
+    }
   },
   "TestimonialForm": {
     "title": "Yorum Bırakın",

@@ -8,7 +8,15 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
   const t = await getTranslations({locale: lang, namespace: 'ContactPage'});
   return {
     title: t('title'),
-    description: t('description')
+    description: t('description'),
+    alternates: {
+      canonical: `/${lang}/iletisim`,
+      languages: {
+        tr: '/tr/iletisim',
+        en: '/en/iletisim',
+        'x-default': '/tr/iletisim',
+      },
+    },
   };
 }
 
@@ -28,7 +36,7 @@ export default async function Page({params}: {params: Promise<{lang: string}>}) 
     "name": "Op. Dr. Ayşin Akdoğan | Tüp Bebek ve İnfertilite Kliniği",
     "description": "Op. Dr. Ayşin Akdoğan liderliğinde, İzmir'de kişiye özel tüp bebek, kısırlık ve jinekolojik tedaviler sunan uzman klinik.",
     "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-lab1.jpg",
-    "url": "https://www.drayinakdogan.com",
+    "url": "https://www.draysinakdogan.com",
     "telephone": "+90-554-871-0590",
     "medicalSpecialty": ["İnfertilite", "Tüp Bebek (IVF)" ],
     "address": {

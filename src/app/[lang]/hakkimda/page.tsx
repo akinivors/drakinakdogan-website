@@ -12,7 +12,15 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
   const t = await getTranslations({locale: lang, namespace: 'AboutPage'});
   return {
     title: t('headerTitle'),
-    description: t('headerDescription')
+    description: t('headerDescription'),
+    alternates: {
+      canonical: `/${lang}/hakkimda`,
+      languages: {
+        tr: '/tr/hakkimda',
+        en: '/en/hakkimda',
+        'x-default': '/tr/hakkimda',
+      },
+    },
   };
 }
 

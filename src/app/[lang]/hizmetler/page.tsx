@@ -8,7 +8,15 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
   const t = await getTranslations({locale: lang, namespace: 'ServicesPage'});
   return {
     title: t('title'),
-    description: t('description')
+    description: t('description'),
+    alternates: {
+      canonical: `/${lang}/hizmetler`,
+      languages: {
+        tr: '/tr/hizmetler',
+        en: '/en/hizmetler',
+        'x-default': '/tr/hizmetler',
+      },
+    },
   };
 }
 
