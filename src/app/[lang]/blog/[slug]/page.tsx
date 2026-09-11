@@ -75,6 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .from('posts')
     .select(`${titleColumn}, ${excerptColumn}, image_url, created_at`)
     .eq('slug', slug)
+    .eq('is_published', true)
     .single();
 
   if (!post) return {};
@@ -129,6 +130,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .from('posts')
     .select(`*, ${titleColumn}, ${excerptColumn}, ${contentColumn}, ${categoryColumn}, ${faqsColumn}`)
     .eq('slug', slug)
+    .eq('is_published', true)
     .single();
 
   if (error || !postData) {
