@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:chatbot": "tsx --env-file=.env.local scripts/test-chatbot-flow.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -37,6 +38,7 @@
     "eslint-config-next": "15.3.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }

@@ -1,10 +1,12 @@
 // Path: src/app/[lang]/layout.tsx (Corrected Version)
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Lora } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingActionHub from '@/components/FloatingActionHub';
+import { ChatbotFlowProvider } from '@/components/chatbot/ChatbotFlowProvider';
+import ChatbotWidget from '@/components/chatbot/ChatbotWidget';
 import Script from 'next/script';
 import "./globals.css";
 // --- THIS IS THE FIX ---
@@ -52,6 +54,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: '#0a4f54',
+};
+
 export default async function RootLayout({
   children,
   params
@@ -93,6 +99,9 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
           <FloatingActionHub />
+          <ChatbotFlowProvider>
+            <ChatbotWidget />
+          </ChatbotFlowProvider>
         </NextIntlClientProvider>
       </body>
     </html>

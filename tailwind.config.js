@@ -24,6 +24,15 @@ module.exports = {
         'text-main': '#1a1a1a',
         'text-light': '#5c5c5c',
       },
+      keyframes: {
+        teaserIn: {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'teaser-in': 'teaserIn 0.25s ease-out',
+      },
     },
   },
   plugins: [

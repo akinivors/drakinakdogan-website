@@ -4,7 +4,7 @@ import { Link } from '@/navigation';
 import Image from 'next/image';
 import { usePathname } from '@/navigation';
 import { useEffect, useState } from 'react';
-import { ChevronUp, MessageCircle } from 'lucide-react'; // Import the MessageCircle icon
+import { ChevronUp, Calendar } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useTranslations } from 'next-intl';
 
@@ -40,34 +40,33 @@ function BackToTop() {
   );
 }
 
-// --- Sub-component for the Floating Contact CTA (with new icon) ---
+// --- Sub-component for the Floating Contact CTA ---
 function ContactCTA() {
   const pathname = usePathname();
   const tCta = useTranslations('CTA');
-  
+
   if (pathname === '/iletisim') return null;
 
   return (
-    <Link href="/iletisim#form" className="group">
-      <div className="flex items-center justify-end">
-        <div className="bg-primary text-white font-bold text-sm px-6 py-3 rounded-l-full -mr-8 opacity-0 group-hover:opacity-100 group-hover:-mr-0 transition-all duration-300">
-          {tCta('getInTouch')}
-        </div>
-        
-        <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white flex-shrink-0">
-          <Image
-            src="/dr-aysin-akdogan-standingnextodesk.jpg"
-            alt="Op. Dr. Ayşin Akdoğan ile iletişime geçin"
-            fill
-            className="object-cover"
-            sizes="64px"
-          />
-          {/* --- MESSAGE ICON OVERLAY --- */}
-          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <MessageCircle className="h-7 w-7 text-white/80" />
-          </div>
+    <Link href="/iletisim#form" className="flex flex-col items-end gap-1.5">
+      <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white flex-shrink-0">
+        <Image
+          src="/dr-aysin-akdogan-standingnextodesk.jpg"
+          alt="Op. Dr. Ayşin Akdoğan ile iletişime geçin"
+          fill
+          className="object-cover"
+          sizes="64px"
+        />
+        {/* Booking badge - distinct from the chatbot's message-circle icon
+            so the two floating buttons don't read as duplicate chat launchers. */}
+        <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-accent border-2 border-white shadow-sm flex items-center justify-center">
+          <Calendar className="h-3.5 w-3.5 text-white" />
         </div>
       </div>
+      {/* Always-visible label (not hover-only) so it still shows on touch devices. */}
+      <span className="bg-white text-accent text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm border border-accent/15 whitespace-nowrap">
+        {tCta('getInTouch')}
+      </span>
     </Link>
   );
 }

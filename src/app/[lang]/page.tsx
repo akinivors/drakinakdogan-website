@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import HomePageClient from './HomePageClient';
 import Script from 'next/script';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase, queryWithRetry } from '@/lib/supabaseClient';
 
 export async function generateMetadata({params}: {params: Promise<{lang: string}>}): Promise<Metadata> {
   const {lang} = await params;
@@ -39,11 +39,13 @@ export async function generateMetadata({params}: {params: Promise<{lang: string}
 export default async function Page({params}: {params: Promise<{lang: string}>}) {
   const {lang: locale} = await params;
 
-  const { data: testimonialsData, error: testimonialsError } = await supabase
-    .from('testimonials')
-    .select('*')
-    .eq('is_approved', true)
-    .order('created_at', { ascending: false });
+  const { data: testimonialsData, error: testimonialsError } = await queryWithRetry(() =>
+    supabase
+      .from('testimonials')
+      .select('*')
+      .eq('is_approved', true)
+      .order('created_at', { ascending: false })
+  );
 
   if (testimonialsError) {
     console.error('Error fetching testimonials:', testimonialsError);
