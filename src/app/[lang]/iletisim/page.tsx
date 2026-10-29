@@ -54,20 +54,15 @@ export default async function Page({params}: {params: Promise<{lang: string}>}) 
     "description": "Op. Dr. Ayşin Akdoğan liderliğinde, İzmir'de kişiye özel tüp bebek, kısırlık ve jinekolojik tedaviler sunan uzman klinik.",
     "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-lab1.jpg",
     "url": "https://www.draysinakdogan.com",
-    "telephone": "+90-554-871-0590",
+    "telephone": "+90-232-463-4672",
     "medicalSpecialty": ["İnfertilite", "Tüp Bebek (IVF)" ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Yeni Girne Bulvarı, 1825. Sk. No:12",
-      "addressLocality": "Karşıyaka",
+      "streetAddress": "Ali Çetinkaya Bulvarı, Havuz Apt. No:66 D:16",
+      "addressLocality": "Konak",
       "addressRegion": "İzmir",
-      "postalCode": "35575",
+      "postalCode": "35220",
       "addressCountry": "TR"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "38.4550",
-      "longitude": "27.1550"
     },
     "openingHoursSpecification": [
       {

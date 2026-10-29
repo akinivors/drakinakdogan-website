@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import { Phone, Mail, MapPin, CheckCircle, HelpCircle, X, Clock, Calendar, AlertCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 declare global {
   interface Window {
@@ -39,6 +39,7 @@ type ContactFormInputs = {
 
 export default function ContactPageClient() {
   const t = useTranslations('ContactPage');
+  const locale = useLocale();
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isMessageInfoVisible, setMessageInfoVisible] = useState(false);
   const [isTopInfoVisible, setTopInfoVisible] = useState(false);
@@ -103,13 +104,19 @@ export default function ContactPageClient() {
             <div className="bg-gradient-to-b from-white to-primary-lightest p-8 rounded-lg">
                 <h2 className="font-serif text-2xl font-bold text-text-main mb-6">{t('infoTitle')}</h2>
                 <div className="space-y-4">
-                    <div className="flex items-start gap-4"><MapPin size={24} className="text-primary flex-shrink-0 mt-1" /><span className="font-sans text-text-light">Yeni Girne Bulvarı, 1825. Sk. No:12, 35575 Karşıyaka/İzmir</span></div>
-                    <div className="flex items-center gap-4"><Phone size={20} className="text-primary" /><span className="font-sans text-text-light">+90 554 871 05 90</span></div>
-                    <div className="flex items-center gap-4"><Mail size={20} className="text-primary" /><span className="font-sans text-text-light">aysinakdogan@draysinakdogan.com</span></div>
+                    <div className="flex items-start gap-4"><MapPin size={24} className="text-primary flex-shrink-0 mt-1" /><span className="font-sans text-text-light">Ali Çetinkaya Bulvarı, Havuz Apt. No:66 D:16 ({locale === 'en' ? '4th floor' : 'Kat 4'}), 35220 Konak/İzmir</span></div>
+                    <div className="flex items-start gap-4"><Phone size={20} className="text-primary flex-shrink-0 mt-1" /><span className="font-sans text-text-light">+90 232 463 46 72<br/>+90 232 464 01 28<br/>+90 530 773 54 43<br/>Faks: +90 232 422 53 50</span></div>
+                    <div className="flex items-center gap-4"><Mail size={20} className="text-primary flex-shrink-0" /><span className="font-sans text-text-light break-all">aysinakdogan@draysinakdogan.com</span></div>
                     <div className="flex items-center gap-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
                         <a href="https://www.instagram.com/draysinakdogan/" target="_blank" rel="noopener noreferrer" className="font-sans text-text-light hover:underline">
                             @draysinakdogan
+                        </a>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg>
+                        <a href="https://www.youtube.com/draysinakdogantupbebek" target="_blank" rel="noopener noreferrer" className="font-sans text-text-light hover:underline">
+                            draysinakdogantupbebek
                         </a>
                     </div>
                 </div>
@@ -260,7 +267,7 @@ export default function ContactPageClient() {
 
       <section className="w-full">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18476.09670595653!2d27.092585311822393!3d38.466520006826286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd9d85530f323%3A0xf4e3a7e795bf6df7!2sMedical%20Point!5e0!3m2!1str!2str!4v1752770818193!5m2!1str!2str"
+          src="https://maps.google.com/maps?q=Op.%20Dr.%20Ay%C5%9Fin%20Akdo%C4%9Fan%20%C4%B0zmir&hl=tr&z=17&output=embed"
           width="100%" 
           height="450"
           style={{ border: 0 }} 

@@ -102,7 +102,13 @@ export default function AboutPageClient() {
               <AnimatedSection tag="div" className="relative border-l-2 border-primary/20 pl-8 space-y-12">
                 <motion.div className="relative" variants={itemVariants}>
                   <div className="absolute -left-[3.2rem] top-1 h-4 w-4 rounded-full bg-primary"></div>
-                  <p className="font-sans text-sm text-accent font-medium">2025 - {t('timelineCurrent')}</p>
+                  <p className="font-sans text-sm text-accent font-medium">2026 - {t('timelineCurrent')}</p>
+                  <h3 className="font-serif text-xl font-bold text-text-main mt-1">{t('timelineClinic')}</h3>
+                  <p className="font-sans text-text-light">{t('role')}</p>
+                </motion.div>
+                <motion.div className="relative" variants={itemVariants}>
+                  <div className="absolute -left-[3.2rem] top-1 h-4 w-4 rounded-full bg-primary"></div>
+                  <p className="font-sans text-sm text-accent font-medium">2025 - 2026</p>
                   <h3 className="font-serif text-xl font-bold text-text-main mt-1">{t('timelineMedicalPoint')}</h3>
                   <p className="font-sans text-text-light">{t('role')}</p>
                 </motion.div>

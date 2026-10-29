@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Link } from '@/navigation';
 import { clsx } from 'clsx';
 
@@ -10,10 +11,10 @@ interface LogoProps {
 
 export default function Logo({ variant = 'dark', className }: LogoProps) {
   return (
-    <Link 
-      href="/" 
+    <Link
+      href="/"
       className={clsx(
-        "text-2xl font-serif font-bold transition-colors",
+        "flex items-center gap-2 sm:gap-3 text-lg sm:text-2xl leading-tight font-serif font-bold transition-colors",
         {
           // Default dark text on light backgrounds
           'text-primary hover:text-primary-dark': variant === 'dark',
@@ -23,7 +24,15 @@ export default function Logo({ variant = 'dark', className }: LogoProps) {
         className
       )}
     >
-      Op. Dr. Ayşin Akdoğan
+      <Image
+        src={variant === 'light' ? '/logo/logo-mark-white.png' : '/logo/logo-mark.png'}
+        alt=""
+        width={416}
+        height={381}
+        className="h-10 sm:h-14 w-auto flex-shrink-0"
+        priority
+      />
+      <span>Op. Dr. Ayşin Akdoğan</span>
     </Link>
   );
-} 
+}

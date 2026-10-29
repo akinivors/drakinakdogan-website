@@ -3,7 +3,7 @@
 import { Link } from '@/navigation';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
-import { Instagram } from 'lucide-react';
+import { Instagram, Youtube } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function Footer() {
@@ -21,12 +21,16 @@ export default function Footer() {
 
   const contactDetails = (
     <div className="font-sans space-y-3 text-white">
-        <p>Yeni Girne Bulvarı, 1825. Sk. No:12,<br/>35575 Karşıyaka/İzmir</p>
-        <p>Telefon: +90 554 871 05 90</p>
+        <p>Ali Çetinkaya Bulvarı,<br/>Havuz Apt. No:66 D:16,<br/>Konak/İzmir</p>
+        <p>Telefon: +90 232 463 46 72<br/>Mobil: +90 530 773 54 43</p>
         <p>E-posta: aysinakdogan@draysinakdogan.com</p>
         <div className="flex items-center gap-3 pt-2">
             <Instagram size={20} />
             <a href="https://www.instagram.com/draysinakdogan/" target="_blank" rel="noopener noreferrer" className="hover:underline">@draysinakdogan</a>
+        </div>
+        <div className="flex items-center gap-3">
+            <Youtube size={20} />
+            <a href="https://www.youtube.com/draysinakdogantupbebek" target="_blank" rel="noopener noreferrer" className="hover:underline">draysinakdogantupbebek</a>
         </div>
     </div>
   );

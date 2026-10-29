@@ -57,7 +57,7 @@ export default async function Page({params}: {params: Promise<{lang: string}>}) 
     "name": "Op. Dr. Ayşin Akdoğan",
     "image": "https://www.draysinakdogan.com/dr-aysin-akdogan-standingbackgroundhospital.jpg",
     "url": "https://www.draysinakdogan.com/hakkimda",
-    "telephone": "+90-554-871-0590",
+    "telephone": "+90-232-463-4672",
     "medicalSpecialty": [
       "Tüp Bebek (IVF)",
       "İnfertilite",
@@ -66,10 +66,10 @@ export default async function Page({params}: {params: Promise<{lang: string}>}) 
     ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Yeni Girne Bulvarı, 1825. Sk. No:12",
-      "addressLocality": "Karşıyaka",
+      "streetAddress": "Ali Çetinkaya Bulvarı, Havuz Apt. No:66 D:16",
+      "addressLocality": "Konak",
       "addressRegion": "İzmir",
-      "postalCode": "35575",
+      "postalCode": "35220",
       "addressCountry": "TR"
     },
     "alumniOf": "Hacettepe Üniversitesi Tıp Fakültesi",
