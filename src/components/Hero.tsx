@@ -17,10 +17,10 @@ export default function Hero() {
         loop
         muted
         playsInline
-        poster="/dr-aysin-akdogan-standingbackgroundhospital.jpg"
+        poster="/hero-clinic-poster.jpg"
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
-        <source src="/clinic-video.mp4" type="video/mp4" />
+        <source src="/hero-clinic.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
