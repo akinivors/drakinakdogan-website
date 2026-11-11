@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
         <div className="flex items-center gap-3">
             <Youtube size={20} />
-            <a href="https://www.youtube.com/draysinakdogantupbebek" target="_blank" rel="noopener noreferrer" className="hover:underline">draysinakdogantupbebek</a>
+            <a href="https://www.youtube.com/@draysinakdogantupbebek" target="_blank" rel="noopener noreferrer" className="hover:underline">draysinakdogantupbebek</a>
         </div>
     </div>
   );

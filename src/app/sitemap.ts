@@ -4,6 +4,10 @@ import { MetadataRoute } from 'next';
 import { supabase } from '@/lib/supabaseClient';
 import { routing } from '@/i18n/routing'; // 1. Import locales
 
+// Regenerate at most once a day instead of on every crawler request -
+// keeps lastModified stable/meaningful and avoids querying Supabase per hit.
+export const revalidate = 86400;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.draysinakdogan.com';
   const { locales } = routing;
